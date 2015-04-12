@@ -1,0 +1,15 @@
+﻿<Window x:Class="DiccionarioJuridicoV2.VentanaPrueba"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:UserControls="clr-namespace:DiccionarioJuridicoV2.UserControls"
+        xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+        Title="VentanaPrueba"
+        Width="300"
+        Height="300"
+        WindowState="Maximized">
+    <Grid>
+
+        <UserControls:RGenSinoni HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+
+    </Grid>
+</Window>
