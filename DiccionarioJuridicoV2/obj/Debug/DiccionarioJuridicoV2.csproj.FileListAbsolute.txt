@@ -43,3 +43,9 @@ c:\users\luis\documents\visual studio 2012\Projects\DiccionarioJuridicoV2\Diccio
 c:\users\luis\documents\visual studio 2012\Projects\DiccionarioJuridicoV2\DiccionarioJuridicoV2\obj\Debug\DiccionarioJuridicoV2.pdb
 c:\users\luis\documents\visual studio 2012\Projects\DiccionarioJuridicoV2\DiccionarioJuridicoV2\obj\Debug\GeneratedInternalTypeHelper.g.cs
 c:\users\luis\documents\visual studio 2012\Projects\DiccionarioJuridicoV2\DiccionarioJuridicoV2\obj\Debug\DiccionarioJuridicoV2_MarkupCompile.lref
+C:\Users\Luis\Documents\Visual Studio 2012\Projects\DiccionarioJuridicoV2\DiccionarioJuridicoV2\obj\Debug\AddUpdates\AddUpdateGenericos.baml
+C:\Users\Luis\Documents\Visual Studio 2012\Projects\DiccionarioJuridicoV2\DiccionarioJuridicoV2\obj\Debug\AddUpdates\AddUpdateSinonimos.baml
+C:\Users\Luis\Documents\Visual Studio 2012\Projects\DiccionarioJuridicoV2\DiccionarioJuridicoV2\obj\Debug\AddUpdates\AddUpdateTesauroScjn.baml
+C:\Users\Luis\Documents\Visual Studio 2012\Projects\DiccionarioJuridicoV2\DiccionarioJuridicoV2\obj\Debug\AddUpdates\AddUpdateGenericos.g.cs
+C:\Users\Luis\Documents\Visual Studio 2012\Projects\DiccionarioJuridicoV2\DiccionarioJuridicoV2\obj\Debug\AddUpdates\AddUpdateSinonimos.g.cs
+C:\Users\Luis\Documents\Visual Studio 2012\Projects\DiccionarioJuridicoV2\DiccionarioJuridicoV2\obj\Debug\AddUpdates\AddUpdateTesauroScjn.g.cs

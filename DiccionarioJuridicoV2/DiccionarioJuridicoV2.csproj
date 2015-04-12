@@ -78,6 +78,8 @@
       <HintPath>..\lib\RCWPF\2014.2.729.45\Telerik.Windows.Data.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="UIAutomationProvider" />
+    <Reference Include="UIAutomationTypes" />
     <Reference Include="UIControls">
       <HintPath>E:\SCJN\DireccionarioJuridico\DireccionarioJuridico\bin\Debug\UIControls.dll</HintPath>
     </Reference>
@@ -96,6 +98,14 @@
     <Compile Include="AddUpdates\AddUpdateSinonimos.xaml.cs">
       <DependentUpon>AddUpdateSinonimos.xaml</DependentUpon>
     </Compile>
+    <Compile Include="AddUpdates\AddUpdateTesauroScjn.xaml.cs">
+      <DependentUpon>AddUpdateTesauroScjn.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Dto\Materias.cs" />
+    <Compile Include="Dto\TesauroScjn.cs" />
+    <Compile Include="Models\MateriasModel.cs" />
+    <Compile Include="Models\TesauroScjnModel.cs" />
+    <Compile Include="Singletons\ArbolesSingleton.cs" />
     <Compile Include="UserControls\RGenSinoni.xaml.cs">
       <DependentUpon>RGenSinoni.xaml</DependentUpon>
     </Compile>
@@ -107,6 +117,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="AddUpdates\AddUpdateSinonimos.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="AddUpdates\AddUpdateTesauroScjn.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

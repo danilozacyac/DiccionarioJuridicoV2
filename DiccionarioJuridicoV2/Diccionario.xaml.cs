@@ -10,7 +10,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-
+using DiccionarioJuridicoV2.UserControls;
 using Telerik.Windows.Controls;
 
 namespace DiccionarioJuridicoV2
@@ -23,6 +23,20 @@ namespace DiccionarioJuridicoV2
         public Diccionario()
         {
             InitializeComponent();
+        }
+
+        private void RadWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void RBtnAgregarGenerico_Click(object sender, RoutedEventArgs e)
+        {
+            RadPane pane = new RadPane();
+            pane.Content = new RGenSinoni();
+            pane.Header = "Términos genéricos";
+
+            PanelCentral.Items.Add(pane);
         }
     }
 }

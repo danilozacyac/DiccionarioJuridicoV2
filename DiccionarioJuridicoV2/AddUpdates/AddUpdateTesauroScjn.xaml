@@ -1,0 +1,50 @@
+﻿<telerik:RadWindow x:Class="DiccionarioJuridicoV2.AddUpdates.AddUpdateTesauroScjn"
+                   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                   xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+                   Width="407"
+                   Height="244"
+                   Header=""
+                   Loaded="RadWindow_Loaded">
+    <Grid>
+        <Label Margin="25,25,0,0"
+               HorizontalAlignment="Left"
+               VerticalAlignment="Top"
+               Content="Identificador:" />
+        <TextBox x:Name="TxtIdentificador"
+                 Width="208"
+                 Height="23"
+                 Margin="25,51,0,0"
+                 HorizontalAlignment="Left"
+                 VerticalAlignment="Top"
+                 Text="{Binding Id}"
+                 TextWrapping="Wrap" />
+        <Label Margin="25,84,0,0"
+               HorizontalAlignment="Left"
+               VerticalAlignment="Top"
+               Content="Concepto:" />
+        <TextBox x:Name="TxtConcepto"
+                 Width="347"
+                 Height="23"
+                 Margin="25,115,0,0"
+                 HorizontalAlignment="Left"
+                 VerticalAlignment="Top"
+                 Text="{Binding ConceptoScjn}"
+                 TextWrapping="Wrap" />
+        <telerik:RadButton x:Name="BtnCancelar"
+                           Width="75"
+                           Margin="297,159,0,0"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Top"
+                           Click="BtnCancelar_Click"
+                           Content="Cancelar" />
+        <telerik:RadButton x:Name="BtnAceptar"
+                           Width="75"
+                           Margin="217,159,0,0"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Top"
+                           Click="BtnAceptar_Click"
+                           Content="Aceptar" />
+
+    </Grid>
+</telerik:RadWindow>

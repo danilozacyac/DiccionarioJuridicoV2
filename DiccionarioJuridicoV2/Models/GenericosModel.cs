@@ -140,6 +140,60 @@ namespace DiccionarioJuridicoV2.Models
 
         public void UpdateTerminoJuridico(Genericos generico)
         {
+            OleDbConnection connection = new OleDbConnection(ConfigurationManager.ConnectionStrings["Diccionario"].ToString());
+
+            OleDbDataAdapter dataAdapter;
+
+            DataSet dataSet = new DataSet();
+            DataRow dr;
+
+            try
+            {
+                string sqlCadena = "SELECT * FROM Genericos WHERE IdConcepto = " + generico.IdGenerico;
+
+                dataAdapter = new OleDbDataAdapter();
+                dataAdapter.SelectCommand = new OleDbCommand(sqlCadena, connection);
+                dataAdapter.Fill(dataSet, "Genericos");
+
+                dr = dataSet.Tables["Genericos"].Rows[0];
+                dr.BeginEdit();
+                dr["Concepto"] = StringUtilities.UppercaseFirst(generico.Termino);
+                dr["ConceptoStr"] = ScjnUtilities.StringUtilities.PrepareToAlphabeticalOrder(generico.Termino);
+                dr.EndEdit();
+
+                dataAdapter.UpdateCommand = connection.CreateCommand();
+
+                dataAdapter.UpdateCommand.CommandText = "UPDATE Genericos SET Concepto = @Concepto, ConceptoStr = @ConceptoStr WHERE IdConcepto = @IdConcepto";
+
+                dataAdapter.UpdateCommand.Parameters.Add("@Concepto", OleDbType.VarChar, 0, "Concepto");
+                dataAdapter.UpdateCommand.Parameters.Add("@ConceptoStr", OleDbType.VarChar, 0, "ConceptoStr");
+                dataAdapter.UpdateCommand.Parameters.Add("@IdConcepto", OleDbType.Numeric, 0, "IdConcepto");
+
+                dataAdapter.Update(dataSet, "Genericos");
+                dataSet.Dispose();
+                dataAdapter.Dispose();
+
+                this.SetDefiniciones(generico);
+
+            }
+            catch (OleDbException ex)
+            {
+                string methodName = System.Reflection.MethodBase.GetCurrentMethod().Name;
+
+                MessageBox.Show("Error ({0}) : {1}" + ex.Source + ex.Message, methodName, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                ErrorUtilities.SetNewErrorMessage(ex, methodName, 0);
+            }
+            catch (Exception ex)
+            {
+                string methodName = System.Reflection.MethodBase.GetCurrentMethod().Name;
+
+                MessageBox.Show("Error ({0}) : {1}" + ex.Source + ex.Message, methodName, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                ErrorUtilities.SetNewErrorMessage(ex, methodName, 0);
+            }
+            finally
+            {
+                connection.Close();
+            }
         }
 
 

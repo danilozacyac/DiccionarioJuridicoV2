@@ -24,5 +24,12 @@ namespace DiccionarioJuridicoV2
         {
             InitializeComponent();
         }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            Diccionario diccionario = new Diccionario();
+            diccionario.Show();
+            this.Close();
+        }
     }
 }

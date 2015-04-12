@@ -3,6 +3,9 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="MainWindow"
         Width="525"
-        Height="350">
+        Height="350"
+        Background="Transparent"
+        Loaded="Window_Loaded"
+        WindowStyle="None">
     <Grid />
 </Window>

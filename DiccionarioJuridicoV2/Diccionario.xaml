@@ -5,6 +5,7 @@
                    Width="700"
                    Height="550"
                    Header="Diccionario"
+                   Loaded="RadWindow_Loaded"
                    WindowState="Maximized">
     <Grid>
         <Grid.RowDefinitions>
@@ -16,6 +17,7 @@
             <telerik:RadRibbonTab Header="RibbonTab">
                 <telerik:RadRibbonGroup Header="Términos Genéricos">
                     <telerik:RadRibbonButton x:Name="RBtnAgregarGenerico"
+                                             Click="RBtnAgregarGenerico_Click"
                                              Content="Agregar término"
                                              Size="Large" />
                 </telerik:RadRibbonGroup>
@@ -44,6 +46,11 @@
                 <telerik:RadRibbonGroup Header="Sinónimos" />
             </telerik:RadRibbonTab>
         </telerik:RadRibbonView>
+        <telerik:RadDocking Grid.Row="1">
+            <telerik:RadSplitContainer InitialPosition="DockedLeft">
+                <telerik:RadPaneGroup Name="PanelCentral" />
+            </telerik:RadSplitContainer>
+        </telerik:RadDocking>
 
     </Grid>
 </telerik:RadWindow>
