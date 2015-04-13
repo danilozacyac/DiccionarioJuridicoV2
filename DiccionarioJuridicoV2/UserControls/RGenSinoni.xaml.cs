@@ -26,14 +26,15 @@ namespace DiccionarioJuridicoV2.UserControls
         private ObservableCollection<Genericos> listaGenericos;
         private Genericos selectedGenerico;
 
-        public RGenSinoni()
+        public RGenSinoni(ObservableCollection<Genericos> listaGenericos)
         {
             InitializeComponent();
+            this.listaGenericos = listaGenericos;
         }
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
-            listaGenericos = new GenericosModel().GetGenericos();
+            //listaGenericos = new GenericosModel().GetGenericos();
 
             RLstGenericos.DataContext = listaGenericos;
         }

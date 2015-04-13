@@ -14,6 +14,14 @@
         </Grid.RowDefinitions>
 
         <telerik:RadRibbonView VerticalAlignment="Top">
+            <telerik:RadRibbonTab Header="Vistas">
+                <telerik:RadRibbonGroup>
+                    <telerik:RadRibbonButton x:Name="RBtnTermGen"
+                                             Click="RBtnTermGen_Click"
+                                             Content="Terminos genéricos" />
+
+                </telerik:RadRibbonGroup>
+            </telerik:RadRibbonTab>
             <telerik:RadRibbonTab Header="RibbonTab">
                 <telerik:RadRibbonGroup Header="Términos Genéricos">
                     <telerik:RadRibbonButton x:Name="RBtnAgregarGenerico"
@@ -46,10 +54,12 @@
                 <telerik:RadRibbonGroup Header="Sinónimos" />
             </telerik:RadRibbonTab>
         </telerik:RadRibbonView>
-        <telerik:RadDocking Grid.Row="1">
-            <telerik:RadSplitContainer InitialPosition="DockedLeft">
-                <telerik:RadPaneGroup Name="PanelCentral" />
-            </telerik:RadSplitContainer>
+        <telerik:RadDocking x:Name="Docking" Grid.Row="1">
+            <telerik:RadDocking.DocumentHost>
+                <telerik:RadSplitContainer InitialPosition="DockedLeft">
+                    <telerik:RadPaneGroup Name="PanelCentral" />
+                </telerik:RadSplitContainer>
+            </telerik:RadDocking.DocumentHost>
         </telerik:RadDocking>
 
     </Grid>

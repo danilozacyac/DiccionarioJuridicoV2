@@ -1,0 +1,52 @@
+﻿<UserControl x:Class="DiccionarioJuridicoV2.UserControls.VistaConsulta"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+             mc:Ignorable="d" 
+             d:DesignHeight="500" d:DesignWidth="700">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <telerik:RadListBox x:Name="RLstGenericos"
+                            Margin="10,50,10,20"
+                            HorizontalAlignment="Stretch"
+                            VerticalAlignment="Stretch"
+                            DisplayMemberPath="Termino"
+                            FontSize="16"
+                            ItemsSource="{Binding}"
+                            SelectedValuePath="IdGenerico"/>
+
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                
+                
+            </Grid.RowDefinitions>
+            <Label Content="Sinónimos" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+            <Label Content="Figuras jurídicas" HorizontalAlignment="Left" Margin="10,10,0,0" Grid.Row="1" VerticalAlignment="Top"/>
+            
+            <telerik:RadListBox x:Name="RLstFiguras"
+                                Grid.Row="1"
+                                HorizontalAlignment="Stretch"
+                                VerticalAlignment="Stretch"
+                                Margin="20,40,20,20"/>
+            
+            <Label Content="Conceptos SCJN" HorizontalAlignment="Left" Margin="10,10,0,0" Grid.Row="2" VerticalAlignment="Top"/>
+
+            <telerik:RadGridView x:Name="ConcepScjn"
+                                 Grid.Row="2"
+                                 Margin="20,40,20,20"
+                                 AutoGenerateColumns="False"
+                                 ShowGroupPanel="False" />
+
+        </Grid>
+    </Grid>
+</UserControl>

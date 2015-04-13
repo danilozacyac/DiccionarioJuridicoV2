@@ -2,8 +2,10 @@
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
+using System.Windows.Controls;
 using DiccionarioJuridicoV2.Dto;
 using DiccionarioJuridicoV2.Models;
+using ScjnUtilities;
 
 namespace DiccionarioJuridicoV2.AddUpdates
 {
@@ -16,6 +18,10 @@ namespace DiccionarioJuridicoV2.AddUpdates
         Genericos generico;
         bool isUpdating;
 
+        /// <summary>
+        /// Añade un término genérico al listado previo
+        /// </summary>
+        /// <param name="listaGenericos">Lista de términos genéricos existentes</param>
         public AddUpdateGenericos(ObservableCollection<Genericos> listaGenericos)
         {
             InitializeComponent();
@@ -24,10 +30,15 @@ namespace DiccionarioJuridicoV2.AddUpdates
             this.Header = "Nuevo término";
         }
 
+        /// <summary>
+        /// Permite actualizar la definición o el término seleccionado
+        /// </summary>
+        /// <param name="generico">Termino que se va a actualizar</param>
         public AddUpdateGenericos(Genericos generico)
         {
             InitializeComponent();
             this.generico = generico;
+            this.isUpdating = true;
             this.Header = "Actualizar término";
         }
 
@@ -45,6 +56,8 @@ namespace DiccionarioJuridicoV2.AddUpdates
         {
             if (isUpdating)
             {
+                new GenericosModel().UpdateTerminoJuridico(generico);
+                this.Close();
             }
             else
             {
@@ -52,6 +65,18 @@ namespace DiccionarioJuridicoV2.AddUpdates
                 listaGenericos.Add(generico);
                 this.Close();
             }
+        }
+
+        private void SearchTextBox_Search(object sender, RoutedEventArgs e)
+        {
+            String tempString = ((TextBox)sender).Text.ToUpper();
+
+            if (!String.IsNullOrEmpty(tempString))
+                RLstDuplicados.DataContext = (from n in listaGenericos
+                                              where n.TerminoStr.Contains(StringUtilities.ConvMayEne(tempString))
+                                              select n).ToList();
+            else
+                RLstDuplicados.DataContext = listaGenericos;
         }
     }
 }
