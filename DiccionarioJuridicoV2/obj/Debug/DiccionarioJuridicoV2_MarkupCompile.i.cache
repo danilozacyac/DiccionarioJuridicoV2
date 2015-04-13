@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-C:\Users\Luis\Documents\Visual Studio 2012\Projects\DiccionarioJuridicoV2\DiccionarioJuridicoV2\obj\Debug\
+C:\Users\Luis\documents\visual studio 2012\Projects\DiccionarioJuridicoV2\DiccionarioJuridicoV2\obj\Debug\
 DiccionarioJuridicoV2
 none
 false
 DEBUG;TRACE
-C:\Users\Luis\Documents\Visual Studio 2012\Projects\DiccionarioJuridicoV2\DiccionarioJuridicoV2\App.xaml
+C:\Users\Luis\documents\visual studio 2012\Projects\DiccionarioJuridicoV2\DiccionarioJuridicoV2\App.xaml
 7-1958709684
 
 29527361491
-262095375184
+262120985398
 AddUpdates\AddUpdateGenericos.xaml;AddUpdates\AddUpdateSinonimos.xaml;AddUpdates\AddUpdateTesauroScjn.xaml;Diccionario.xaml;MainWindow.xaml;UserControls\RGenSinoni.xaml;VentanaPrueba.xaml;
 
-False
+True
 
