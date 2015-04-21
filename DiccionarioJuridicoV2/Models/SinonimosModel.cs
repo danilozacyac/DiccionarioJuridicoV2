@@ -13,7 +13,123 @@ namespace DiccionarioJuridicoV2.Models
     public class SinonimosModel
     {
 
-        public void SetNewSinonimo(Sinonimos sinonimo)
+        public ObservableCollection<Sinonimos> GetSinonimos(int idConcepto)
+        {
+            ObservableCollection<Sinonimos> conceptos = new ObservableCollection<Sinonimos>();
+
+            OleDbConnection connection = new OleDbConnection(ConfigurationManager.ConnectionStrings["Diccionario"].ToString());
+            OleDbCommand cmd;
+            OleDbDataReader reader = null;
+
+            try
+            {
+                connection.Open();
+
+                string sqlCadena = "SELECT S.IdSinonimo, S.Sinonimo, S.Fuente, R.IdConcepto, R.IdRelExterna " +
+                                   " FROM Sinonimos S INNER JOIN Relaciones R ON R.IdRelExterna = S.IdSinonimo " + 
+                                   " WHERE IdConcepto = @IdConcepto AND TipoRelacion = 2";
+
+                cmd = new OleDbCommand(sqlCadena, connection);
+                cmd.Parameters.AddWithValue("@IdConcepto", idConcepto);
+                reader = cmd.ExecuteReader();
+
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        Sinonimos sinonimo = new Sinonimos();
+
+                        sinonimo.IdSinonimo = reader["IdSinonimo"] as int? ?? 0;
+                        sinonimo.Sinonimo = reader["Sinonimo"].ToString();
+                        sinonimo.Fuente = reader["Fuente"].ToString();
+
+                        conceptos.Add(sinonimo);
+                    }
+                }
+            }
+            catch (OleDbException ex)
+            {
+                string methodName = System.Reflection.MethodBase.GetCurrentMethod().Name;
+
+                MessageBox.Show("Error ({0}) : {1}" + ex.Source + ex.Message, methodName, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                ErrorUtilities.SetNewErrorMessage(ex, methodName, 0);
+            }
+            catch (Exception ex)
+            {
+                string methodName = System.Reflection.MethodBase.GetCurrentMethod().Name;
+
+                MessageBox.Show("Error ({0}) : {1}" + ex.Source + ex.Message, methodName, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                ErrorUtilities.SetNewErrorMessage(ex, methodName, 0);
+            }
+            finally
+            {
+                reader.Close();
+                connection.Close();
+            }
+
+            return conceptos;
+        }
+
+        public ObservableCollection<Sinonimos> GetSinonimos()
+        {
+            ObservableCollection<Sinonimos> conceptos = new ObservableCollection<Sinonimos>();
+
+            OleDbConnection connection = new OleDbConnection(ConfigurationManager.ConnectionStrings["Diccionario"].ToString());
+            OleDbCommand cmd;
+            OleDbDataReader reader = null;
+
+            try
+            {
+                connection.Open();
+
+                string sqlCadena = "SELECT * FROM Sinonimos";
+
+                cmd = new OleDbCommand(sqlCadena, connection);
+                reader = cmd.ExecuteReader();
+
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        Sinonimos sinonimo = new Sinonimos();
+
+                        sinonimo.IdSinonimo = reader["IdSinonimo"] as int? ?? 0;
+                        sinonimo.Sinonimo = reader["Sinonimo"].ToString();
+                        sinonimo.SinonimoStr = reader["SinonimoStr"].ToString();
+
+                        conceptos.Add(sinonimo);
+                    }
+                }
+            }
+            catch (OleDbException ex)
+            {
+                string methodName = System.Reflection.MethodBase.GetCurrentMethod().Name;
+
+                MessageBox.Show("Error ({0}) : {1}" + ex.Source + ex.Message, methodName, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                ErrorUtilities.SetNewErrorMessage(ex, methodName, 0);
+            }
+            catch (Exception ex)
+            {
+                string methodName = System.Reflection.MethodBase.GetCurrentMethod().Name;
+
+                MessageBox.Show("Error ({0}) : {1}" + ex.Source + ex.Message, methodName, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                ErrorUtilities.SetNewErrorMessage(ex, methodName, 0);
+            }
+            finally
+            {
+                reader.Close();
+                connection.Close();
+            }
+
+            return conceptos;
+        }
+
+        /// <summary>
+        /// Establece una relación entre algún concepto y el término que se quiere asociar como sinónimo
+        /// </summary>
+        /// <param name="sinonimo">Término con significado similar </param>
+        /// <param name="idConcepto">Concepto al que irá ligado el sinónimo</param>
+        public void SetNewSinonimo(Sinonimos sinonimo,int idConcepto)
         {
             OleDbConnection connection = new OleDbConnection(ConfigurationManager.ConnectionStrings["Diccionario"].ToString());
             OleDbDataAdapter dataAdapter;
@@ -57,6 +173,8 @@ namespace DiccionarioJuridicoV2.Models
                 dataAdapter.Update(dataSet, "Sinonimos");
                 dataSet.Dispose();
                 dataAdapter.Dispose();
+
+                new RelacionesModel().SetNewRelation(idConcepto, sinonimo.IdSinonimo, 2);
 
             }
             catch (OleDbException ex)
@@ -143,59 +261,7 @@ namespace DiccionarioJuridicoV2.Models
             }
         }
 
-        public ObservableCollection<Sinonimos> GetSinonimos()
-        {
-            ObservableCollection<Sinonimos> conceptos = new ObservableCollection<Sinonimos>();
-
-            OleDbConnection connection = new OleDbConnection(ConfigurationManager.ConnectionStrings["Diccionario"].ToString());
-            OleDbCommand cmd;
-            OleDbDataReader reader = null;
-
-            try
-            {
-                connection.Open();
-
-                string sqlCadena = "SELECT * FROM Sinonimos";
-
-                cmd = new OleDbCommand(sqlCadena, connection);
-                reader = cmd.ExecuteReader();
-
-                if (reader.HasRows)
-                {
-                    while (reader.Read())
-                    {
-                        Sinonimos sinonimo = new Sinonimos();
-
-                        sinonimo.IdSinonimo = reader["IdSinonimo"] as int? ?? 0;
-                        sinonimo.Sinonimo = reader["Sinonimo"].ToString();
-                        sinonimo.SinonimoStr = reader["SinonimoStr"].ToString();
-
-                        conceptos.Add(sinonimo);
-                    }
-                }
-            }
-            catch (OleDbException ex)
-            {
-                string methodName = System.Reflection.MethodBase.GetCurrentMethod().Name;
-
-                MessageBox.Show("Error ({0}) : {1}" + ex.Source + ex.Message, methodName, MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                ErrorUtilities.SetNewErrorMessage(ex, methodName, 0);
-            }
-            catch (Exception ex)
-            {
-                string methodName = System.Reflection.MethodBase.GetCurrentMethod().Name;
-
-                MessageBox.Show("Error ({0}) : {1}" + ex.Source + ex.Message, methodName, MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                ErrorUtilities.SetNewErrorMessage(ex, methodName, 0);
-            }
-            finally
-            {
-                reader.Close();
-                connection.Close();
-            }
-
-            return conceptos;
-        }
+        
 
         public void DeleteConcepto(Sinonimos sinonimo)
         {

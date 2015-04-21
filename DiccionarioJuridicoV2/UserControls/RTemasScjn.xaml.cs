@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using DiccionarioJuridicoV2.Dto;
+using DiccionarioJuridicoV2.Singletons;
 
 namespace DiccionarioJuridicoV2.UserControls
 {
@@ -20,9 +22,25 @@ namespace DiccionarioJuridicoV2.UserControls
     /// </summary>
     public partial class RTemasScjn : UserControl
     {
+        private Materias selectedMateria;
+
         public RTemasScjn()
         {
             InitializeComponent();
         }
+
+        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        {
+            CbxMaterias.DataContext = new Materias().GetMateriasBase();
+        }
+
+        private void CbxMaterias_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            selectedMateria = CbxMaterias.SelectedItem as Materias;
+
+            TreeMaterias.DataContext = ArbolesSingleton.Temas(selectedMateria.Id);
+        }
+
+        
     }
 }

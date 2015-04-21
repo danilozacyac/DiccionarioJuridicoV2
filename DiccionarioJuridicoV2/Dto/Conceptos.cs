@@ -11,7 +11,7 @@ namespace DiccionarioJuridicoV2.Dto
         private string concepto;
         private string conceptoStr;
         private DateTime fechaAlta;
-        private ObservableCollection<Sinonimos> sinonimos;
+        //private ObservableCollection<Sinonimos> sinonimos;
         private ObservableCollection<int> tesisRelacionadas;
 
 
@@ -65,17 +65,17 @@ namespace DiccionarioJuridicoV2.Dto
         }
 
 
-        public ObservableCollection<Sinonimos> Sinonimos
-        {
-            get
-            {
-                return this.sinonimos;
-            }
-            set
-            {
-                this.sinonimos = value;
-            }
-        }
+        //public ObservableCollection<Sinonimos> Sinonimos
+        //{
+        //    get
+        //    {
+        //        return this.sinonimos;
+        //    }
+        //    set
+        //    {
+        //        this.sinonimos = value;
+        //    }
+        //}
 
         public ObservableCollection<int> TesisRelacionadas
         {

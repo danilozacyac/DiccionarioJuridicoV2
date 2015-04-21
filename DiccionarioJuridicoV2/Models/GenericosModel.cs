@@ -42,6 +42,7 @@ namespace DiccionarioJuridicoV2.Models
                     generico.Termino = reader["Concepto"].ToString();
                     generico.TerminoStr = reader["ConceptoStr"].ToString();
                     generico.Definicion = reader["Definicion"].ToString();
+                    generico.Sinonimos = new SinonimosModel().GetSinonimos(generico.IdGenerico);
 
                     terminosGenericos.Add(generico);
                 }

@@ -16,13 +16,15 @@ namespace DiccionarioJuridicoV2.AddUpdates
         private Sinonimos sinonimo;
         private readonly bool isUpdating;
         private ObservableCollection<Sinonimos> sinonimosRelacionados;
+        private int idConceptoPrincipal;
 
-        public AddUpdateSinonimos(ObservableCollection<Sinonimos> sinonimosRelacionados)
+        public AddUpdateSinonimos(ObservableCollection<Sinonimos> sinonimosRelacionados,int idConceptoPrincipal)
         {
             InitializeComponent();
             this.sinonimo = new Sinonimos();
             this.Header = "Agregar sinónimo";
             this.sinonimosRelacionados = sinonimosRelacionados;
+            this.idConceptoPrincipal = idConceptoPrincipal;
         }
 
         public AddUpdateSinonimos(Sinonimos concepto)
@@ -50,7 +52,7 @@ namespace DiccionarioJuridicoV2.AddUpdates
             }
             else
             {
-                model.SetNewSinonimo(sinonimo);
+                model.SetNewSinonimo(sinonimo, idConceptoPrincipal);
                 sinonimosRelacionados.Add(sinonimo);
             }
 

@@ -24,7 +24,7 @@ namespace DiccionarioJuridicoV2.UserControls
     public partial class RGenSinoni : UserControl
     {
         private ObservableCollection<Genericos> listaGenericos;
-        private Genericos selectedGenerico;
+        public Genericos SelectedGenerico;
 
         public RGenSinoni(ObservableCollection<Genericos> listaGenericos)
         {
@@ -37,13 +37,16 @@ namespace DiccionarioJuridicoV2.UserControls
             //listaGenericos = new GenericosModel().GetGenericos();
 
             RLstGenericos.DataContext = listaGenericos;
+            
         }
 
         private void RLstGenericos_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            selectedGenerico = RLstGenericos.SelectedItem as Genericos;
+            SelectedGenerico = RLstGenericos.SelectedItem as Genericos;
 
-            TxtDefinicion.Text = selectedGenerico.Definicion;
+            TxtDefinicion.Text = SelectedGenerico.Definicion;
+
+            RLstSinonimos.DataContext = SelectedGenerico.Sinonimos;
         }
     }
 }

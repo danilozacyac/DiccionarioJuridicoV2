@@ -22,12 +22,17 @@ namespace DiccionarioJuridicoV2.Models
     /// 9. Concepto Jurídico-Tesauro Administrativa
     /// 10. Concepto Jurídico-Tesauro Común
     /// 11. Concepto Jurídico-Tesauro SCJN
-    /// 12. Tesauro SCJN-Tesauro Constitucional
-    /// 13. Tesauro SCJN-Tesauro Penal
-    /// 14. Tesauro SCJN-Tesauro Laboral
-    /// 15. Tesauro SCJN-Tesauro Civil
-    /// 16. Tesauro SCJN-Tesauro Administrativa
-    /// 17. Tesauro SCJN-Tesauro Común
+    /// 
+    /// Cuando la relación sea entre un Tema del Temático de la CCST y uno del tesauro de la
+    /// Suprema Corte, aquellos del Temático se almacenarán como IdConcepto y los de la SCJN
+    /// como IdRelExterna
+    /// 
+    /// 101. Tesauro Constitucional - Tesauro SCJN
+    /// 102. Tesauro Penal - Tesauro SCJN-
+    /// 104. Tesauro Civil - Tesauro SCJN-
+    /// 108. Tesauro Administrativa - Tesauro SCJN-
+    /// 116. Tesauro Laboral - Tesauro SCJN-
+    /// 132. Tesauro Común - Tesauro SCJN-
     /// </summary>
     public class RelacionesModel
     {
@@ -68,7 +73,7 @@ namespace DiccionarioJuridicoV2.Models
 
                 dataAdapter.InsertCommand = connection.CreateCommand();
 
-                dataAdapter.InsertCommand.CommandText = "INSERT INTO Relaciones VALUES (@IdConcepto,@IdRelExterna,@TipoRelacion)";
+                dataAdapter.InsertCommand.CommandText = "INSERT INTO Relaciones (IdConcepto,IdRelExterna,TipoRelacion) VALUES (@IdConcepto,@IdRelExterna,@TipoRelacion)";
                 dataAdapter.InsertCommand.Parameters.Add("@IdConcepto", OleDbType.Numeric, 0, "IdConcepto");
                 dataAdapter.InsertCommand.Parameters.Add("@IdRelExterna", OleDbType.Numeric, 0, "IdRelExterna");
                 dataAdapter.InsertCommand.Parameters.Add("@TipoRelacion", OleDbType.Numeric, 0, "TipoRelacion");
