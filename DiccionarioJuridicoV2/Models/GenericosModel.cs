@@ -116,7 +116,8 @@ namespace DiccionarioJuridicoV2.Models
                 dataSet.Dispose();
                 dataAdapter.Dispose();
 
-                this.SetDefiniciones(generico);
+                if(generico.Definicion != null)
+                    this.SetDefiniciones(generico);
 
             }
             catch (OleDbException ex)
@@ -139,7 +140,7 @@ namespace DiccionarioJuridicoV2.Models
             }
         }
 
-        public void UpdateTerminoJuridico(Genericos generico)
+        public void UpdateTerminoGenerico(Genericos generico)
         {
             OleDbConnection connection = new OleDbConnection(ConfigurationManager.ConnectionStrings["Diccionario"].ToString());
 
@@ -196,6 +197,48 @@ namespace DiccionarioJuridicoV2.Models
                 connection.Close();
             }
         }
+
+        /// <summary>
+        /// Elimina el concepto del diccionario junto con todas sus asociaciones
+        /// </summary>
+        /// <param name="generico"></param>
+        public void DeleteTerminoGenerico(Genericos generico)
+        {
+            OleDbConnection connection = new OleDbConnection(ConfigurationManager.ConnectionStrings["Diccionario"].ToString());
+            OleDbCommand cmd;
+
+            try
+            {
+                connection.Open();
+
+                string sqlCadena = "Delete FROM Genericos WHERE IdConcepto = @IdConcepto";
+
+                cmd = new OleDbCommand(sqlCadena, connection);
+                cmd.Parameters.AddWithValue("@IdConcepto", generico.IdGenerico);
+                cmd.ExecuteNonQuery();
+
+                new RelacionesModel().DeleteRelation(generico.IdGenerico, 1);
+            }
+            catch (OleDbException ex)
+            {
+                string methodName = System.Reflection.MethodBase.GetCurrentMethod().Name;
+
+                MessageBox.Show("Error ({0}) : {1}" + ex.Source + ex.Message, methodName, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                ErrorUtilities.SetNewErrorMessage(ex, methodName, 0);
+            }
+            catch (Exception ex)
+            {
+                string methodName = System.Reflection.MethodBase.GetCurrentMethod().Name;
+
+                MessageBox.Show("Error ({0}) : {1}" + ex.Source + ex.Message, methodName, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                ErrorUtilities.SetNewErrorMessage(ex, methodName, 0);
+            }
+            finally
+            {
+                connection.Close();
+            }
+        }
+
 
 
         private void SetDefiniciones(Genericos generico)

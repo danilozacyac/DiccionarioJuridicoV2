@@ -17,16 +17,19 @@
     <PublishUrl>\\172.28.41.17\Users\lavega\Pictures\Diccionario\Updates\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Unc</InstallFrom>
-    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateEnabled>true</UpdateEnabled>
     <UpdateMode>Foreground</UpdateMode>
     <UpdateInterval>7</UpdateInterval>
     <UpdateIntervalUnits>Days</UpdateIntervalUnits>
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
+    <ProductName>Diccionario Jurídico</ProductName>
+    <PublisherName>Suprema Corte de Justicia de la Nación</PublisherName>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>1</ApplicationRevision>
+    <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
+    <ApplicationRevision>3</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -63,6 +66,9 @@
   </PropertyGroup>
   <PropertyGroup>
     <SignManifests>true</SignManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>dictionary_128.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="ScjnUtilities">
@@ -303,6 +309,30 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="dictionary_128.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Dictionary_128.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Dictionary_32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\law_128.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\law_400.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\tesa_32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\tesa_128.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\tesa_256.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -23,7 +23,7 @@ namespace DiccionarioJuridicoV2.UserControls
     /// </summary>
     public partial class LFiguras : UserControl
     {
-        Conceptos conceptoSelect;
+        public Conceptos ConceptoSelect;
 
         public LFiguras()
         {
@@ -37,11 +37,11 @@ namespace DiccionarioJuridicoV2.UserControls
 
         private void RLstFiguras_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            //conceptoSelect = RLstFiguras.SelectedItem as Conceptos;
+            ConceptoSelect = RLstFiguras.SelectedItem as Conceptos;
 
-            //new ConceptosModel().GetTesisByConcepto(conceptoSelect);
+            new ConceptosModel().GetTesisByConcepto(ConceptoSelect);
 
-            //ConcepScjn.DataContext = new TesisModel().GetTesisForConcepto(conceptoSelect.TesisRelacionadas);
+            ConcepScjn.DataContext = new TesisModel().GetTesisForConcepto(ConceptoSelect.TesisRelacionadas);
         }
     }
 }

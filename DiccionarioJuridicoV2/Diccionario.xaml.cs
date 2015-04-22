@@ -33,9 +33,10 @@ namespace DiccionarioJuridicoV2
 
         private ObservableCollection<Genericos> listaGenericos;
 
-        public Diccionario()
+        public Diccionario(ObservableCollection<Genericos> listaGenericos)
         {
             InitializeComponent();
+            this.listaGenericos = listaGenericos;
             //worker.DoWork += this.WorkerDoWork;
             //worker.RunWorkerCompleted += WorkerRunWorkerCompleted;
         }
@@ -45,22 +46,17 @@ namespace DiccionarioJuridicoV2
             //this.LaunchBusyIndicator();
         }
 
-        private void RBtnAgregarGenerico_Click(object sender, RoutedEventArgs e)
-        {
-            AddUpdateGenericos addUpdate = new AddUpdateGenericos(listaGenericos);
-            addUpdate.ShowDialog();
-        }
-
+        
         private void RBtnTermGen_Click(object sender, RoutedEventArgs e)
         {
-            listaGenericos = new GenericosModel().GetGenericos();
-
             RadPane pane = new RadPane();
             rGrnSin = new RGenSinoni(listaGenericos);
             pane.Content = rGrnSin;
             pane.Header = "Términos genéricos";
 
             PanelCentral.AddItem(pane, DockPosition.Center);
+
+            Ribbon.SelectedIndex = 1;
         }
 
         private void RBtnAddSin_Click(object sender, RoutedEventArgs e)
@@ -78,11 +74,7 @@ namespace DiccionarioJuridicoV2
             sinonimo.Show();
         }
 
-        private void RBtnUpdateGenerico_Click(object sender, RoutedEventArgs e)
-        {
-            AddUpdateGenericos update = new AddUpdateGenericos(rGrnSin.SelectedGenerico);
-            update.ShowDialog();
-        }
+        
 
         RTemasScjn tematScjn;
         private void RBtnTemasScjn_Click(object sender, RoutedEventArgs e)
@@ -106,6 +98,53 @@ namespace DiccionarioJuridicoV2
             PanelCentral.AddItem(pane, DockPosition.Center);
         }
 
+        
+
+        #region Terminos Genericos
+
+        private void RBtnAgregarGenerico_Click(object sender, RoutedEventArgs e)
+        {
+            AddUpdateGenericos addUpdate = new AddUpdateGenericos(listaGenericos);
+            addUpdate.ShowDialog();
+        }
+
+        private void RBtnUpdateGenerico_Click(object sender, RoutedEventArgs e)
+        {
+            AddUpdateGenericos update = new AddUpdateGenericos(rGrnSin.SelectedGenerico);
+            update.ShowDialog();
+        }
+
+        private void RBtnDelGenerico_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBoxResult result = MessageBox.Show("¿Estas seguro de que deseas eliminar el concepto: \"" + rGrnSin.SelectedGenerico.Termino + "\"", "ATENCIÓN:",
+                MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+            if (result == MessageBoxResult.Yes)
+            {
+                new GenericosModel().DeleteTerminoGenerico(rGrnSin.SelectedGenerico);
+            }
+        }
+
+        #endregion
+
+        
+
+        #region Figuras Jurídicas
+
+        private void RBtnDeleteConcept_Click(object sender, RoutedEventArgs e)
+        {
+            if (figuras != null && figuras.ConceptoSelect != null)
+            {
+                MessageBoxResult result = MessageBox.Show("¿Estas seguro de que deseas eliminar el concepto: \"" + figuras.ConceptoSelect.Concepto + "\"", "ATENCIÓN:",
+                    MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+                if (result == MessageBoxResult.Yes)
+                {
+                    new ConceptosModel().DeleteConcepto(figuras.ConceptoSelect);
+                }
+            }
+        }
+
         private void RBtnFusionar_Click(object sender, RoutedEventArgs e)
         {
             IList concepFusionar = figuras.RLstFiguras.SelectedItems;
@@ -122,6 +161,7 @@ namespace DiccionarioJuridicoV2
             }
         }
 
+        #endregion
 
 
         //#region Background Worker

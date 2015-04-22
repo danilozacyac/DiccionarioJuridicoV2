@@ -5,9 +5,9 @@
                    xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
                    Width="793"
                    Height="328"
-                   ResizeMode="NoResize"
                    Header="AddUpdateGenericos"
-                   Loaded="Window_Loaded">
+                   Loaded="Window_Loaded"
+                   ResizeMode="NoResize">
     <Grid>
 
         <Grid.ColumnDefinitions>
@@ -58,8 +58,14 @@
                                   HorizontalAlignment="Stretch"
                                   VerticalAlignment="Top"
                                   Search="SearchTextBox_Search"
+                                  Text="{Binding Termino}"
                                   TextWrapping="Wrap" />
-        <Label Content="Términos similares" Grid.Column="1" HorizontalAlignment="Left" Margin="25,29,0,0" VerticalAlignment="Top" Foreground="Red"/>
+        <Label Grid.Column="1"
+               Margin="25,29,0,0"
+               HorizontalAlignment="Left"
+               VerticalAlignment="Top"
+               Content="Términos similares"
+               Foreground="Red" />
 
 
     </Grid>

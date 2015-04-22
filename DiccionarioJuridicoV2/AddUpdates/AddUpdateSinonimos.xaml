@@ -3,14 +3,15 @@
                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                    xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
                    Width="462"
-                   Height="400"
+                   Height="466.272"
                    Header=""
                    Loaded="RadWindow_Loaded"
+                   ResizeMode="NoResize"
                    WindowStartupLocation="CenterScreen">
     <Grid>
         <TextBox x:Name="TxtConcepto"
                  Width="388"
-                 Height="91"
+                 Height="28"
                  Margin="27,47,0,0"
                  HorizontalAlignment="Left"
                  VerticalAlignment="Top"
@@ -25,22 +26,23 @@
                FontSize="16" />
         <telerik:RadButton x:Name="RBtnAceptar"
                            Width="85"
-                           Height="40"
-                           Margin="0,0,20,20"
+                           Height="26"
+                           Margin="0,0,20,10"
                            HorizontalAlignment="Right"
                            VerticalAlignment="Bottom"
                            Click="RBtnAceptar_Click"
-                           Content="Aceptar" />
+                           Content="Aceptar"
+                           IsEnabled="False" />
         <telerik:RadButton x:Name="RBtnCancelar"
                            Width="85"
-                           Height="40"
-                           Margin="0,0,115,20"
+                           Height="26"
+                           Margin="0,0,115,10"
                            HorizontalAlignment="Right"
                            VerticalAlignment="Bottom"
                            Click="RBtnCancelar_Click"
                            Content="Cancelar" />
         <Label Width="100"
-               Margin="27,161,0,0"
+               Margin="27,79,0,0"
                HorizontalAlignment="Left"
                VerticalAlignment="Top"
                Content="Fuente:"
@@ -48,13 +50,33 @@
         <TextBox x:Name="TxtFuente"
                  Width="388"
                  Height="91"
-                 Margin="27,197,0,0"
+                 Margin="27,115,0,0"
                  HorizontalAlignment="Left"
                  VerticalAlignment="Top"
                  FontSize="16"
                  SpellCheck.IsEnabled="True"
                  Text="{Binding Fuente}"
                  TextWrapping="Wrap" />
+        <telerik:RadButton x:Name="BtnAgregar"
+                           Width="78"
+                           Height="27"
+                           Margin="337,211,0,0"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Top"
+                           Click="BtnAgregar_Click"
+                           Content="Agregar" />
+        <telerik:GroupBox Width="388"
+                          Height="131"
+                          Margin="27,252,0,0"
+                          HorizontalAlignment="Left"
+                          VerticalAlignment="Top"
+                          Header="Sinónimos por guardar">
+            <telerik:RadListBox x:Name="RLstSinonimos"
+                                HorizontalAlignment="Stretch"
+                                VerticalAlignment="Stretch"
+                                DisplayMemberPath="Sinonimo"
+                                ItemsSource="{Binding}" />
+        </telerik:GroupBox>
 
     </Grid>
 </telerik:RadWindow>

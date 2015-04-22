@@ -93,6 +93,26 @@ namespace DiccionarioJuridicoV2.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Dictionary_128 {
+            get {
+                object obj = ResourceManager.GetObject("Dictionary_128", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Dictionary_32 {
+            get {
+                object obj = ResourceManager.GetObject("Dictionary_32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap edit_blue {
             get {
                 object obj = ResourceManager.GetObject("edit_blue", resourceCulture);
@@ -123,6 +143,26 @@ namespace DiccionarioJuridicoV2.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap law_128 {
+            get {
+                object obj = ResourceManager.GetObject("law_128", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap law_400 {
+            get {
+                object obj = ResourceManager.GetObject("law_400", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap relacion {
             get {
                 object obj = ResourceManager.GetObject("relacion", resourceCulture);
@@ -136,6 +176,36 @@ namespace DiccionarioJuridicoV2.Properties {
         internal static System.Drawing.Bitmap reload {
             get {
                 object obj = ResourceManager.GetObject("reload", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap tesa_128 {
+            get {
+                object obj = ResourceManager.GetObject("tesa_128", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap tesa_256 {
+            get {
+                object obj = ResourceManager.GetObject("tesa_256", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap tesa_32 {
+            get {
+                object obj = ResourceManager.GetObject("tesa_32", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

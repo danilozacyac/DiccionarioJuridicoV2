@@ -56,11 +56,14 @@ namespace DiccionarioJuridicoV2.AddUpdates
         {
             if (isUpdating)
             {
-                new GenericosModel().UpdateTerminoJuridico(generico);
+                new GenericosModel().UpdateTerminoGenerico(generico);
                 this.Close();
             }
             else
             {
+                if (String.IsNullOrEmpty(TxtDefinicion.Text.Trim()))
+                    generico.Definicion = "";
+
                 new GenericosModel().SetNewTerminoGenericos(generico);
                 listaGenericos.Add(generico);
                 this.Close();

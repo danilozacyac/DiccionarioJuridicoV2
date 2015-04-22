@@ -13,55 +13,63 @@ namespace DiccionarioJuridicoV2.AddUpdates
     /// </summary>
     public partial class AddUpdateSinonimos
     {
-        private Sinonimos sinonimo;
         private readonly bool isUpdating;
         private ObservableCollection<Sinonimos> sinonimosRelacionados;
+        private ObservableCollection<Sinonimos> sinonimosPorGuardar;
         private int idConceptoPrincipal;
 
-        public AddUpdateSinonimos(ObservableCollection<Sinonimos> sinonimosRelacionados,int idConceptoPrincipal)
+        public AddUpdateSinonimos(ObservableCollection<Sinonimos> sinonimosRelacionados, int idConceptoPrincipal)
         {
             InitializeComponent();
-            this.sinonimo = new Sinonimos();
             this.Header = "Agregar sinónimo";
             this.sinonimosRelacionados = sinonimosRelacionados;
             this.idConceptoPrincipal = idConceptoPrincipal;
         }
 
-        public AddUpdateSinonimos(Sinonimos concepto)
-        {
-            InitializeComponent();
-            this.sinonimo = concepto;
-            this.isUpdating = true;
-            this.Header = "Actualizar sinónimo";
-        }
-
         private void RadWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            this.DataContext = sinonimo;
+            sinonimosPorGuardar = new ObservableCollection<Sinonimos>();
+            RLstSinonimos.DataContext = sinonimosPorGuardar;
         }
 
         private void RBtnAceptar_Click(object sender, RoutedEventArgs e)
         {
             SinonimosModel model = new SinonimosModel();
-            sinonimo.SinonimoStr = StringUtilities.PrepareToAlphabeticalOrder(sinonimo.Sinonimo);
-            sinonimo.FuenteStr = StringUtilities.PrepareToAlphabeticalOrder(sinonimo.Fuente);
 
-            if (isUpdating)
-            {
-                model.UpdateSinonimo(sinonimo);
-            }
-            else
+            foreach (Sinonimos sinonimo in sinonimosPorGuardar)
             {
                 model.SetNewSinonimo(sinonimo, idConceptoPrincipal);
                 sinonimosRelacionados.Add(sinonimo);
             }
-
+            
             this.Close();
         }
 
         private void RBtnCancelar_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
+        }
+
+        private void BtnAgregar_Click(object sender, RoutedEventArgs e)
+        {
+            if (String.IsNullOrEmpty(TxtConcepto.Text) || String.IsNullOrWhiteSpace(TxtConcepto.Text))
+            {
+                MessageBox.Show("Ingrese el concepto antes de Agregar");
+                return;
+            }
+            else
+            {
+                Sinonimos newSinonimo = new Sinonimos();
+                newSinonimo.Sinonimo = TxtConcepto.Text;
+                newSinonimo.SinonimoStr = StringUtilities.PrepareToAlphabeticalOrder(newSinonimo.Sinonimo);
+                newSinonimo.Fuente = TxtFuente.Text;
+                newSinonimo.FuenteStr = StringUtilities.PrepareToAlphabeticalOrder(newSinonimo.Fuente);
+
+                sinonimosPorGuardar.Add(newSinonimo);
+
+                TxtConcepto.Text = String.Empty;
+                RBtnAceptar.IsEnabled = true;
+            }
         }
     }
 }

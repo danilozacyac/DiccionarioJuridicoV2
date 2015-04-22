@@ -14,14 +14,19 @@ namespace DiccionarioJuridicoV2.Models
     /// 1. Genérico-Concepto Jurídico
     /// 2. Genérico-Sinónimo
     /// 3. Genérico-Tesauro Constitucional
-    /// 4. Genérico- Tesauro SCJN
-    /// 5. Concepto Jurídico-Tesauro Constitucional
-    /// 6. Concepto Jurídico-Tesauro Penal
-    /// 7. Concepto Jurídico-Tesauro Laboral
-    /// 8. Concepto Jurídico-Tesauro Civil
-    /// 9. Concepto Jurídico-Tesauro Administrativa
-    /// 10. Concepto Jurídico-Tesauro Común
-    /// 11. Concepto Jurídico-Tesauro SCJN
+    /// 4. Genérico-Tesauro Penal
+    /// 5. Genérico-Tesauro Laboral
+    /// 6. Genérico-Tesauro Civil
+    /// 7. Genérico-Tesauro Administrativa
+    /// 8. Genérico-Tesauro Común
+    /// 9. Genérico- Tesauro SCJN
+    /// 10. Concepto Jurídico-Tesauro Constitucional
+    /// 11. Concepto Jurídico-Tesauro Penal
+    /// 12. Concepto Jurídico-Tesauro Laboral
+    /// 13. Concepto Jurídico-Tesauro Civil
+    /// 14. Concepto Jurídico-Tesauro Administrativa
+    /// 15. Concepto Jurídico-Tesauro Común
+    /// 16. Concepto Jurídico-Tesauro SCJN
     /// 
     /// Cuando la relación sea entre un Tema del Temático de la CCST y uno del tesauro de la
     /// Suprema Corte, aquellos del Temático se almacenarán como IdConcepto y los de la SCJN
@@ -103,6 +108,12 @@ namespace DiccionarioJuridicoV2.Models
             }
         }
 
+        /// <summary>
+        /// Elimina la relación seleccionada
+        /// </summary>
+        /// <param name="idConcepto">Identificador del concepto base</param>
+        /// <param name="idRelExterna">Identificador del concepto relacionado</param>
+        /// <param name="tipoRelacion">Tipo de relacion establecida</param>
         public void DeleteRelation(int idConcepto, int idRelExterna, int tipoRelacion)
         {
             OleDbConnection connection = new OleDbConnection(ConfigurationManager.ConnectionStrings["Diccionario"].ToString());
@@ -118,6 +129,50 @@ namespace DiccionarioJuridicoV2.Models
                 cmd.Parameters.AddWithValue("@IdConcepto", idConcepto);
                 cmd.Parameters.AddWithValue("@IdRelExterna", idRelExterna);
                 cmd.Parameters.AddWithValue("@TipoRelacion", tipoRelacion);
+                cmd.ExecuteNonQuery();
+
+            }
+            catch (OleDbException ex)
+            {
+                string methodName = System.Reflection.MethodBase.GetCurrentMethod().Name;
+
+                MessageBox.Show("Error ({0}) : {1}" + ex.Source + ex.Message, methodName, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                ErrorUtilities.SetNewErrorMessage(ex, methodName, 0);
+            }
+            catch (Exception ex)
+            {
+                string methodName = System.Reflection.MethodBase.GetCurrentMethod().Name;
+
+                MessageBox.Show("Error ({0}) : {1}" + ex.Source + ex.Message, methodName, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                ErrorUtilities.SetNewErrorMessage(ex, methodName, 0);
+            }
+            finally
+            {
+                connection.Close();
+            }
+        }
+
+        /// <summary>
+        /// Elimina todas las asociaciones de un concepto
+        /// </summary>
+        /// <param name="idConcepto">Concepto que se elimina</param>
+        /// <param name="idReferenciaBorrado">Tipo de borrado que se realizará</param>
+        public void DeleteRelation(int idConcepto, int idReferenciaBorrado)
+        {
+            OleDbConnection connection = new OleDbConnection(ConfigurationManager.ConnectionStrings["Diccionario"].ToString());
+            OleDbCommand cmd;
+
+            try
+            {
+                connection.Open();
+
+                string sqlCadena = "Delete FROM Relaciones WHERE IdConcepto = @IdConcepto ";
+
+                if (idReferenciaBorrado == 1)
+                    sqlCadena += " AND TipoRelacion BETWEEN 1 AND 9";
+
+                cmd = new OleDbCommand(sqlCadena, connection);
+                cmd.Parameters.AddWithValue("@IdConcepto", idConcepto);
                 cmd.ExecuteNonQuery();
 
             }

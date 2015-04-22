@@ -77,7 +77,7 @@ namespace DiccionarioJuridicoV2.Models
             }
         }
 
-        public void UpdateSinonimo(Conceptos concepto)
+        public void UpdateConcepto(Conceptos concepto)
         {
             OleDbConnection connection = new OleDbConnection(ConfigurationManager.ConnectionStrings["Diccionario"].ToString());
 
@@ -203,6 +203,43 @@ namespace DiccionarioJuridicoV2.Models
                 connection.Open();
 
                 string sqlCadena = "Delete FROM Conceptos WHERE IdConcepto = @IdConcepto";
+
+                cmd = new OleDbCommand(sqlCadena, connection);
+                cmd.Parameters.AddWithValue("@IdConcepto", concepto.IdConcepto);
+                cmd.ExecuteNonQuery();
+
+                this.DeleteRelacionTesis(concepto);
+            }
+            catch (OleDbException ex)
+            {
+                string methodName = System.Reflection.MethodBase.GetCurrentMethod().Name;
+
+                MessageBox.Show("Error ({0}) : {1}" + ex.Source + ex.Message, methodName, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                ErrorUtilities.SetNewErrorMessage(ex, methodName, 0);
+            }
+            catch (Exception ex)
+            {
+                string methodName = System.Reflection.MethodBase.GetCurrentMethod().Name;
+
+                MessageBox.Show("Error ({0}) : {1}" + ex.Source + ex.Message, methodName, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                ErrorUtilities.SetNewErrorMessage(ex, methodName, 0);
+            }
+            finally
+            {
+                connection.Close();
+            }
+        }
+
+        private void DeleteRelacionTesis(Conceptos concepto)
+        {
+            OleDbConnection connection = new OleDbConnection(ConfigurationManager.ConnectionStrings["Diccionario"].ToString());
+            OleDbCommand cmd;
+
+            try
+            {
+                connection.Open();
+
+                string sqlCadena = "Delete FROM RelTesisConceptos WHERE IdConcepto = @IdConcepto";
 
                 cmd = new OleDbCommand(sqlCadena, connection);
                 cmd.Parameters.AddWithValue("@IdConcepto", concepto.IdConcepto);
