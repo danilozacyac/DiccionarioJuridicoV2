@@ -1,20 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Configuration;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using DiccionarioJuridicoV2.Singletons;
 using Telerik.Windows.Controls;
 
@@ -54,7 +43,8 @@ namespace DiccionarioJuridicoV2
         private BackgroundWorker worker = new BackgroundWorker();
         private void WorkerDoWork(object sender, DoWorkEventArgs e)
         {
-            var y = ArbolesSingleton.Temas(1);
+            var z = ConceptosSingleton.Conceptos;
+            //var y = ArbolesSingleton.Temas(1);
             //y = ArbolesSingleton.Temas(2);
             //y = ArbolesSingleton.Temas(4);
             //y = ArbolesSingleton.Temas(8);

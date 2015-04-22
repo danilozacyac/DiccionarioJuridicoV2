@@ -148,7 +148,9 @@ namespace DiccionarioJuridicoV2.Models
             {
                 connection.Open();
 
-                string sqlCadena = "SELECT * FROM Conceptos";
+                string sqlCadena = "SELECT C.IdConcepto, C.Concepto, C.ConceptoStr, COUNT(R.IdConcepto) AS Cuenta " +
+                                   " FROM Conceptos C INNER JOIN RelTesisConceptos R ON C.IdConcepto = R.IdConcepto " +
+                                   " GROUP BY C.IdConcepto, C.Concepto, C.ConceptoStr";
 
                 cmd = new OleDbCommand(sqlCadena, connection);
                 reader = cmd.ExecuteReader();
@@ -162,6 +164,7 @@ namespace DiccionarioJuridicoV2.Models
                         concepto.IdConcepto = reader["IdConcepto"] as int? ?? 0;
                         concepto.Concepto = reader["Concepto"].ToString();
                         concepto.ConceptoStr = reader["ConceptoStr"].ToString();
+                        concepto.NumTesis = reader["Cuenta"] as int? ?? 0;
 
                         conceptos.Add(concepto);
                     }
@@ -227,7 +230,53 @@ namespace DiccionarioJuridicoV2.Models
         }
 
 
+        public void GetTesisByConcepto(Conceptos concepto)
+        {
+            concepto.TesisRelacionadas = new ObservableCollection<int>();
 
+            OleDbConnection connection = new OleDbConnection(ConfigurationManager.ConnectionStrings["Diccionario"].ToString());
+            OleDbCommand cmd;
+            OleDbDataReader reader = null;
+
+            try
+            {
+                connection.Open();
+
+                string sqlCadena = "SELECT IUS FROM RelTesisConceptos WHERE IdConcepto = @IdConcepto";
+
+                cmd = new OleDbCommand(sqlCadena, connection);
+                cmd.Parameters.AddWithValue("@IdConcepto", concepto.IdConcepto);
+                reader = cmd.ExecuteReader();
+
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        concepto.TesisRelacionadas.Add(reader["IUS"] as int? ?? 0);
+                    }
+                }
+            }
+            catch (OleDbException ex)
+            {
+                string methodName = System.Reflection.MethodBase.GetCurrentMethod().Name;
+
+                MessageBox.Show("Error ({0}) : {1}" + ex.Source + ex.Message, methodName, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                ErrorUtilities.SetNewErrorMessage(ex, methodName, 0);
+            }
+            catch (Exception ex)
+            {
+                string methodName = System.Reflection.MethodBase.GetCurrentMethod().Name;
+
+                MessageBox.Show("Error ({0}) : {1}" + ex.Source + ex.Message, methodName, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                ErrorUtilities.SetNewErrorMessage(ex, methodName, 0);
+            }
+            finally
+            {
+                reader.Close();
+                connection.Close();
+            }
+
+        }
 
     }
 }

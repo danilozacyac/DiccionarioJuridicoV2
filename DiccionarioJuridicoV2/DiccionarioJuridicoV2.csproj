@@ -147,6 +147,7 @@
     <Compile Include="Models\TesauroScjnModel.cs" />
     <Compile Include="Models\TesisModel.cs" />
     <Compile Include="Singletons\ArbolesSingleton.cs" />
+    <Compile Include="Singletons\ConceptosSingleton.cs" />
     <Compile Include="UserControls\LFiguras.xaml.cs">
       <DependentUpon>LFiguras.xaml</DependentUpon>
     </Compile>

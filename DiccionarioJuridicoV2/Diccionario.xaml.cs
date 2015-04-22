@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -92,6 +93,33 @@ namespace DiccionarioJuridicoV2
             pane.Header = "Temático - SCJN";
 
             PanelCentral.AddItem(pane, DockPosition.Center);
+        }
+
+        LFiguras figuras;
+        private void RBtnListaFiguras_Click(object sender, RoutedEventArgs e)
+        {
+            RadPane pane = new RadPane();
+            figuras = new LFiguras();
+            pane.Content = figuras;
+            pane.Header = "Figuras Jurídicas";
+
+            PanelCentral.AddItem(pane, DockPosition.Center);
+        }
+
+        private void RBtnFusionar_Click(object sender, RoutedEventArgs e)
+        {
+            IList concepFusionar = figuras.RLstFiguras.SelectedItems;
+
+            if (concepFusionar.Count != 2)
+            {
+                MessageBox.Show("Para utilizar esta función debe seleccionar EXACTAMENTE dos conceptos del listado");
+                return;
+            }
+            else
+            {
+                FusionarTemas fusion = new FusionarTemas(concepFusionar[0] as Conceptos, concepFusionar[1] as Conceptos);
+                fusion.ShowDialog();
+            }
         }
 
 

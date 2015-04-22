@@ -42,14 +42,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="DiccionarioJuridicoV2.exe" size="863232">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="DiccionarioJuridicoV2.exe" size="865792">
       <assemblyIdentity name="DiccionarioJuridicoV2" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>oBS9iNn+cvWie77JC08poWzuprwBbjLmKoqibEHoau0=</dsig:DigestValue>
+        <dsig:DigestValue>LWEZ2Dla0A3ExI6X62y4zynLfg07UrY/2oTFAxFbOyk=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -245,13 +245,13 @@
       </hash>
     </dependentAssembly>
   </dependency>
-  <file name="DiccionarioJuridicoV2.exe.config" size="1326">
+  <file name="DiccionarioJuridicoV2.exe.config" size="1513">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>rZkpICNNluo7grWGUNOCfYJ85JNQdu0wdkmmswtRfOU=</dsig:DigestValue>
+      <dsig:DigestValue>RfylErqygDXVvd5fTMkXTwwOpD0TXcPAK6mGo4MUc2s=</dsig:DigestValue>
     </hash>
   </file>
 </asmv1:assembly>

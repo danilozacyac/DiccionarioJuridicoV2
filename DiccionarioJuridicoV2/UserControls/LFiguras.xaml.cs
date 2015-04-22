@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using DiccionarioJuridicoV2.Dto;
 using DiccionarioJuridicoV2.Models;
+using DiccionarioJuridicoV2.Singletons;
 
 namespace DiccionarioJuridicoV2.UserControls
 {
@@ -31,14 +32,16 @@ namespace DiccionarioJuridicoV2.UserControls
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
-
+            this.RLstFiguras.DataContext = ConceptosSingleton.Conceptos;
         }
 
         private void RLstFiguras_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            conceptoSelect = RLstFiguras.SelectedItem as Conceptos;
+            //conceptoSelect = RLstFiguras.SelectedItem as Conceptos;
 
-            ConcepScjn.DataContext = new TesisModel().GetTesisForConcepto(conceptoSelect.TesisRelacionadas);
+            //new ConceptosModel().GetTesisByConcepto(conceptoSelect);
+
+            //ConcepScjn.DataContext = new TesisModel().GetTesisForConcepto(conceptoSelect.TesisRelacionadas);
         }
     }
 }

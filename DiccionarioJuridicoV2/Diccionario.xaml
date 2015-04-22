@@ -24,6 +24,8 @@
                                                  Content="Terminos genéricos" />
                         <telerik:RadRibbonButton x:Name="RBtnTemasScjn"
                                                  Content="Temático - SCJN" Click="RBtnTemasScjn_Click" />
+                        <telerik:RadRibbonButton x:Name="RBtnListaFiguras"
+                                                 Content="Figuras Jurídicas" Click="RBtnListaFiguras_Click"  />
 
                     </telerik:RadRibbonGroup>
                 </telerik:RadRibbonTab>
@@ -51,12 +53,12 @@
                                                  Content="Eliminar"
                                                  LargeImage="Resources/add_blue Menos.png"
                                                  Size="Large" />
-                        <telerik:RadRibbonButton x:Name="RBtnTurnToSinonimo"
+                        <telerik:RadRibbonButton x:Name="RBtnFusionar"
                                                  LargeImage="Resources/exit.png"
-                                                 Size="Large">
+                                                 Size="Large" Click="RBtnFusionar_Click">
                             <StackPanel Orientation="Vertical">
-                                <TextBlock HorizontalAlignment="Center" Text="Convertir en" />
-                                <TextBlock HorizontalAlignment="Center" Text="Sinónimo" />
+                                <TextBlock HorizontalAlignment="Center" Text="Fusionar" />
+                                <TextBlock HorizontalAlignment="Center" Text="temas" />
                             </StackPanel>
                         </telerik:RadRibbonButton>
                     </telerik:RadRibbonGroup>

@@ -20,8 +20,9 @@ namespace DiccionarioJuridicoV2
     /// </summary>
     public partial class FusionarTemas
     {
-        private readonly Conceptos conceptoPermanece;
-        private readonly Conceptos conceptoElimina;
+        private Conceptos conceptoPermanece;
+        private Conceptos conceptoElimina;
+        private Conceptos conceptoTemporal;
 
         public FusionarTemas(Conceptos conceptoPermanece, Conceptos conceptoElimina)
         {
@@ -32,7 +33,23 @@ namespace DiccionarioJuridicoV2
 
         private void RadWindow_Loaded(object sender, RoutedEventArgs e)
         {
+            TxtConserva.Text = conceptoPermanece.Concepto;
+            TxtEliminar.Text = conceptoElimina.Concepto;
+        }
+
+        private void RBtnCambiar_Click(object sender, RoutedEventArgs e)
+        {
+            conceptoTemporal = conceptoPermanece;
+
+            conceptoPermanece = conceptoElimina;
+
+            conceptoElimina = conceptoTemporal;
+
+            TxtConserva.Text = conceptoPermanece.Concepto;
+            TxtEliminar.Text = conceptoElimina.Concepto;
 
         }
+
+        
     }
 }

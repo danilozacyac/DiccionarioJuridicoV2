@@ -13,7 +13,10 @@ namespace DiccionarioJuridicoV2.Dto
         private DateTime fechaAlta;
         //private ObservableCollection<Sinonimos> sinonimos;
         private ObservableCollection<int> tesisRelacionadas;
+        private int numTesis;
 
+
+        
 
         public int IdConcepto
         {
@@ -64,6 +67,17 @@ namespace DiccionarioJuridicoV2.Dto
             }
         }
 
+        public int NumTesis
+        {
+            get
+            {
+                return this.numTesis;
+            }
+            set
+            {
+                this.numTesis = value;
+            }
+        }
 
         //public ObservableCollection<Sinonimos> Sinonimos
         //{

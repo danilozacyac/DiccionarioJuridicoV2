@@ -18,11 +18,12 @@
                             Margin="10,50,10,20"
                             HorizontalAlignment="Stretch"
                             VerticalAlignment="Stretch"
-                            DisplayMemberPath="Termino"
+                            DisplayMemberPath="Concepto"
                             FontSize="16"
                             ItemsSource="{Binding}"
-                            SelectedValuePath="IdGenerico"
-                            SelectionChanged="RLstFiguras_SelectionChanged" />
+                            SelectedValuePath="IdConcepto"
+                            SelectionChanged="RLstFiguras_SelectionChanged"
+                            SelectionMode="Multiple" />
 
         <telerik:RadGridView x:Name="ConcepScjn"
                              Grid.Column="1"
