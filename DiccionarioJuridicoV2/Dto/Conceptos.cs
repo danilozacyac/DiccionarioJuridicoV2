@@ -7,6 +7,7 @@ namespace DiccionarioJuridicoV2.Dto
 {
     public class Conceptos : INotifyPropertyChanged
     {
+        private bool isSelected;
         private int idConcepto;
         private string concepto;
         private string conceptoStr;
@@ -15,8 +16,17 @@ namespace DiccionarioJuridicoV2.Dto
         private ObservableCollection<int> tesisRelacionadas;
         private int numTesis;
 
-
-        
+        public bool IsSelected
+        {
+            get
+            {
+                return this.isSelected;
+            }
+            set
+            {
+                this.isSelected = value;
+            }
+        }
 
         public int IdConcepto
         {

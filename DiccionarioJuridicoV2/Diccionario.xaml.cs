@@ -98,7 +98,16 @@ namespace DiccionarioJuridicoV2
             PanelCentral.AddItem(pane, DockPosition.Center);
         }
 
-        
+        RGenFigScjn relacionesGenericos;
+        private void RBtnGenericRelaciones_Click(object sender, RoutedEventArgs e)
+        {
+            RadPane pane = new RadPane();
+            relacionesGenericos = new RGenFigScjn(listaGenericos);
+            pane.Content = relacionesGenericos;
+            pane.Header = "Establecer relaciones";
+
+            PanelCentral.AddItem(pane, DockPosition.Center);
+        }
 
         #region Terminos Genericos
 
@@ -124,6 +133,8 @@ namespace DiccionarioJuridicoV2
                 new GenericosModel().DeleteTerminoGenerico(rGrnSin.SelectedGenerico);
             }
         }
+
+        
 
         #endregion
 
@@ -162,6 +173,8 @@ namespace DiccionarioJuridicoV2
         }
 
         #endregion
+
+        
 
 
         //#region Background Worker

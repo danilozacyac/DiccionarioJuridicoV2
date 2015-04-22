@@ -18,18 +18,21 @@
 
             <telerik:RadRibbonView VerticalAlignment="Top" x:Name="Ribbon">
                 <telerik:RadRibbonTab Header="Vistas">
-                    <telerik:RadRibbonGroup>
+                    <telerik:RadRibbonGroup Header="Listados">
                         <telerik:RadRibbonButton x:Name="RBtnTermGen"
                                                  Click="RBtnTermGen_Click" Size="Large"
                                                  Content="Terminos genéricos" LargeImage="Resources/Dictionary_128.png" />
                         <telerik:RadRibbonButton x:Name="RBtnListaFiguras"
                                                  Click="RBtnListaFiguras_Click" Size="Large"
                                                  Content="Figuras Jurídicas" LargeImage="Resources/law_400.png" />
+                        
+                        
+
+                    </telerik:RadRibbonGroup>
+                    <telerik:RadRibbonGroup Header="Relaciones">
                         <telerik:RadRibbonButton x:Name="RBtnTemasScjn"
                                                  Click="RBtnTemasScjn_Click" Size="Large"
                                                  Content="Temático - SCJN" LargeImage="Resources/tesa_256.png" />
-                        
-
                     </telerik:RadRibbonGroup>
                 </telerik:RadRibbonTab>
                 <telerik:RadRibbonTab Header="Herramientas">
@@ -52,6 +55,14 @@
                                                      Size="Medium"
                                                      SmallImage="Resources/Dictionary_32.png" />
                         </StackPanel>
+                        <telerik:RadRibbonButton x:Name="RBtnGenericRelaciones"
+                                                     LargeImage="Resources/relacion.png"
+                                                     Size="Large" Click="RBtnGenericRelaciones_Click">
+                            <StackPanel Orientation="Vertical">
+                                <TextBlock Text="Establecer"/>
+                                <TextBlock Text="relaciones"/>
+                            </StackPanel>
+                        </telerik:RadRibbonButton>
                     </telerik:RadRibbonGroup>
                     <telerik:RadRibbonGroup Header="Figuras Jurídicas">
                         <!--<telerik:RadRibbonButton x:Name="RBtnAddConcepto"

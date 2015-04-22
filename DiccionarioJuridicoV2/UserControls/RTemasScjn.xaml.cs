@@ -1,18 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using DiccionarioJuridicoV2.Dto;
+using DiccionarioJuridicoV2.Models;
 using DiccionarioJuridicoV2.Singletons;
 
 namespace DiccionarioJuridicoV2.UserControls
@@ -27,6 +19,8 @@ namespace DiccionarioJuridicoV2.UserControls
         public RTemasScjn()
         {
             InitializeComponent();
+            worker.DoWork += this.WorkerDoWork;
+            worker.RunWorkerCompleted += WorkerRunWorkerCompleted;
         }
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
@@ -38,9 +32,34 @@ namespace DiccionarioJuridicoV2.UserControls
         {
             selectedMateria = CbxMaterias.SelectedItem as Materias;
 
+            this.LaunchBusyIndicator();
+        }
+
+        #region Background Worker
+
+        private BackgroundWorker worker = new BackgroundWorker();
+        private void WorkerDoWork(object sender, DoWorkEventArgs e)
+        {
+            ArbolesSingleton.Temas(selectedMateria.Id);
+        }
+
+        void WorkerRunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            //Dispatcher.BeginInvoke(new Action<ObservableCollection<Organismos>>(this.UpdateGridDataSource), e.Result);
+            this.BusyIndicator.IsBusy = false;
             TreeMaterias.DataContext = ArbolesSingleton.Temas(selectedMateria.Id);
         }
 
-        
+        private void LaunchBusyIndicator()
+        {
+            if (!worker.IsBusy)
+            {
+                this.BusyIndicator.IsBusy = true;
+                worker.RunWorkerAsync();
+
+            }
+        }
+
+        #endregion
     }
 }

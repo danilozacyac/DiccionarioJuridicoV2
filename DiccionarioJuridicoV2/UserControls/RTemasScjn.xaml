@@ -8,150 +8,155 @@
              d:DesignHeight="500"
              d:DesignWidth="700"
              mc:Ignorable="d">
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="*" />
-        </Grid.ColumnDefinitions>
+    <telerik:RadBusyIndicator x:Name="BusyIndicator"
+                              Grid.Row="1"
+                              IsIndeterminate="True"
+                              telerik:StyleManager.Theme="Windows8Touch">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
 
-        <Grid Grid.Column="0">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="80" />
-                <RowDefinition Height="*" />
-            </Grid.RowDefinitions>
+            <Grid Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="80" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
 
 
 
-            <telerik:RadComboBox x:Name="CbxMaterias"
-                                 Grid.Row="0"
-                                 Width="198"
+                <telerik:RadComboBox x:Name="CbxMaterias"
+                                     Grid.Row="0"
+                                     Width="198"
+                                     Height="23"
+                                     Margin="15,39,0,0"
+                                     HorizontalAlignment="Left"
+                                     VerticalAlignment="Top"
+                                     DisplayMemberPath="Descripcion"
+                                     ItemsSource="{Binding}"
+                                     SelectedValuePath="Id"
+                                     SelectionChanged="CbxMaterias_SelectionChanged" />
+                <telerik:RadTreeView x:Name="TreeMaterias"
+                                     Grid.Row="1"
+                                     Margin="15,15,15,15"
+                                     HorizontalAlignment="Stretch"
+                                     VerticalAlignment="Stretch"
+                                     ItemsSource="{Binding}">
+                    <telerik:RadTreeView.ItemTemplate>
+                        <HierarchicalDataTemplate ItemsSource="{Binding TemasHijo}">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock VerticalAlignment="Center" Text="{Binding Descripcion}" />
+                            </StackPanel>
+                        </HierarchicalDataTemplate>
+                    </telerik:RadTreeView.ItemTemplate>
+                </telerik:RadTreeView>
+                <Label Margin="15,10,0,0"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Top"
+                       Content="Materia:"
+                       FontSize="14"
+                       FontWeight="Bold" />
+
+
+
+
+            </Grid>
+
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="200" />
+                </Grid.RowDefinitions>
+
+                <telerik:RadGridView x:Name="ConcepScjn"
+                                     Margin="20,50,20,20"
+                                     HorizontalAlignment="Stretch"
+                                     VerticalAlignment="Stretch"
+                                     AutoGenerateColumns="False"
+                                     FontSize="18"
+                                     IsFilteringAllowed="False"
+                                     ItemsSource="{Binding}"
+                                     ShowGroupPanel="False">
+                    <telerik:RadGridView.Columns>
+                        <telerik:GridViewDataColumn Width="*"
+                                                    DataMemberBinding="{Binding Id}"
+                                                    Header="Identificador"
+                                                    IsReadOnly="True" />
+                        <telerik:GridViewDataColumn Width="*"
+                                                    DataMemberBinding="{Binding ConceptoScjn}"
+                                                    Header="Concepto"
+                                                    IsReadOnly="True" />
+
+                    </telerik:RadGridView.Columns>
+                </telerik:RadGridView>
+
+                <GroupBox Grid.Row="1"
+                          Width="330"
+                          Margin="10,15,10,15"
+                          HorizontalAlignment="Left"
+                          VerticalAlignment="Stretch"
+                          Header="Agregar Tema SCJN">
+                    <Grid>
+                        <Label Width="25"
+                               Height="23"
+                               Margin="15,15,0,0"
+                               HorizontalAlignment="Left"
+                               VerticalAlignment="Top"
+                               Content="Id:" />
+                        <TextBox x:Name="TxtIdTemaScjn"
+                                 Width="150"
                                  Height="23"
-                                 Margin="15,39,0,0"
+                                 Margin="45,15,0,0"
                                  HorizontalAlignment="Left"
-                                 VerticalAlignment="Top"
-                                 DisplayMemberPath="Descripcion"
-                                 ItemsSource="{Binding}"
-                                 SelectedValuePath="Id"
-                                 SelectionChanged="CbxMaterias_SelectionChanged" />
-            <telerik:RadTreeView x:Name="TreeMaterias"
-                                 Grid.Row="1"
-                                 Margin="15,15,15,15"
-                                 HorizontalAlignment="Stretch"
-                                 VerticalAlignment="Stretch"
-                                 ItemsSource="{Binding}">
-                <telerik:RadTreeView.ItemTemplate>
-                    <HierarchicalDataTemplate ItemsSource="{Binding TemasHijo}">
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock VerticalAlignment="Center" Text="{Binding Descripcion}" />
-                        </StackPanel>
-                    </HierarchicalDataTemplate>
-                </telerik:RadTreeView.ItemTemplate>
-            </telerik:RadTreeView>
-            <Label Margin="15,10,0,0"
-                   HorizontalAlignment="Left"
-                   VerticalAlignment="Top"
-                   Content="Materia:"
-                   FontSize="14"
-                   FontWeight="Bold" />
+                                 VerticalAlignment="Top" />
+                        <Label Width="100"
+                               Height="25"
+                               Margin="15,45,0,0"
+                               HorizontalAlignment="Left"
+                               VerticalAlignment="Top"
+                               Content="Concepto" />
+                        <TextBox x:Name="TxtConceptoScjn"
+                                 Width="180"
+                                 Height="23"
+                                 Margin="15,72,0,0"
+                                 HorizontalAlignment="Left"
+                                 VerticalAlignment="Top" />
+                        <telerik:RadButton x:Name="BtnLimpiar"
+                                           Width="75"
+                                           Margin="233,15,0,0"
+                                           HorizontalAlignment="Left"
+                                           VerticalAlignment="Top"
+                                           Content="Limpiar" />
+                        <telerik:RadButton x:Name="BtnAddRelaciona"
+                                           Width="75"
+                                           Margin="233,48,0,0"
+                                           HorizontalAlignment="Left"
+                                           VerticalAlignment="Top">
+                            <StackPanel Orientation="Vertical">
+                                <TextBlock HorizontalAlignment="Center" Text="Agregar" />
+                                <TextBlock HorizontalAlignment="Center" Text="y relacionar" />
+                            </StackPanel>
+                        </telerik:RadButton>
+                        <telerik:RadButton x:Name="BtnAgregar"
+                                           Width="75"
+                                           Margin="233,100,0,0"
+                                           HorizontalAlignment="Left"
+                                           VerticalAlignment="Top"
+                                           Content="Agregar" />
+
+                    </Grid>
+                </GroupBox>
+                <Label Margin="20,10,0,0"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Top"
+                       Content="Conceptos del Tesauro de la SCJN"
+                       FontSize="14"
+                       FontWeight="Bold" />
 
 
-
-
-        </Grid>
-
-        <Grid Grid.Column="1">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*" />
-                <RowDefinition Height="200" />
-            </Grid.RowDefinitions>
-
-            <telerik:RadGridView x:Name="ConcepScjn"
-                                 Margin="20,50,20,20"
-                                 HorizontalAlignment="Stretch"
-                                 VerticalAlignment="Stretch"
-                                 AutoGenerateColumns="False"
-                                 FontSize="18"
-                                 IsFilteringAllowed="False"
-                                 ItemsSource="{Binding}"
-                                 ShowGroupPanel="False">
-                <telerik:RadGridView.Columns>
-                    <telerik:GridViewDataColumn Width="*"
-                                                DataMemberBinding="{Binding Id}"
-                                                Header="Identificador"
-                                                IsReadOnly="True" />
-                    <telerik:GridViewDataColumn Width="*"
-                                                DataMemberBinding="{Binding ConceptoScjn}"
-                                                Header="Concepto"
-                                                IsReadOnly="True" />
-
-                </telerik:RadGridView.Columns>
-            </telerik:RadGridView>
-
-            <GroupBox Grid.Row="1"
-                      Width="330"
-                      Margin="10,15,10,15"
-                      HorizontalAlignment="Left"
-                      VerticalAlignment="Stretch"
-                      Header="Agregar Tema SCJN">
-                <Grid>
-                    <Label Width="25"
-                           Height="23"
-                           Margin="15,15,0,0"
-                           HorizontalAlignment="Left"
-                           VerticalAlignment="Top"
-                           Content="Id:" />
-                    <TextBox x:Name="TxtIdTemaScjn"
-                             Width="150"
-                             Height="23"
-                             Margin="45,15,0,0"
-                             HorizontalAlignment="Left"
-                             VerticalAlignment="Top" />
-                    <Label Width="100"
-                           Height="25"
-                           Margin="15,45,0,0"
-                           HorizontalAlignment="Left"
-                           VerticalAlignment="Top"
-                           Content="Concepto" />
-                    <TextBox x:Name="TxtConceptoScjn"
-                             Width="180"
-                             Height="23"
-                             Margin="15,72,0,0"
-                             HorizontalAlignment="Left"
-                             VerticalAlignment="Top" />
-                    <telerik:RadButton x:Name="BtnLimpiar"
-                                       Width="75"
-                                       Margin="233,15,0,0"
-                                       HorizontalAlignment="Left"
-                                       VerticalAlignment="Top"
-                                       Content="Limpiar" />
-                    <telerik:RadButton x:Name="BtnAddRelaciona"
-                                       Width="75"
-                                       Margin="233,48,0,0"
-                                       HorizontalAlignment="Left"
-                                       VerticalAlignment="Top">
-                        <StackPanel Orientation="Vertical">
-                            <TextBlock HorizontalAlignment="Center" Text="Agregar" />
-                            <TextBlock HorizontalAlignment="Center" Text="y relacionar" />
-                        </StackPanel>
-                    </telerik:RadButton>
-                    <telerik:RadButton x:Name="BtnAgregar"
-                                       Width="75"
-                                       Margin="233,100,0,0"
-                                       HorizontalAlignment="Left"
-                                       VerticalAlignment="Top"
-                                       Content="Agregar" />
-
-                </Grid>
-            </GroupBox>
-            <Label Margin="20,10,0,0"
-                   HorizontalAlignment="Left"
-                   VerticalAlignment="Top"
-                   Content="Conceptos del Tesauro de la SCJN"
-                   FontSize="14"
-                   FontWeight="Bold" />
-
+            </Grid>
 
         </Grid>
-
-    </Grid>
+    </telerik:RadBusyIndicator>
 </UserControl>
