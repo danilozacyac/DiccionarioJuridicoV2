@@ -29,7 +29,7 @@
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
     <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
-    <ApplicationRevision>4</ApplicationRevision>
+    <ApplicationRevision>5</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -143,6 +143,9 @@
     <Compile Include="AddUpdates\AddUpdateTesauroScjn.xaml.cs">
       <DependentUpon>AddUpdateTesauroScjn.xaml</DependentUpon>
     </Compile>
+    <Compile Include="AddUpdates\UpdateGenerico.xaml.cs">
+      <DependentUpon>UpdateGenerico.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Dto\Materias.cs" />
     <Compile Include="Dto\TesauroScjn.cs" />
     <Compile Include="Dto\Tesis.cs" />
@@ -181,6 +184,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="AddUpdates\AddUpdateTesauroScjn.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="AddUpdates\UpdateGenerico.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -333,6 +340,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\tesa_256.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="RelacionesF\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

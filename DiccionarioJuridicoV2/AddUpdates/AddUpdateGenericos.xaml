@@ -15,14 +15,18 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
-        <Label Margin="33,32,0,0"
+        <Label Margin="25,29,0,0"
                HorizontalAlignment="Left"
                VerticalAlignment="Top"
-               Content="Concepto:" />
-        <Label Margin="33,98,0,0"
+               Content="Término:"
+               FontSize="14"
+               FontWeight="Bold" />
+        <Label Margin="25,95,0,0"
                HorizontalAlignment="Left"
                VerticalAlignment="Top"
-               Content="Definición:" />
+               Content="Definición:"
+               FontSize="14"
+               FontWeight="Bold" />
         <TextBox x:Name="TxtDefinicion"
                  Margin="25,124,25,40"
                  HorizontalAlignment="Stretch"
@@ -65,6 +69,8 @@
                HorizontalAlignment="Left"
                VerticalAlignment="Top"
                Content="Términos similares"
+               FontSize="14"
+               FontWeight="Bold"
                Foreground="Red" />
 
 

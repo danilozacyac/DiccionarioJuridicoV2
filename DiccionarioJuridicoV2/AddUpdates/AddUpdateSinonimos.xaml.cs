@@ -63,7 +63,9 @@ namespace DiccionarioJuridicoV2.AddUpdates
                 newSinonimo.Sinonimo = TxtConcepto.Text;
                 newSinonimo.SinonimoStr = StringUtilities.PrepareToAlphabeticalOrder(newSinonimo.Sinonimo);
                 newSinonimo.Fuente = TxtFuente.Text;
-                newSinonimo.FuenteStr = StringUtilities.PrepareToAlphabeticalOrder(newSinonimo.Fuente);
+
+                if(!String.IsNullOrEmpty(newSinonimo.Fuente) || !String.IsNullOrWhiteSpace(newSinonimo.Fuente))
+                    newSinonimo.FuenteStr = StringUtilities.PrepareToAlphabeticalOrder(newSinonimo.Fuente);
 
                 sinonimosPorGuardar.Add(newSinonimo);
 

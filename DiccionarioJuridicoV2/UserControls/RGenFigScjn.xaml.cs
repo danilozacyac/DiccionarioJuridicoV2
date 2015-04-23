@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows.Controls;
 using DiccionarioJuridicoV2.Dto;
+using DiccionarioJuridicoV2.Singletons;
 
 namespace DiccionarioJuridicoV2.UserControls
 {
@@ -22,6 +23,7 @@ namespace DiccionarioJuridicoV2.UserControls
         private void UserControl_Loaded(object sender, System.Windows.RoutedEventArgs e)
         {
             RLstGenericos.DataContext = listaGenericos;
+            RLstFiguras.DataContext = ConceptosSingleton.Conceptos;
         }
     }
 }

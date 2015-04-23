@@ -119,7 +119,7 @@ namespace DiccionarioJuridicoV2
 
         private void RBtnUpdateGenerico_Click(object sender, RoutedEventArgs e)
         {
-            AddUpdateGenericos update = new AddUpdateGenericos(rGrnSin.SelectedGenerico);
+            UpdateGenerico update = new UpdateGenerico(rGrnSin.SelectedGenerico);
             update.ShowDialog();
         }
 

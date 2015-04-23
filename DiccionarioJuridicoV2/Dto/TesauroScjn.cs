@@ -5,8 +5,21 @@ namespace DiccionarioJuridicoV2.Dto
 {
     public class TesauroScjn
     {
+        private bool isSelected;
         private int id;
         private string conceptoScjn;
+
+        public bool IsSelected
+        {
+            get
+            {
+                return this.isSelected;
+            }
+            set
+            {
+                this.isSelected = value;
+            }
+        }
 
         public int Id
         {

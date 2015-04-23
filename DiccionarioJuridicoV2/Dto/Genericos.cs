@@ -9,10 +9,12 @@ namespace DiccionarioJuridicoV2.Dto
         private int idGenerico;
         private string termino;
         private string terminoStr;
+        private int idDefinicion;
         private string definicion;
         private string definicionStr;
         private ObservableCollection<Conceptos> conceptosAsociados;
         private ObservableCollection<Sinonimos> sinonimos;
+        
 
         public int IdGenerico
         {
@@ -47,6 +49,18 @@ namespace DiccionarioJuridicoV2.Dto
             set
             {
                 this.terminoStr = value;
+            }
+        }
+
+        public int IdDefinicion
+        {
+            get
+            {
+                return this.idDefinicion;
+            }
+            set
+            {
+                this.idDefinicion = value;
             }
         }
 
