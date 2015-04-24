@@ -7,107 +7,140 @@
                    Header="Diccionario"
                    Loaded="RadWindow_Loaded"
                    WindowState="Maximized">
-    <telerik:RadBusyIndicator x:Name="BusyIndicator"
-                              IsIndeterminate="True"
-                              telerik:StyleManager.Theme="Windows7">
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="148" />
-                <RowDefinition Height="*" />
-            </Grid.RowDefinitions>
 
-            <telerik:RadRibbonView VerticalAlignment="Top" x:Name="Ribbon">
-                <telerik:RadRibbonTab Header="Vistas">
-                    <telerik:RadRibbonGroup Header="Listados">
-                        <telerik:RadRibbonButton x:Name="RBtnTermGen"
-                                                 Click="RBtnTermGen_Click" Size="Large"
-                                                 Content="Terminos genéricos" LargeImage="Resources/Dictionary_128.png" />
-                        <telerik:RadRibbonButton x:Name="RBtnListaFiguras"
-                                                 Click="RBtnListaFiguras_Click" Size="Large"
-                                                 Content="Figuras Jurídicas" LargeImage="Resources/law_400.png" />
-                        
-                        
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="148" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
 
-                    </telerik:RadRibbonGroup>
-                    <telerik:RadRibbonGroup Header="Relaciones">
-                        <telerik:RadRibbonButton x:Name="RBtnTemasScjn"
-                                                 Click="RBtnTemasScjn_Click" Size="Large"
-                                                 Content="Temático - SCJN" LargeImage="Resources/tesa_256.png" />
-                    </telerik:RadRibbonGroup>
-                </telerik:RadRibbonTab>
-                <telerik:RadRibbonTab Header="Herramientas">
-                    <telerik:RadRibbonGroup Header="Términos Genéricos">
-                        <telerik:RadRibbonButton x:Name="RBtnAgregarGenerico"
-                                                 Click="RBtnAgregarGenerico_Click"
-                                                 Content="Agregar término"
+        <telerik:RadRibbonView x:Name="Ribbon" VerticalAlignment="Top">
+            <telerik:RadRibbonTab Header="Vistas">
+                <telerik:RadRibbonGroup Header="Listados">
+                    <telerik:RadRibbonButton x:Name="RBtnTermGen"
+                                             Click="RBtnTermGen_Click"
+                                             Content="Terminos genéricos"
+                                             LargeImage="Resources/Dictionary_128.png"
+                                             Size="Large" />
+                    <telerik:RadRibbonButton x:Name="RBtnListaFiguras"
+                                             Click="RBtnListaFiguras_Click"
+                                             Content="Figuras Jurídicas"
+                                             LargeImage="Resources/law_400.png"
+                                             Size="Large" />
+
+
+
+                </telerik:RadRibbonGroup>
+                <telerik:RadRibbonGroup Header="Relaciones">
+                    <telerik:RadRibbonButton x:Name="RBtnTemasScjn"
+                                             Click="RBtnTemasScjn_Click"
+                                             Content="Temático - SCJN"
+                                             LargeImage="Resources/tesa_256.png"
+                                             Size="Large" />
+                </telerik:RadRibbonGroup>
+            </telerik:RadRibbonTab>
+            <telerik:RadRibbonTab Header="Herramientas">
+                <telerik:RadRibbonGroup Header="Términos Genéricos">
+                    <telerik:RadRibbonButton x:Name="RBtnAgregarGenerico"
+                                             Click="RBtnAgregarGenerico_Click"
+                                             Content="Agregar término"
+                                             LargeImage="Resources/Dictionary_128.png"
+                                             Size="Large" />
+                    <StackPanel Orientation="Vertical">
+                        <telerik:RadRibbonButton x:Name="RBtnDelGenerico"
+                                                 Click="RBtnDelGenerico_Click"
+                                                 Content="Eliminar término"
                                                  LargeImage="Resources/Dictionary_128.png"
-                                                 Size="Large" />
+                                                 Size="Medium"
+                                                 SmallImage="Resources/Dictionary_32.png" />
+                        <telerik:RadRibbonButton x:Name="RBtnUpdateGenerico"
+                                                 Click="RBtnUpdateGenerico_Click"
+                                                 Content="Actualizar término"
+                                                 LargeImage="Resources/Dictionary_128.png"
+                                                 Size="Medium"
+                                                 SmallImage="Resources/Dictionary_32.png" />
+                    </StackPanel>
+                    <telerik:RadRibbonButton x:Name="RBtnGenericRelaciones"
+                                             Click="RBtnGenericRelaciones_Click"
+                                             LargeImage="Resources/relacion.png"
+                                             Size="Large">
                         <StackPanel Orientation="Vertical">
-                            <telerik:RadRibbonButton x:Name="RBtnDelGenerico"
-                                                     Content="Eliminar término"
-                                                     LargeImage="Resources/Dictionary_128.png"
-                                                     Size="Medium"
-                                                     SmallImage="Resources/Dictionary_32.png" Click="RBtnDelGenerico_Click" />
-                            <telerik:RadRibbonButton x:Name="RBtnUpdateGenerico"
-                                                     Click="RBtnUpdateGenerico_Click"
-                                                     Content="Actualizar término"
-                                                     LargeImage="Resources/Dictionary_128.png"
-                                                     Size="Medium"
-                                                     SmallImage="Resources/Dictionary_32.png" />
+                            <TextBlock Text="Establecer" />
+                            <TextBlock Text="relaciones" />
                         </StackPanel>
-                        <telerik:RadRibbonButton x:Name="RBtnGenericRelaciones"
-                                                     LargeImage="Resources/relacion.png"
-                                                     Size="Large" Click="RBtnGenericRelaciones_Click">
-                            <StackPanel Orientation="Vertical">
-                                <TextBlock Text="Establecer"/>
-                                <TextBlock Text="relaciones"/>
-                            </StackPanel>
-                        </telerik:RadRibbonButton>
-                    </telerik:RadRibbonGroup>
-                    <telerik:RadRibbonGroup Header="Figuras Jurídicas">
-                        <!--<telerik:RadRibbonButton x:Name="RBtnAddConcepto"
-                                                 Content="Agregar relación"
-                                                 LargeImage="Resources/relacion.png"
-                                                 Size="Large" />
+                    </telerik:RadRibbonButton>
+                </telerik:RadRibbonGroup>
+                <telerik:RadRibbonGroup Header="Figuras Jurídicas">
+                    <!--
+                        <telerik:RadRibbonButton x:Name="RBtnAddConcepto"
+                        Content="Agregar relación"
+                        LargeImage="Resources/relacion.png"
+                        Size="Large" />
                         <telerik:RadRibbonButton x:Name="RBtnModificar"
-                                                 Content="Modificar"
-                                                 LargeImage="Resources/edit_blue.png"
-                                                 Size="Large" />-->
-                        <telerik:RadRibbonButton x:Name="RBtnDeleteConcept"
-                                                 Content="Eliminar"
-                                                 LargeImage="Resources/law_400.png"
-                                                 Size="Large" Click="RBtnDeleteConcept_Click" />
-                        <telerik:RadRibbonButton x:Name="RBtnFusionar"
-                                                 Click="RBtnFusionar_Click"
-                                                 LargeImage="Resources/exit.png"
-                                                 Size="Large">
-                            <StackPanel Orientation="Vertical">
-                                <TextBlock HorizontalAlignment="Center" Text="Fusionar" />
-                                <TextBlock HorizontalAlignment="Center" Text="temas" />
-                            </StackPanel>
-                        </telerik:RadRibbonButton>
-                    </telerik:RadRibbonGroup>
-                    <telerik:RadRibbonGroup Header="Sinónimos">
-                        <telerik:RadRibbonButton x:Name="RBtnAddSin"
-                                                 Click="RBtnAddSin_Click"
-                                                 LargeImage="Resources/equality.png"
-                                                 Size="Large">
-                            <StackPanel Orientation="Vertical">
-                                <TextBlock HorizontalAlignment="Center" Text="Agregar" />
-                                <TextBlock HorizontalAlignment="Center" Text="Sinónimo" />
-                            </StackPanel>
-                        </telerik:RadRibbonButton>
-                    </telerik:RadRibbonGroup>
-                </telerik:RadRibbonTab>
-            </telerik:RadRibbonView>
-            <telerik:RadDocking x:Name="Docking" Grid.Row="1">
+                        Content="Modificar"
+                        LargeImage="Resources/edit_blue.png"
+                        Size="Large" />
+                    -->
+                    <telerik:RadRibbonButton x:Name="RBtnDeleteConcept"
+                                             Click="RBtnDeleteConcept_Click"
+                                             Content="Eliminar"
+                                             LargeImage="Resources/law_400.png"
+                                             Size="Large" />
+                    <telerik:RadRibbonButton x:Name="RBtnFusionar"
+                                             Click="RBtnFusionar_Click"
+                                             LargeImage="Resources/exit.png"
+                                             Size="Large">
+                        <StackPanel Orientation="Vertical">
+                            <TextBlock HorizontalAlignment="Center" Text="Fusionar" />
+                            <TextBlock HorizontalAlignment="Center" Text="temas" />
+                        </StackPanel>
+                    </telerik:RadRibbonButton>
+                </telerik:RadRibbonGroup>
+                <telerik:RadRibbonGroup Header="Sinónimos">
+                    <telerik:RadRibbonButton x:Name="RBtnAddSin"
+                                             Click="RBtnAddSin_Click"
+                                             LargeImage="Resources/equality.png"
+                                             Size="Large">
+                        <StackPanel Orientation="Vertical">
+                            <TextBlock HorizontalAlignment="Center" Text="Agregar" />
+                            <TextBlock HorizontalAlignment="Center" Text="Sinónimo" />
+                        </StackPanel>
+                    </telerik:RadRibbonButton>
+                </telerik:RadRibbonGroup>
+                <telerik:RadRibbonGroup Header="Temático IUS">
+                    <telerik:RadRibbonButton x:Name="RBtnLoadTrees"
+                                             Click="RBtnLoadTrees_Click"
+                                             LargeImage="Resources/load.png"
+                                             Size="Large"
+                                             Uid="100">
+                        <StackPanel Orientation="Vertical">
+                            <TextBlock HorizontalAlignment="Center" Text="Cargar" />
+                            <TextBlock HorizontalAlignment="Center" Text="Temáticos" />
+                        </StackPanel>
+                    </telerik:RadRibbonButton>
+                    <telerik:RadRibbonButton x:Name="RBtnRelTesaScjn"
+                                             LargeImage="Resources/load.png"
+                                             Size="Large">
+                        <StackPanel Orientation="Vertical">
+                            <TextBlock HorizontalAlignment="Center" Text="Relacionar" />
+                            <TextBlock HorizontalAlignment="Center" Text="Tesauro SCJN" />
+                        </StackPanel>
+                    </telerik:RadRibbonButton>
+                </telerik:RadRibbonGroup>
+            </telerik:RadRibbonTab>
+        </telerik:RadRibbonView>
+
+        <telerik:RadBusyIndicator x:Name="BusyIndicator"
+                                  IsIndeterminate="True" Grid.Row="1"
+                                  telerik:StyleManager.Theme="Windows7">
+            <telerik:RadDocking x:Name="Docking" >
                 <telerik:RadDocking.DocumentHost>
                     <telerik:RadSplitContainer InitialPosition="DockedLeft">
                         <telerik:RadPaneGroup Name="PanelCentral" />
                     </telerik:RadSplitContainer>
                 </telerik:RadDocking.DocumentHost>
             </telerik:RadDocking>
+        </telerik:RadBusyIndicator>
+    </Grid>
 
-        </Grid>
-    </telerik:RadBusyIndicator>
 </telerik:RadWindow>

@@ -29,7 +29,7 @@
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
     <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
-    <ApplicationRevision>5</ApplicationRevision>
+    <ApplicationRevision>6</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -157,6 +157,7 @@
     <Compile Include="Models\TesisModel.cs" />
     <Compile Include="Singletons\ArbolesSingleton.cs" />
     <Compile Include="Singletons\ConceptosSingleton.cs" />
+    <Compile Include="Singletons\TesauroScjnSingleton.cs" />
     <Compile Include="UserControls\LFiguras.xaml.cs">
       <DependentUpon>LFiguras.xaml</DependentUpon>
     </Compile>
@@ -343,6 +344,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="RelacionesF\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\load.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

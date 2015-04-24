@@ -22,11 +22,13 @@
                             DisplayMemberPath="Termino"
                             FontSize="16"
                             ItemsSource="{Binding}"
-                            SelectedValuePath="IdGenerico" />
+                            SelectedValuePath="IdGenerico"
+                            SelectionChanged="RLstGenericos_SelectionChanged" />
         <Grid Grid.Column="1">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />
                 <RowDefinition Height="*" />
+                <RowDefinition Height="50" />
             </Grid.RowDefinitions>
 
             <Grid Grid.Row="0">
@@ -44,11 +46,11 @@
                        FontWeight="Bold" />
 
                 <telerik:RadListBox x:Name="RLstFiguras"
+                                    Grid.Row="2"
                                     Margin="10"
                                     HorizontalAlignment="Stretch"
                                     VerticalAlignment="Stretch"
                                     FontSize="14"
-                                    Grid.Row="2"
                                     ItemsSource="{Binding}">
                     <telerik:RadListBox.ItemTemplate>
                         <DataTemplate>
@@ -76,24 +78,65 @@
                                           Margin="10,4,0,0"
                                           HorizontalAlignment="Left"
                                           VerticalAlignment="Top"
-                                          TextWrapping="Wrap" />
+                                          LabelText="Buscar" Search="SearchConceptos_Search" />
 
             </Grid>
 
+            <Grid Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30" />
+                    <RowDefinition Height="30" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
 
 
-            <telerik:RadGridView x:Name="ConcepScjn"
-                                 Grid.Row="1"
-                                 Margin="20,40,20,20"
-                                 AutoGenerateColumns="False"
-                                 ShowGroupPanel="False" />
-            <Label Grid.Row="1"
-                   Margin="20,10,0,0"
-                   HorizontalAlignment="Left"
-                   VerticalAlignment="Top"
-                   Content="Conceptos SCJN"
-                   FontSize="14"
-                   FontWeight="Bold" />
+                <Label Grid.Row="0"
+                       Margin="20,0,0,0"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Top"
+                       Content="Conceptos SCJN"
+                       FontSize="14"
+                       FontWeight="Bold" />
+
+                <UIControls:SearchTextBox x:Name="SearchScjn"
+                                          Grid.Row="1"
+                                          Width="304"
+                                          Margin="10,4,0,0"
+                                          HorizontalAlignment="Left"
+                                          VerticalAlignment="Top"
+                                          LabelText="Buscar" Search="SearchScjn_Search" />
+
+                <telerik:RadListBox x:Name="RLstScjn"
+                                    Grid.Row="2"
+                                    Margin="10"
+                                    HorizontalAlignment="Stretch"
+                                    VerticalAlignment="Stretch"
+                                    FontSize="14"
+                                    ItemsSource="{Binding}">
+                    <telerik:RadListBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <CheckBox Margin="2" IsChecked="{Binding IsSelected, Mode=TwoWay}" />
+                                <TextBlock Text=" " />
+                                <TextBlock Text="{Binding ConceptoScjn}" />
+                            </StackPanel>
+                        </DataTemplate>
+                    </telerik:RadListBox.ItemTemplate>
+                </telerik:RadListBox>
+
+            </Grid>
+            <telerik:RadButton x:Name="RbtnGuardar"
+                               Grid.Row="2"
+                               Width="104"
+                               Height="35"
+                               Margin="0,5,10,0"
+                               HorizontalAlignment="Right"
+                               telerik:StyleManager.Theme="Expression_Dark"
+                               VerticalAlignment="Top"
+                               Click="RbtnGuardar_Click"
+                               Content="Guardar" />
+
+
         </Grid>
         <Label Margin="10,10,0,0"
                HorizontalAlignment="Left"

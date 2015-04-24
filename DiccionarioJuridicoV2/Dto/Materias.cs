@@ -49,7 +49,7 @@ namespace DiccionarioJuridicoV2.Dto
             materias.Add(new Materias { Id = 8, Descripcion = "Administrativa", Tabla = "Temas", Servidor = 2 });
             materias.Add(new Materias { Id = 16, Descripcion = "Laboral", Tabla = "Temas", Servidor = 2 });
             materias.Add(new Materias { Id = 32, Descripcion = "Común", Tabla = "Temas", Servidor = 2 });
-            materias.Add(new Materias { Id = 64, Descripcion = "Derechos Humanos", Tabla = "Temas", Servidor = 2 });
+            //materias.Add(new Materias { Id = 64, Descripcion = "Derechos Humanos", Tabla = "Temas", Servidor = 2 });
 
             return materias;
         }

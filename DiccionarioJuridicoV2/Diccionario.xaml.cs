@@ -32,18 +32,19 @@ namespace DiccionarioJuridicoV2
         private RGenSinoni rGrnSin;
 
         private ObservableCollection<Genericos> listaGenericos;
+        private int uid;
 
         public Diccionario(ObservableCollection<Genericos> listaGenericos)
         {
             InitializeComponent();
             this.listaGenericos = listaGenericos;
-            //worker.DoWork += this.WorkerDoWork;
-            //worker.RunWorkerCompleted += WorkerRunWorkerCompleted;
+            worker.DoWork += this.WorkerDoWork;
+            worker.RunWorkerCompleted += WorkerRunWorkerCompleted;
         }
 
         private void RadWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            //this.LaunchBusyIndicator();
+            
         }
 
         
@@ -107,6 +108,15 @@ namespace DiccionarioJuridicoV2
             pane.Header = "Establecer relaciones";
 
             PanelCentral.AddItem(pane, DockPosition.Center);
+        }
+
+        private void RBtnLoadTrees_Click(object sender, RoutedEventArgs e)
+        {
+            RadRibbonButton button = sender as RadRibbonButton;
+
+            uid = Convert.ToInt32(button.Uid);
+
+            this.LaunchBusyIndicator();
         }
 
         #region Terminos Genericos
@@ -174,47 +184,45 @@ namespace DiccionarioJuridicoV2
 
         #endregion
 
-        
 
 
-        //#region Background Worker
 
-        //private BackgroundWorker worker = new BackgroundWorker();
-        //private void WorkerDoWork(object sender, DoWorkEventArgs e)
-        //{
-        //    var y = ArbolesSingleton.Temas(1);
-        //    //if (busyIndicatorAction == 1)
-        //    //{
-        //    //    FuncionariosWord imprime = new FuncionariosWord(FuncionariosSingleton.FuncionariosCollection);
-        //    //    imprime.GeneraDocumentoWord();
-        //    //}
-        //    //else if (busyIndicatorAction == 2)
-        //    //{
-        //    //    OrganismosWord imprime = new OrganismosWord(organismosToPrint);
-        //    //    imprime.GeneraDocumentoWord();
-        //    //}
-        //    //else if (busyIndicatorAction == 3)
-        //    //{
-        //    //    OrganismosModel.SetNewIntegrantesCount();
-        //    //}
-        //}
 
-        //void WorkerRunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
-        //{
-        //    //Dispatcher.BeginInvoke(new Action<ObservableCollection<Organismos>>(this.UpdateGridDataSource), e.Result);
-        //    this.BusyIndicator.IsBusy = false;
-        //}
 
-        //private void LaunchBusyIndicator()
-        //{
-        //    if (!worker.IsBusy)
-        //    {
-        //        this.BusyIndicator.IsBusy = true;
-        //        worker.RunWorkerAsync();
+        #region Background Worker
 
-        //    }
-        //}
+        private BackgroundWorker worker = new BackgroundWorker();
+        private void WorkerDoWork(object sender, DoWorkEventArgs e)
+        {
+            switch (uid)
+            {
+                case 100: var x = ArbolesSingleton.Temas(1);
+                    x = ArbolesSingleton.Temas(2);
+                    x = ArbolesSingleton.Temas(4);
+                    x = ArbolesSingleton.Temas(8);
+                    x = ArbolesSingleton.Temas(16);
+                    x = ArbolesSingleton.Temas(32);
+                    x = null;
+                    break;
+            }
+        }
 
-        //#endregion
+        void WorkerRunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            //Dispatcher.BeginInvoke(new Action<ObservableCollection<Organismos>>(this.UpdateGridDataSource), e.Result);
+            this.BusyIndicator.IsBusy = false;
+        }
+
+        private void LaunchBusyIndicator()
+        {
+            if (!worker.IsBusy)
+            {
+                this.BusyIndicator.IsBusy = true;
+                worker.RunWorkerAsync();
+
+            }
+        }
+
+        #endregion
     }
 }

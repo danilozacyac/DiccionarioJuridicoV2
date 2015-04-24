@@ -42,7 +42,7 @@
                                      Margin="15,15,15,15"
                                      HorizontalAlignment="Stretch"
                                      VerticalAlignment="Stretch"
-                                     ItemsSource="{Binding}">
+                                     ItemsSource="{Binding}" SelectionChanged="TreeMaterias_SelectionChanged">
                     <telerik:RadTreeView.ItemTemplate>
                         <HierarchicalDataTemplate ItemsSource="{Binding TemasHijo}">
                             <StackPanel Orientation="Horizontal">
@@ -123,27 +123,21 @@
                                  HorizontalAlignment="Left"
                                  VerticalAlignment="Top" />
                         <telerik:RadButton x:Name="BtnLimpiar"
-                                           Width="75"
-                                           Margin="233,15,0,0"
+                                           Width="88"
+                                           Margin="220,15,0,0"
                                            HorizontalAlignment="Left"
                                            VerticalAlignment="Top"
-                                           Content="Limpiar" />
+                                           Content="Limpiar" Click="BtnLimpiar_Click" Height="32" />
                         <telerik:RadButton x:Name="BtnAddRelaciona"
-                                           Width="75"
-                                           Margin="233,48,0,0"
+                                           Width="88"
+                                           Margin="220,72,0,0"
                                            HorizontalAlignment="Left"
-                                           VerticalAlignment="Top">
+                                           VerticalAlignment="Top" Height="49" Click="BtnAddRelaciona_Click">
                             <StackPanel Orientation="Vertical">
                                 <TextBlock HorizontalAlignment="Center" Text="Agregar" />
                                 <TextBlock HorizontalAlignment="Center" Text="y relacionar" />
                             </StackPanel>
                         </telerik:RadButton>
-                        <telerik:RadButton x:Name="BtnAgregar"
-                                           Width="75"
-                                           Margin="233,100,0,0"
-                                           HorizontalAlignment="Left"
-                                           VerticalAlignment="Top"
-                                           Content="Agregar" />
 
                     </Grid>
                 </GroupBox>

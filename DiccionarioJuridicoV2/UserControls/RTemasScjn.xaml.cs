@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Windows;
@@ -15,6 +16,8 @@ namespace DiccionarioJuridicoV2.UserControls
     public partial class RTemasScjn : UserControl
     {
         private Materias selectedMateria;
+        private Temas selectedTema;
+        private ObservableCollection<TesauroScjn> conceptosScjn;
 
         public RTemasScjn()
         {
@@ -35,6 +38,38 @@ namespace DiccionarioJuridicoV2.UserControls
             this.LaunchBusyIndicator();
         }
 
+        private void TreeMaterias_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            selectedTema = TreeMaterias.SelectedItem as Temas;
+
+            conceptosScjn = new RelacionesModel().GetRelations(selectedTema, selectedMateria.Id + 100);
+
+            ConcepScjn.DataContext = conceptosScjn;
+        }
+
+        private void BtnLimpiar_Click(object sender, RoutedEventArgs e)
+        {
+            TxtIdTemaScjn.Text = String.Empty;
+            TxtConceptoScjn.Text = String.Empty;
+        }
+
+        private void BtnAddRelaciona_Click(object sender, RoutedEventArgs e)
+        {
+            TesauroScjn tesauro = new TesauroScjn()
+            {
+                Id = Convert.ToInt32(TxtIdTemaScjn.Text),
+                ConceptoScjn = TxtConceptoScjn.Text,
+                IsSelected = false
+            };
+
+            new TesauroScjnModel().SetNewTerminoScjn(tesauro);
+            new RelacionesModel().SetNewRelation(selectedTema.Id, tesauro.Id, selectedMateria.Id + 100);
+            TesauroScjnSingleton.ConceptosScjn.Add(tesauro);
+            conceptosScjn.Add(tesauro);
+
+            this.BtnLimpiar_Click(null, null);
+        }
+
         #region Background Worker
 
         private BackgroundWorker worker = new BackgroundWorker();
@@ -52,14 +87,24 @@ namespace DiccionarioJuridicoV2.UserControls
 
         private void LaunchBusyIndicator()
         {
-            if (!worker.IsBusy)
+            try
             {
-                this.BusyIndicator.IsBusy = true;
-                worker.RunWorkerAsync();
+                if (!worker.IsBusy)
+                {
+                    this.BusyIndicator.IsBusy = true;
+                    worker.RunWorkerAsync();
 
+                }
             }
+            catch (Exception) { }
         }
 
         #endregion
+
+        
+
+        
+
+        
     }
 }

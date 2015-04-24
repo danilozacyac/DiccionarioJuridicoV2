@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Collections.ObjectModel;
 using System.Configuration;
 using System.Data;
 using System.Data.OleDb;
 using System.Linq;
 using System.Windows.Forms;
+using DiccionarioJuridicoV2.Dto;
 using ScjnUtilities;
 
 namespace DiccionarioJuridicoV2.Models
@@ -153,7 +155,7 @@ namespace DiccionarioJuridicoV2.Models
         }
 
         /// <summary>
-        /// Elimina todas las asociaciones de un concepto
+        /// Elimina todas las asociaciones de un concepto cuando el concepto está siendo eliminado
         /// </summary>
         /// <param name="idConcepto">Concepto que se elimina</param>
         /// <param name="idReferenciaBorrado">Tipo de borrado que se realizará</param>
@@ -194,6 +196,117 @@ namespace DiccionarioJuridicoV2.Models
             {
                 connection.Close();
             }
+        }
+
+
+        public ObservableCollection<int> GetRelations(int idConcepto,int tipoRelacion)
+        {
+            OleDbConnection connection = new OleDbConnection(ConfigurationManager.ConnectionStrings["Diccionario"].ToString());
+
+            ObservableCollection<int> conceptosRelacionados = new ObservableCollection<int>();
+
+            OleDbCommand cmd;
+            OleDbDataReader reader;
+
+            cmd = connection.CreateCommand();
+            cmd.Connection = connection;
+
+            try
+            {
+                connection.Open();
+                string miQry = "SELECT IdRelExterna FROM Relaciones WHERE IdConcepto = @IdConcepto AND TipoRelacion = @TipoRelacion";
+
+                cmd = new OleDbCommand(miQry, connection);
+                cmd.Parameters.AddWithValue("@IdConcepto", idConcepto);
+                cmd.Parameters.AddWithValue("@TipoRelacion", tipoRelacion);
+                reader = cmd.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    conceptosRelacionados.Add(reader["IdRelExterna"] as int? ?? 0);
+                }
+
+
+            }
+            catch (OleDbException ex)
+            {
+                string methodName = System.Reflection.MethodBase.GetCurrentMethod().Name;
+
+                MessageBox.Show("Error ({0}) : {1}" + ex.Source + ex.Message, methodName, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                ErrorUtilities.SetNewErrorMessage(ex, methodName, 0);
+            }
+            catch (Exception ex)
+            {
+                string methodName = System.Reflection.MethodBase.GetCurrentMethod().Name;
+
+                MessageBox.Show("Error ({0}) : {1}" + ex.Source + ex.Message, methodName, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                ErrorUtilities.SetNewErrorMessage(ex, methodName, 0);
+            }
+            finally
+            {
+                connection.Close();
+            }
+
+            return conceptosRelacionados;
+        }
+
+        public ObservableCollection<TesauroScjn> GetRelations(Temas temaTematico, int tipoRelacion)
+        {
+            OleDbConnection connection = new OleDbConnection(ConfigurationManager.ConnectionStrings["Diccionario"].ToString());
+
+            ObservableCollection<TesauroScjn> conceptosRelacionados = new ObservableCollection<TesauroScjn>();
+
+            OleDbCommand cmd;
+            OleDbDataReader reader;
+
+            cmd = connection.CreateCommand();
+            cmd.Connection = connection;
+
+            try
+            {
+                connection.Open();
+                string miQry = "SELECT T.* FROM Relaciones R INNER JOIN TesauroScjn T ON R.IdRelExterna = T.IdTesauroScjn " + 
+                                " WHERE IdConcepto = @IdConcepto AND TipoRelacion = @TipoRelacion";
+
+                cmd = new OleDbCommand(miQry, connection);
+                cmd.Parameters.AddWithValue("@IdConcepto", temaTematico.Id);
+                cmd.Parameters.AddWithValue("@TipoRelacion", tipoRelacion);
+                reader = cmd.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    TesauroScjn tesauro = new TesauroScjn()
+                    {
+                        Id = reader["IdTesauroScjn"] as int? ?? 0,
+                        ConceptoScjn = reader["Concepto"].ToString(),
+                        IsSelected = false
+                    };
+
+                    conceptosRelacionados.Add(tesauro);
+                }
+
+
+            }
+            catch (OleDbException ex)
+            {
+                string methodName = System.Reflection.MethodBase.GetCurrentMethod().Name;
+
+                MessageBox.Show("Error ({0}) : {1}" + ex.Source + ex.Message, methodName, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                ErrorUtilities.SetNewErrorMessage(ex, methodName, 0);
+            }
+            catch (Exception ex)
+            {
+                string methodName = System.Reflection.MethodBase.GetCurrentMethod().Name;
+
+                MessageBox.Show("Error ({0}) : {1}" + ex.Source + ex.Message, methodName, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                ErrorUtilities.SetNewErrorMessage(ex, methodName, 0);
+            }
+            finally
+            {
+                connection.Close();
+            }
+
+            return conceptosRelacionados;
         }
 
 

@@ -12,7 +12,7 @@ namespace DiccionarioJuridicoV2.Dto
         private int idDefinicion;
         private string definicion;
         private string definicionStr;
-        private ObservableCollection<Conceptos> conceptosAsociados;
+        private ObservableCollection<int> conceptosAsociados;
         private ObservableCollection<Sinonimos> sinonimos;
         
 
@@ -88,7 +88,7 @@ namespace DiccionarioJuridicoV2.Dto
             }
         }
 
-        public ObservableCollection<Conceptos> ConceptosAsociados
+        public ObservableCollection<int> ConceptosAsociados
         {
             get
             {

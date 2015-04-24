@@ -25,6 +25,7 @@ namespace DiccionarioJuridicoV2.Dto
             set
             {
                 this.isSelected = value;
+                this.OnPropertyChanged("IsSelected");
             }
         }
 
