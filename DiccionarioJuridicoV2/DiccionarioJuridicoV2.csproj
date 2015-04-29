@@ -29,7 +29,7 @@
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
     <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
-    <ApplicationRevision>6</ApplicationRevision>
+    <ApplicationRevision>7</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -71,14 +71,20 @@
     <ApplicationIcon>dictionary_128.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="ScjnUtilities">
-      <HintPath>E:\SCJN\DireccionarioJuridico\DireccionarioJuridico\bin\Debug\ScjnUtilities.dll</HintPath>
+    <Reference Include="Accessibility" />
+    <Reference Include="PresentationUI, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="ReachFramework" />
+    <Reference Include="ScjnUtilities, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\ScjnUtilities\ScjnUtilities\bin\Debug\ScjnUtilities.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Printing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
@@ -146,6 +152,7 @@
     <Compile Include="AddUpdates\UpdateGenerico.xaml.cs">
       <DependentUpon>UpdateGenerico.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Converters\ForegroundConverter.cs" />
     <Compile Include="Dto\Materias.cs" />
     <Compile Include="Dto\TesauroScjn.cs" />
     <Compile Include="Dto\Tesis.cs" />
@@ -160,6 +167,9 @@
     <Compile Include="Singletons\TesauroScjnSingleton.cs" />
     <Compile Include="UserControls\LFiguras.xaml.cs">
       <DependentUpon>LFiguras.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\LTematicos.xaml.cs">
+      <DependentUpon>LTematicos.xaml</DependentUpon>
     </Compile>
     <Compile Include="UserControls\RGenFigScjn.xaml.cs">
       <DependentUpon>RGenFigScjn.xaml</DependentUpon>
@@ -220,6 +230,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="UserControls\LFiguras.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\LTematicos.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

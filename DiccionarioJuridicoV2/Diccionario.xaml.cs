@@ -75,19 +75,6 @@ namespace DiccionarioJuridicoV2
             sinonimo.Show();
         }
 
-        
-
-        RTemasScjn tematScjn;
-        private void RBtnTemasScjn_Click(object sender, RoutedEventArgs e)
-        {
-            RadPane pane = new RadPane();
-            tematScjn = new RTemasScjn();
-            pane.Content = tematScjn;
-            pane.Header = "Temático - SCJN";
-
-            PanelCentral.AddItem(pane, DockPosition.Center);
-        }
-
         LFiguras figuras;
         private void RBtnListaFiguras_Click(object sender, RoutedEventArgs e)
         {
@@ -117,6 +104,28 @@ namespace DiccionarioJuridicoV2
             uid = Convert.ToInt32(button.Uid);
 
             this.LaunchBusyIndicator();
+        }
+
+        RTemasScjn tematScjn;
+        private void RBtnRelTesaScjn_Click(object sender, RoutedEventArgs e)
+        {
+            RadPane pane = new RadPane();
+            tematScjn = new RTemasScjn();
+            pane.Content = tematScjn;
+            pane.Header = "Temático - SCJN";
+
+            PanelCentral.AddItem(pane, DockPosition.Center);
+        }
+
+        LTematicos tematicos;
+        private void RBtnTematico_Click(object sender, RoutedEventArgs e)
+        {
+            RadPane pane = new RadPane();
+            tematicos = new LTematicos();
+            pane.Content = tematicos;
+            pane.Header = " Temáticos ";
+
+            PanelCentral.AddItem(pane, DockPosition.Center);
         }
 
         #region Terminos Genericos
@@ -224,5 +233,9 @@ namespace DiccionarioJuridicoV2
         }
 
         #endregion
+
+        
+
+        
     }
 }

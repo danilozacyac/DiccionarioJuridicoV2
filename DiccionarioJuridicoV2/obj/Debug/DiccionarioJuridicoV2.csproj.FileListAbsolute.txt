@@ -132,3 +132,6 @@ C:\Users\Luis\Documents\Visual Studio 2012\Projects\DiccionarioJuridicoV2\Diccio
 C:\Users\Luis\Documents\Visual Studio 2012\Projects\DiccionarioJuridicoV2\DiccionarioJuridicoV2\obj\Debug\DiccionarioJuridicoV2.application
 C:\Users\lavega\Documents\Visual Studio 2012\Projects\DiccionarioJuridicoV2\DiccionarioJuridicoV2\obj\Debug\AddUpdates\UpdateGenerico.baml
 C:\Users\lavega\Documents\Visual Studio 2012\Projects\DiccionarioJuridicoV2\DiccionarioJuridicoV2\obj\Debug\AddUpdates\UpdateGenerico.g.cs
+C:\Users\lavega\Documents\Visual Studio 2012\Projects\DiccionarioJuridicoV2\DiccionarioJuridicoV2\obj\Debug\UserControls\LTematicos.baml
+C:\Users\lavega\Documents\Visual Studio 2012\Projects\DiccionarioJuridicoV2\DiccionarioJuridicoV2\obj\Debug\UserControls\LTematicos.g.cs
+C:\Users\lavega\Documents\Visual Studio 2012\Projects\DiccionarioJuridicoV2\DiccionarioJuridicoV2\bin\Debug\ScjnUtilities.dll

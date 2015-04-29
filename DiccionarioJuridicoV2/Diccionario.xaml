@@ -27,14 +27,9 @@
                                              Content="Figuras Jurídicas"
                                              LargeImage="Resources/law_400.png"
                                              Size="Large" />
-
-
-
-                </telerik:RadRibbonGroup>
-                <telerik:RadRibbonGroup Header="Relaciones">
-                    <telerik:RadRibbonButton x:Name="RBtnTemasScjn"
-                                             Click="RBtnTemasScjn_Click"
-                                             Content="Temático - SCJN"
+                    <telerik:RadRibbonButton x:Name="RBtnTematico"
+                                             Click="RBtnTematico_Click"
+                                             Content="Temáticos"
                                              LargeImage="Resources/tesa_256.png"
                                              Size="Large" />
                 </telerik:RadRibbonGroup>
@@ -119,7 +114,8 @@
                         </StackPanel>
                     </telerik:RadRibbonButton>
                     <telerik:RadRibbonButton x:Name="RBtnRelTesaScjn"
-                                             LargeImage="Resources/load.png"
+                                             Click="RBtnRelTesaScjn_Click"
+                                             LargeImage="Resources/tesa_256.png"
                                              Size="Large">
                         <StackPanel Orientation="Vertical">
                             <TextBlock HorizontalAlignment="Center" Text="Relacionar" />
@@ -131,9 +127,10 @@
         </telerik:RadRibbonView>
 
         <telerik:RadBusyIndicator x:Name="BusyIndicator"
-                                  IsIndeterminate="True" Grid.Row="1"
+                                  Grid.Row="1"
+                                  IsIndeterminate="True"
                                   telerik:StyleManager.Theme="Windows7">
-            <telerik:RadDocking x:Name="Docking" >
+            <telerik:RadDocking x:Name="Docking">
                 <telerik:RadDocking.DocumentHost>
                     <telerik:RadSplitContainer InitialPosition="DockedLeft">
                         <telerik:RadPaneGroup Name="PanelCentral" />

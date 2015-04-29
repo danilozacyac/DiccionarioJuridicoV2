@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
@@ -7,6 +8,8 @@ using System.Windows.Controls;
 using DiccionarioJuridicoV2.Dto;
 using DiccionarioJuridicoV2.Models;
 using DiccionarioJuridicoV2.Singletons;
+using ScjnUtilities;
+using Telerik.Windows.Controls;
 
 namespace DiccionarioJuridicoV2.UserControls
 {
@@ -18,6 +21,8 @@ namespace DiccionarioJuridicoV2.UserControls
         private Materias selectedMateria;
         private Temas selectedTema;
         private ObservableCollection<TesauroScjn> conceptosScjn;
+        ObservableCollection<Temas> temasBusqueda;
+        private int uid = 0;
 
         public RTemasScjn()
         {
@@ -33,6 +38,7 @@ namespace DiccionarioJuridicoV2.UserControls
 
         private void CbxMaterias_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            uid = 0;
             selectedMateria = CbxMaterias.SelectedItem as Materias;
 
             this.LaunchBusyIndicator();
@@ -63,11 +69,20 @@ namespace DiccionarioJuridicoV2.UserControls
             };
 
             new TesauroScjnModel().SetNewTerminoScjn(tesauro);
-            new RelacionesModel().SetNewRelation(selectedTema.Id, tesauro.Id, selectedMateria.Id + 100);
+            new RelacionesModel().SetNewRelation(selectedTema.IDTema, tesauro.Id, selectedMateria.Id + 100);
             TesauroScjnSingleton.ConceptosScjn.Add(tesauro);
             conceptosScjn.Add(tesauro);
 
             this.BtnLimpiar_Click(null, null);
+        }
+
+        String searchText;
+        private void SearchTextBox_Search(object sender, RoutedEventArgs e)
+        {
+            searchText = ((TextBox)sender).Text.ToUpper();
+
+            uid = 100;
+            this.LaunchBusyIndicator();
         }
 
         #region Background Worker
@@ -75,14 +90,56 @@ namespace DiccionarioJuridicoV2.UserControls
         private BackgroundWorker worker = new BackgroundWorker();
         private void WorkerDoWork(object sender, DoWorkEventArgs e)
         {
-            ArbolesSingleton.Temas(selectedMateria.Id);
+            if (uid == 0)
+                ArbolesSingleton.Temas(selectedMateria.Id);
+            else if (uid == 100)
+            {
+
+                if (!String.IsNullOrEmpty(searchText))
+                    temasBusqueda = new TemasModel(searchText, selectedMateria.Id).Temas;
+                else
+                {
+                    temasBusqueda = ArbolesSingleton.Temas(selectedMateria.Id);
+                    uid = 0;
+                }
+            }
+        }
+
+        private void ExpandAll(Temas items)
+        {
+            foreach (Temas obj in items.SubTemas)
+            {
+
+                if (obj.Descripcion != null)
+                {
+                    ExpandAll(obj);
+                    obj.IsExpanded = true;
+                }
+            }
         }
 
         void WorkerRunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             //Dispatcher.BeginInvoke(new Action<ObservableCollection<Organismos>>(this.UpdateGridDataSource), e.Result);
             this.BusyIndicator.IsBusy = false;
-            TreeMaterias.DataContext = ArbolesSingleton.Temas(selectedMateria.Id);
+
+            if (uid == 0)
+                TreeMaterias.DataContext = ArbolesSingleton.Temas(selectedMateria.Id);
+            else
+            {
+                TreeMaterias.DataContext = temasBusqueda;
+
+                foreach (object item in TreeMaterias.Items)
+                {
+                    Temas treeItem = item as Temas;
+                    if (treeItem != null)
+                    {
+                        ExpandAll(treeItem);
+                    }
+                    treeItem.IsExpanded = true;
+                }
+            }
+
         }
 
         private void LaunchBusyIndicator()
@@ -100,6 +157,8 @@ namespace DiccionarioJuridicoV2.UserControls
         }
 
         #endregion
+
+        
 
         
 

@@ -1,13 +1,18 @@
 ﻿<UserControl x:Class="DiccionarioJuridicoV2.UserControls.RTemasScjn"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:UIControls="clr-namespace:UIControls;assembly=UIControls"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+             xmlns:converter="clr-namespace:DiccionarioJuridicoV2.Converters"
              Loaded="UserControl_Loaded"
              d:DesignHeight="500"
              d:DesignWidth="700"
              mc:Ignorable="d">
+    <UserControl.Resources>
+        <converter:ForegroundConverter x:Key="foreground"/>
+    </UserControl.Resources>
     <telerik:RadBusyIndicator x:Name="BusyIndicator"
                               Grid.Row="1"
                               IsIndeterminate="True"
@@ -20,7 +25,7 @@
 
             <Grid Grid.Column="0">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="80" />
+                    <RowDefinition Height="100" />
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
 
@@ -30,7 +35,7 @@
                                      Grid.Row="0"
                                      Width="198"
                                      Height="23"
-                                     Margin="15,39,0,0"
+                                     Margin="15,31,0,0"
                                      HorizontalAlignment="Left"
                                      VerticalAlignment="Top"
                                      DisplayMemberPath="Descripcion"
@@ -42,21 +47,46 @@
                                      Margin="15,15,15,15"
                                      HorizontalAlignment="Stretch"
                                      VerticalAlignment="Stretch"
-                                     ItemsSource="{Binding}" SelectionChanged="TreeMaterias_SelectionChanged">
+                                     ItemsSource="{Binding}"
+                                     SelectionChanged="TreeMaterias_SelectionChanged">
+                    <telerik:RadTreeView.ItemContainerStyle>
+
+                        <Style TargetType="{x:Type telerik:RadTreeViewItem}">
+                            <Setter Property="IsExpanded" Value="{Binding IsExpanded, Mode=TwoWay}" />
+                            <Setter Property="IsSelected" Value="{Binding IsSelected, Mode=TwoWay}" />
+                            <Setter Property="FontWeight" Value="Normal" />
+                            <Style.Triggers>
+                                <Trigger Property="IsSelected" Value="True">
+                                    <Setter Property="FontWeight" Value="Bold" />
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </telerik:RadTreeView.ItemContainerStyle>
                     <telerik:RadTreeView.ItemTemplate>
-                        <HierarchicalDataTemplate ItemsSource="{Binding TemasHijo}">
+                        <HierarchicalDataTemplate ItemsSource="{Binding SubTemas}">
                             <StackPanel Orientation="Horizontal">
-                                <TextBlock VerticalAlignment="Center" Text="{Binding Descripcion}" />
+                                <TextBlock VerticalAlignment="Center" Text="{Binding Descripcion}" Foreground="{Binding IdOrigen,Converter={StaticResource foreground}}"/>
                             </StackPanel>
                         </HierarchicalDataTemplate>
                     </telerik:RadTreeView.ItemTemplate>
                 </telerik:RadTreeView>
-                <Label Margin="15,10,0,0"
+                <Label Margin="15,2,0,0"
                        HorizontalAlignment="Left"
                        VerticalAlignment="Top"
                        Content="Materia:"
                        FontSize="14"
                        FontWeight="Bold" />
+
+
+
+
+                <UIControls:SearchTextBox Width="320"
+                                          Margin="15,68,0,0"
+                                          HorizontalAlignment="Left"
+                                          VerticalAlignment="Top"
+                                          LabelText="Buscar"
+                                          Search="SearchTextBox_Search"
+                                          TextWrapping="Wrap" />
 
 
 
@@ -124,15 +154,19 @@
                                  VerticalAlignment="Top" />
                         <telerik:RadButton x:Name="BtnLimpiar"
                                            Width="88"
+                                           Height="32"
                                            Margin="220,15,0,0"
                                            HorizontalAlignment="Left"
                                            VerticalAlignment="Top"
-                                           Content="Limpiar" Click="BtnLimpiar_Click" Height="32" />
+                                           Click="BtnLimpiar_Click"
+                                           Content="Limpiar" />
                         <telerik:RadButton x:Name="BtnAddRelaciona"
                                            Width="88"
+                                           Height="49"
                                            Margin="220,72,0,0"
                                            HorizontalAlignment="Left"
-                                           VerticalAlignment="Top" Height="49" Click="BtnAddRelaciona_Click">
+                                           VerticalAlignment="Top"
+                                           Click="BtnAddRelaciona_Click">
                             <StackPanel Orientation="Vertical">
                                 <TextBlock HorizontalAlignment="Center" Text="Agregar" />
                                 <TextBlock HorizontalAlignment="Center" Text="y relacionar" />

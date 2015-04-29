@@ -269,7 +269,7 @@ namespace DiccionarioJuridicoV2.Models
                                 " WHERE IdConcepto = @IdConcepto AND TipoRelacion = @TipoRelacion";
 
                 cmd = new OleDbCommand(miQry, connection);
-                cmd.Parameters.AddWithValue("@IdConcepto", temaTematico.Id);
+                cmd.Parameters.AddWithValue("@IdConcepto", temaTematico.IDTema);
                 cmd.Parameters.AddWithValue("@TipoRelacion", tipoRelacion);
                 reader = cmd.ExecuteReader();
 
