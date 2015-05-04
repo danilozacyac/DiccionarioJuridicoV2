@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Configuration;
 using System.Data;
-using System.Data.Common;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Windows.Forms;
@@ -14,6 +13,8 @@ namespace DiccionarioJuridicoV2.Models
 {
     public class TemasModel
     {
+        private readonly String connectionString = ConfigurationManager.ConnectionStrings["Tematicos"].ConnectionString;
+
         //private readonly string textoBuscado;
         //private ObservableCollection<Temas> temasEnLista = new ObservableCollection<Temas>();
         //public TemasModel() { }
@@ -79,14 +80,14 @@ namespace DiccionarioJuridicoV2.Models
             return listaTemas;
         }
 
-        public static ObservableCollection<Temas> GetTemasTematico(Temas temaPadre, int materia)
+        public static ObservableCollection<Temas> GetTemasTematico(Temas temaPadre, int materia, bool buscaAbogado)
         {
             SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["Tematicos"].ToString());
 
             ObservableCollection<Temas> listaTemas = new ObservableCollection<Temas>();
 
             SqlCommand cmd;
-            SqlDataReader dataReader;
+            SqlDataReader reader;
 
             cmd = connection.CreateCommand();
             cmd.Connection = connection;
@@ -107,16 +108,19 @@ namespace DiccionarioJuridicoV2.Models
                     cmd.Parameters.AddWithValue("@IDPadre", temaPadre.IDTema);
                     cmd.Parameters.AddWithValue("@Materia", materia);
                 }
-                dataReader = cmd.ExecuteReader();
+                reader = cmd.ExecuteReader();
 
-                while (dataReader.Read())
+                while (reader.Read())
                 {
                     Temas tema = new Temas(temaPadre);
-                    tema.IDTema = Convert.ToInt32(dataReader["IdTema"].ToString());
-                    tema.Nivel = Convert.ToInt32(dataReader["Nivel"].ToString());
-                    tema.IDPadre = Convert.ToInt32(dataReader["IDPadre"].ToString());
-                    tema.Descripcion = dataReader["Descripcion"].ToString();
-                    tema.SubTemas = TemasModel.GetTemasTematico(tema, materia);
+                    tema.IDTema = Convert.ToInt32(reader["IdTema"].ToString());
+                    tema.Nivel = Convert.ToInt32(reader["Nivel"].ToString());
+                    tema.IDPadre = Convert.ToInt32(reader["IDPadre"].ToString());
+                    tema.Descripcion = reader["Descripcion"].ToString();
+                    tema.SubTemas = TemasModel.GetTemasTematico(tema, materia, buscaAbogado);
+                    tema.IdOrigen = reader["IdOrigen"] as int? ?? -1;
+                    tema.Materia = reader["Materia"] as int? ?? -1;
+                    TemasModel.GetTesisRelacionadas(tema);
 
                     listaTemas.Add(tema);
                 }
@@ -143,6 +147,98 @@ namespace DiccionarioJuridicoV2.Models
             return listaTemas;
         }
 
+        public static void GetAbogadoCrea(Temas temaBusca)
+        {
+            SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["Tematicos"].ToString());
+
+            SqlCommand cmd;
+            SqlDataReader reader;
+
+            cmd = connection.CreateCommand();
+            cmd.Connection = connection;
+
+            try
+            {
+                connection.Open();
+                
+                cmd.CommandText = "SELECT A.nombre, * FROM bitacora B INNER JOIN Acceso A ON B.IdUsuario = A.Id " +
+                                  " WHERE (IdSeccion = 1 AND idMovimiento = 1) AND IdTema = @IdTema AND IdMateria = @IdMateria";
+                cmd.Parameters.AddWithValue("@IdTema", temaBusca.IDTema);
+                cmd.Parameters.AddWithValue("@IdMateria", temaBusca.Materia);
+                
+                reader = cmd.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    temaBusca.AbogadoCrea = reader["Nombre"].ToString();
+                }
+            }
+            catch (SqlException ex)
+            {
+                string methodName = System.Reflection.MethodBase.GetCurrentMethod().Name;
+
+                MessageBox.Show("Error ({0}) : {1}" + ex.Source + ex.Message, methodName, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                ErrorUtilities.SetNewErrorMessage(ex, methodName, 0);
+            }
+            catch (Exception ex)
+            {
+                string methodName = System.Reflection.MethodBase.GetCurrentMethod().Name;
+
+                MessageBox.Show("Error ({0}) : {1}" + ex.Source + ex.Message, methodName, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                ErrorUtilities.SetNewErrorMessage(ex, methodName, 0);
+            }
+            finally
+            {
+                connection.Close();
+            }
+        }
+
+        public static void GetTesisRelacionadas(Temas temaBusca)
+        {
+            SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["Tematicos"].ToString());
+
+            SqlCommand cmd;
+            SqlDataReader reader;
+
+            cmd = connection.CreateCommand();
+            cmd.Connection = connection;
+
+            try
+            {
+                connection.Open();
+
+                cmd.CommandText = "SELECT * FROM TemasTesis WHERE IdTema = @IdTema AND IdMateria = @IdMateria";
+                cmd.Parameters.AddWithValue("@IdTema", temaBusca.IDTema);
+                cmd.Parameters.AddWithValue("@IdMateria", temaBusca.Materia);
+
+                reader = cmd.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    temaBusca.RegIusString += reader["IUS"].ToString() + ", ";
+                }
+            }
+            catch (SqlException ex)
+            {
+                string methodName = System.Reflection.MethodBase.GetCurrentMethod().Name;
+
+                MessageBox.Show("Error ({0}) : {1}" + ex.Source + ex.Message, methodName, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                ErrorUtilities.SetNewErrorMessage(ex, methodName, 0);
+            }
+            catch (Exception ex)
+            {
+                string methodName = System.Reflection.MethodBase.GetCurrentMethod().Name;
+
+                MessageBox.Show("Error ({0}) : {1}" + ex.Source + ex.Message, methodName, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                ErrorUtilities.SetNewErrorMessage(ex, methodName, 0);
+            }
+            finally
+            {
+                connection.Close();
+            }
+        }
+
+
         /*
          * 
          * 
@@ -162,7 +258,6 @@ namespace DiccionarioJuridicoV2.Models
             {
                 //if (tematico == null)
                 //    tematico = new TemasModel().GetTemasRaiz(null);
-
                 return tematico;
             }
         }
@@ -237,19 +332,19 @@ namespace DiccionarioJuridicoV2.Models
         //    return modulos;
         //}
 
-        public ObservableCollection<Temas> GetTemasBusqueda(Temas parentModule,int materia)
+        public ObservableCollection<Temas> GetTemasBusqueda(Temas parentModule, int materia)
         {
-            SqlConnection sqlConne = this.GetConnection();
+            SqlConnection connection = new SqlConnection(connectionString);
 
             ObservableCollection<Temas> modulos = new ObservableCollection<Temas>();
 
             try
             {
-                sqlConne.Open();
+                connection.Open();
 
                 string sqlCadena = "SELECT *, (SELECT COUNT(idTEma) FROM TemasTesis T WHERE T.idTema = Temas.Idtema and T.idMateria = Temas.Materia ) Total " +
                                    "FROM Temas WHERE (" + this.ArmaCadenaBusqueda(textoBuscado) + ")  AND Materia = @IdMateria  AND idtema >= 0 and idPadre <> -1 ORDER BY DescripcionStr ";
-                SqlCommand cmd = new SqlCommand(sqlCadena, sqlConne);
+                SqlCommand cmd = new SqlCommand(sqlCadena, connection);
                 cmd.Parameters.AddWithValue("@IdMateria", materia);
                 SqlDataReader reader = cmd.ExecuteReader();
 
@@ -317,17 +412,23 @@ namespace DiccionarioJuridicoV2.Models
                     }
                 }
             }
-            catch (SqlException sql)
+            catch (SqlException ex)
             {
-                MessageBox.Show("Error ({0}) : {1}" + sql.Source + sql.Message, "Error Interno");
+                string methodName = System.Reflection.MethodBase.GetCurrentMethod().Name;
+
+                MessageBox.Show("Error ({0}) : {1}" + ex.Source + ex.Message, methodName, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                ErrorUtilities.SetNewErrorMessage(ex, methodName, 0);
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error ({0}) : {1}" + ex.Source + ex.Message, "Error Interno");
+                string methodName = System.Reflection.MethodBase.GetCurrentMethod().Name;
+
+                MessageBox.Show("Error ({0}) : {1}" + ex.Source + ex.Message, methodName, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                ErrorUtilities.SetNewErrorMessage(ex, methodName, 0);
             }
             finally
             {
-                sqlConne.Close();
+                connection.Close();
             }
 
             modulos = this.SetParents(modulos);
@@ -491,37 +592,22 @@ namespace DiccionarioJuridicoV2.Models
         //    }
         //}
 
+        /// <summary>
+        /// Ordena alfabéticamente los temas obtenidos
+        /// </summary>
+        /// <param name="moduloToSort">Listado de Temas a ordenar</param>
+        /// <returns></returns>
         private ObservableCollection<Temas> SortSearch(ObservableCollection<Temas> moduloToSort)
         {
-
             ObservableCollection<Temas> moduloOrdenado = new ObservableCollection<Temas>(moduloToSort.OrderBy(i => i.Descripcion));
 
             foreach (Temas tema in moduloOrdenado)
             {
-                this.SortSearch(tema.SubTemas);
+                tema.SubTemas = this.SortSearch(tema.SubTemas);
             }
 
             return moduloOrdenado;
         }
-
-        //private ObservableCollection<Temas> SortSearch(ObservableCollection<Temas> moduloToSort)
-        //{
-            
-        //    List<Temas> temp = moduloToSort.ToList();
-
-        //    temp.Sort((x, y) => string.Compare(x.Descripcion, y.Descripcion));
-
-        //    foreach (Temas tema in temp)
-        //    {
-        //        this.SortSearch(tema.SubTemas);
-        //    }
-
-        //    ObservableCollection<Temas> result = new ObservableCollection<Temas>(temp);
-
-        //    return result;
-        //}
-        
-
 
         /// <summary>
         /// Busca el tema padre del nodo actual dentro de la estructura existente
@@ -624,6 +710,11 @@ namespace DiccionarioJuridicoV2.Models
             }
         }
 
+        /// <summary>
+        /// A cada uno de los hijos de un nodo les indica quien es su padre
+        /// </summary>
+        /// <param name="modulos">Nodos a los que se hará la asignación</param>
+        /// <returns></returns>
         private ObservableCollection<Temas> SetParents(ObservableCollection<Temas> modulos)
         {
             foreach (Temas tema in modulos)
@@ -639,16 +730,16 @@ namespace DiccionarioJuridicoV2.Models
 
         private Temas GetTemaByIdTema(int idTema, int mat)
         {
-            SqlConnection sqlConne = this.GetConnection();
+            SqlConnection connection = new SqlConnection(connectionString);
 
             Temas tema = new Temas();
             try
             {
-                sqlConne.Open();
+                connection.Open();
 
                 string sqlCadena = "SELECT *, (SELECT COUNT(idTEma) FROM TemasTesis T WHERE T.idTema = Temas.Idtema and T.idMateria = Temas.Materia ) Total " +
                                    "FROM Temas WHERE  IdTema = @IdTema AND Materia = @Materia  ORDER BY DescripcionStr ";
-                SqlCommand cmd = new SqlCommand(sqlCadena, sqlConne);
+                SqlCommand cmd = new SqlCommand(sqlCadena, connection);
                 SqlParameter idTemas = cmd.Parameters.Add("@IdTema", SqlDbType.Int, 0);
                 idTemas.Value = idTema;
                 SqlParameter materia = cmd.Parameters.Add("@Materia", SqlDbType.Int, 0);
@@ -669,17 +760,23 @@ namespace DiccionarioJuridicoV2.Models
                     }
                 }
             }
-            catch (SqlException sql)
+            catch (SqlException ex)
             {
-                MessageBox.Show("Error ({0}) : {1}" + sql.Source + sql.Message, "Error Interno");
+                string methodName = System.Reflection.MethodBase.GetCurrentMethod().Name;
+
+                MessageBox.Show("Error ({0}) : {1}" + ex.Source + ex.Message, methodName, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                ErrorUtilities.SetNewErrorMessage(ex, methodName, 0);
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error ({0}) : {1}" + ex.Source + ex.Message, "Error Interno");
+                string methodName = System.Reflection.MethodBase.GetCurrentMethod().Name;
+
+                MessageBox.Show("Error ({0}) : {1}" + ex.Source + ex.Message, methodName, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                ErrorUtilities.SetNewErrorMessage(ex, methodName, 0);
             }
             finally
             {
-                sqlConne.Close();
+                connection.Close();
             }
             return tema;
         }
@@ -749,13 +846,6 @@ namespace DiccionarioJuridicoV2.Models
                     if (findParent)
                         break;
                 }
-        }
-
-        private SqlConnection GetConnection()
-        {
-            String bdStringSql = ConfigurationManager.ConnectionStrings["Tematicos"].ConnectionString;
-            SqlConnection realConnection = new SqlConnection(bdStringSql);
-            return realConnection;
         }
     }
 }

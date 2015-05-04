@@ -80,7 +80,7 @@
 
 
 
-                <UIControls:SearchTextBox Width="320"
+                <UIControls:SearchTextBox x:Name="SearchBox" Width="320"
                                           Margin="15,68,0,0"
                                           HorizontalAlignment="Left"
                                           VerticalAlignment="Top"

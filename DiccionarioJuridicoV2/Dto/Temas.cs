@@ -493,6 +493,36 @@ namespace DiccionarioJuridicoV2.Dto
             subtemas.Add(tema);
         }
 
+        private String abogadoCrea = "";
+
+        public String AbogadoCrea
+        {
+            get
+            {
+                return abogadoCrea;
+            }
+            set
+            {
+                abogadoCrea = value;
+            }
+        }
+
+        private string regIusString;
+
+        public string RegIusString
+        {
+            get
+            {
+                return regIusString;
+            }
+            set
+            {
+                regIusString = value;
+            }
+
+
+        }
+
         public Temas(Temas parent)
         {
             this.parentItem = parent;

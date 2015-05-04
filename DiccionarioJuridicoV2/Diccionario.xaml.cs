@@ -16,6 +16,7 @@ using System.Windows.Shapes;
 using DiccionarioJuridicoV2.AddUpdates;
 using DiccionarioJuridicoV2.Dto;
 using DiccionarioJuridicoV2.Models;
+using DiccionarioJuridicoV2.Reportes;
 using DiccionarioJuridicoV2.Singletons;
 using DiccionarioJuridicoV2.UserControls;
 using Telerik.Windows.Controls;
@@ -26,9 +27,8 @@ namespace DiccionarioJuridicoV2
     /// <summary>
     /// Interaction logic for Diccionario.xaml
     /// </summary>
-    public partial class Diccionario
+    public partial class Diccionario 
     {
-
         private RGenSinoni rGrnSin;
 
         private ObservableCollection<Genericos> listaGenericos;
@@ -42,16 +42,16 @@ namespace DiccionarioJuridicoV2
             worker.RunWorkerCompleted += WorkerRunWorkerCompleted;
         }
 
+        
+
         private void RadWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            
         }
-
         
         private void RBtnTermGen_Click(object sender, RoutedEventArgs e)
         {
             RadPane pane = new RadPane();
-            rGrnSin = new RGenSinoni(listaGenericos);
+            rGrnSin = new RGenSinoni(listaGenericos, RBtnPegarInfo);
             pane.Content = rGrnSin;
             pane.Header = "Términos genéricos";
 
@@ -110,7 +110,7 @@ namespace DiccionarioJuridicoV2
         private void RBtnRelTesaScjn_Click(object sender, RoutedEventArgs e)
         {
             RadPane pane = new RadPane();
-            tematScjn = new RTemasScjn();
+            tematScjn = new RTemasScjn(RBtnArbolPdf);
             pane.Content = tematScjn;
             pane.Header = "Temático - SCJN";
 
@@ -153,7 +153,16 @@ namespace DiccionarioJuridicoV2
             }
         }
 
-        
+        private void CortarInfo(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void PegarInfo(object sender, RoutedEventArgs e)
+        {
+
+        }
+
 
         #endregion
 
@@ -233,6 +242,14 @@ namespace DiccionarioJuridicoV2
         }
 
         #endregion
+
+        private void RBtnArbolPdf_Click(object sender, RoutedEventArgs e)
+        {
+            Materias materia = RBtnArbolPdf.Tag as Materias;
+
+            ArbolesEnPdf pdf = new ArbolesEnPdf(ArbolesSingleton.Temas( materia.Id));
+            pdf.GeneraPdf();
+        }
 
         
 

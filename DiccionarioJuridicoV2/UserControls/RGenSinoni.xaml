@@ -28,7 +28,27 @@
                             FontSize="16"
                             ItemsSource="{Binding}"
                             SelectedValuePath="IdGenerico"
-                            SelectionChanged="RLstGenericos_SelectionChanged" />
+                            SelectionChanged="RLstGenericos_SelectionChanged" >
+            <telerik:RadContextMenu.ContextMenu>
+                <telerik:RadContextMenu>
+                    <telerik:RadMenuItem x:Name="RConCopyInfo" Header="Copy" IsEnabled="False"  >
+                        <telerik:RadMenuItem.Icon>
+                            <Image Source="../Resources/copy_16.png" Stretch="None" />
+                        </telerik:RadMenuItem.Icon>
+                    </telerik:RadMenuItem>
+                    <telerik:RadMenuItem x:Name="RConPasteInfo" Header="Paste" Click="PegarInfo" IsEnabled="False">
+                        <telerik:RadMenuItem.Icon>
+                            <Image Source="../Resources/paste_16.png" Stretch="None" />
+                        </telerik:RadMenuItem.Icon>
+                    </telerik:RadMenuItem>
+                    <telerik:RadMenuItem x:Name="RConCutInfo" Header="Cut" Click="CortarInfo">
+                        <telerik:RadMenuItem.Icon>
+                            <Image Source="../Resources/cut_16.png" Stretch="None" />
+                        </telerik:RadMenuItem.Icon>
+                    </telerik:RadMenuItem>
+                </telerik:RadContextMenu>
+            </telerik:RadContextMenu.ContextMenu>
+        </telerik:RadListBox>
 
         <Grid Grid.Column="1">
             <Grid.RowDefinitions>

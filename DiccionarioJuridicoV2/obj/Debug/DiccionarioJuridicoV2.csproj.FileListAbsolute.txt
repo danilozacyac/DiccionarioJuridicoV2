@@ -135,3 +135,4 @@ C:\Users\lavega\Documents\Visual Studio 2012\Projects\DiccionarioJuridicoV2\Dicc
 C:\Users\lavega\Documents\Visual Studio 2012\Projects\DiccionarioJuridicoV2\DiccionarioJuridicoV2\obj\Debug\UserControls\LTematicos.baml
 C:\Users\lavega\Documents\Visual Studio 2012\Projects\DiccionarioJuridicoV2\DiccionarioJuridicoV2\obj\Debug\UserControls\LTematicos.g.cs
 C:\Users\lavega\Documents\Visual Studio 2012\Projects\DiccionarioJuridicoV2\DiccionarioJuridicoV2\bin\Debug\ScjnUtilities.dll
+C:\Users\lavega\Documents\Visual Studio 2012\Projects\DiccionarioJuridicoV2\DiccionarioJuridicoV2\bin\Debug\itextsharp.dll

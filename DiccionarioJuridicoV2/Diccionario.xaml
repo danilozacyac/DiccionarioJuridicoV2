@@ -55,6 +55,16 @@
                                                  Size="Medium"
                                                  SmallImage="Resources/Dictionary_32.png" />
                     </StackPanel>
+                    <StackPanel Orientation="Vertical">
+                        <telerik:RadRibbonButton x:Name="RBtnCortarInfo"
+                                                 Content="Cortar info."
+                                                 Size="Medium"
+                                                 SmallImage="Resources/copy_32.png" Click="CortarInfo" />
+                        <telerik:RadRibbonButton x:Name="RBtnPegarInfo"
+                                                 Content="Pegar info."
+                                                 Size="Medium" IsEnabled="False"
+                                                 SmallImage="Resources/paste_32.png" Click="PegarInfo" />
+                    </StackPanel>
                     <telerik:RadRibbonButton x:Name="RBtnGenericRelaciones"
                                              Click="RBtnGenericRelaciones_Click"
                                              LargeImage="Resources/relacion.png"
@@ -120,6 +130,16 @@
                         <StackPanel Orientation="Vertical">
                             <TextBlock HorizontalAlignment="Center" Text="Relacionar" />
                             <TextBlock HorizontalAlignment="Center" Text="Tesauro SCJN" />
+                        </StackPanel>
+                    </telerik:RadRibbonButton>
+                    <telerik:RadRibbonButton x:Name="RBtnArbolPdf"
+                                             Click="RBtnArbolPdf_Click"
+                                             IsEnabled="False"
+                                             LargeImage="Resources/tesa_256.png"
+                                             Size="Large">
+                        <StackPanel Orientation="Vertical">
+                            <TextBlock HorizontalAlignment="Center" Text="Generar" />
+                            <TextBlock HorizontalAlignment="Center" Text="PDF" />
                         </StackPanel>
                     </telerik:RadRibbonButton>
                 </telerik:RadRibbonGroup>

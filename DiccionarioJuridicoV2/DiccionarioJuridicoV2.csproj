@@ -29,7 +29,7 @@
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
     <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
-    <ApplicationRevision>7</ApplicationRevision>
+    <ApplicationRevision>8</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -72,6 +72,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Accessibility" />
+    <Reference Include="itextsharp">
+      <HintPath>..\..\..\..\Visual Studio 2010\Projects\MantesisWpf\MantesisWpf\bin\Debug\itextsharp.dll</HintPath>
+    </Reference>
     <Reference Include="PresentationUI, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="ReachFramework" />
     <Reference Include="ScjnUtilities, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -162,6 +165,7 @@
     <Compile Include="Models\MateriasModel.cs" />
     <Compile Include="Models\TesauroScjnModel.cs" />
     <Compile Include="Models\TesisModel.cs" />
+    <Compile Include="Reportes\ArbolesEnPdf.cs" />
     <Compile Include="Singletons\ArbolesSingleton.cs" />
     <Compile Include="Singletons\ConceptosSingleton.cs" />
     <Compile Include="Singletons\TesauroScjnSingleton.cs" />
@@ -361,6 +365,33 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\load.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\copy_16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\copy_32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\copy_64.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\cut_16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\cut_32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\cut_64.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\paste_16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\paste_32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\paste_64.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

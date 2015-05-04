@@ -23,10 +23,13 @@ namespace DiccionarioJuridicoV2.UserControls
         private ObservableCollection<TesauroScjn> conceptosScjn;
         ObservableCollection<Temas> temasBusqueda;
         private int uid = 0;
+        RadRibbonButton botonPdf;
 
-        public RTemasScjn()
+        public RTemasScjn(RadRibbonButton botonPdf)
         {
             InitializeComponent();
+            this.botonPdf = botonPdf;
+
             worker.DoWork += this.WorkerDoWork;
             worker.RunWorkerCompleted += WorkerRunWorkerCompleted;
         }
@@ -42,6 +45,10 @@ namespace DiccionarioJuridicoV2.UserControls
             selectedMateria = CbxMaterias.SelectedItem as Materias;
 
             this.LaunchBusyIndicator();
+
+            SearchBox.IsEnabled = (selectedMateria.Id == 1) ? false : true;
+
+            botonPdf.Tag = selectedMateria;
         }
 
         private void TreeMaterias_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -91,7 +98,9 @@ namespace DiccionarioJuridicoV2.UserControls
         private void WorkerDoWork(object sender, DoWorkEventArgs e)
         {
             if (uid == 0)
+            {
                 ArbolesSingleton.Temas(selectedMateria.Id);
+            }
             else if (uid == 100)
             {
 
@@ -124,7 +133,10 @@ namespace DiccionarioJuridicoV2.UserControls
             this.BusyIndicator.IsBusy = false;
 
             if (uid == 0)
+            {
                 TreeMaterias.DataContext = ArbolesSingleton.Temas(selectedMateria.Id);
+                botonPdf.IsEnabled = true;
+            }
             else
             {
                 TreeMaterias.DataContext = temasBusqueda;

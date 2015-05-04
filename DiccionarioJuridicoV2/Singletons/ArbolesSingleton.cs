@@ -33,37 +33,37 @@ namespace DiccionarioJuridicoV2.Singletons
 
                 case 2:
                     if (penal == null)
-                        penal = TemasModel.GetTemasTematico(null, idMateria);
+                        penal = TemasModel.GetTemasTematico(null, idMateria,false);
 
                     return penal;
 
                 case 4:
                     if (civil == null)
-                        civil = TemasModel.GetTemasTematico(null, idMateria);
+                        civil = TemasModel.GetTemasTematico(null, idMateria,false);
 
                     return civil;
 
                 case 8:
                     if (administrativa == null)
-                        administrativa = TemasModel.GetTemasTematico(null, idMateria);
+                        administrativa = TemasModel.GetTemasTematico(null, idMateria,false);
 
                     return administrativa;
 
                 case 16:
                     if (laboral == null)
-                        laboral = TemasModel.GetTemasTematico(null, idMateria);
+                        laboral = TemasModel.GetTemasTematico(null, idMateria,false);
 
                     return laboral;
 
                 case 32:
                     if (comun == null)
-                        comun = TemasModel.GetTemasTematico(null, idMateria);
+                        comun = TemasModel.GetTemasTematico(null, idMateria,false);
 
                     return comun;
 
                 case 64:
                     if (derechos == null)
-                        derechos = TemasModel.GetTemasTematico(null, idMateria);
+                        derechos = TemasModel.GetTemasTematico(null, idMateria,false);
 
                     return derechos;
 
