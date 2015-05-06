@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 
 namespace DiccionarioJuridicoV2.Dto
 {
-    public class Genericos
+    public class Genericos : INotifyPropertyChanged
     {
         private int idGenerico;
         private string termino;
@@ -14,7 +15,9 @@ namespace DiccionarioJuridicoV2.Dto
         private string definicionStr;
         private ObservableCollection<int> conceptosAsociados;
         private ObservableCollection<Sinonimos> sinonimos;
+        private ObservableCollection<TesauroScjn> conceptosScjn;
         
+
 
         public int IdGenerico
         {
@@ -73,6 +76,7 @@ namespace DiccionarioJuridicoV2.Dto
             set
             {
                 this.definicion = value;
+                this.OnPropertyChanged("Definicion");
             }
         }
 
@@ -112,6 +116,31 @@ namespace DiccionarioJuridicoV2.Dto
             }
         }
 
+        public ObservableCollection<TesauroScjn> ConceptosScjn
+        {
+            get
+            {
+                return this.conceptosScjn;
+            }
+            set
+            {
+                this.conceptosScjn = value;
+            }
+        }
+
+
+        #region INotifyPropertyChanged Members
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected virtual void OnPropertyChanged(string propertyName)
+        {
+            if (this.PropertyChanged != null)
+                this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+
+        }
+
+        #endregion // INotifyPropertyChanged Members
         
     }
 }

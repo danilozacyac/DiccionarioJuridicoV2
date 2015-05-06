@@ -47,6 +47,7 @@ namespace DiccionarioJuridicoV2.Models
                     generico.IdDefinicion = reader["Id"] as int? ?? 0;
                     generico.Definicion = reader["Definicion"].ToString();
                     generico.Sinonimos = new SinonimosModel().GetSinonimos(generico.IdGenerico);
+                    generico.ConceptosScjn = new TesauroScjnModel().GetTerminosScjn(generico.IdGenerico);
 
                     terminosGenericos.Add(generico);
                 }

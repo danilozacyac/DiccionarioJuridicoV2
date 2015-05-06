@@ -197,6 +197,10 @@ namespace DiccionarioJuridicoV2.Models
             }
         }
 
+        /// <summary>
+        /// Modifica la estructura original del sinónimo
+        /// </summary>
+        /// <param name="sinonimo">Sinonimo que se modificará</param>
         public void UpdateSinonimo(Sinonimos sinonimo)
         {
             OleDbConnection connection = new OleDbConnection(ConfigurationManager.ConnectionStrings["Diccionario"].ToString());
@@ -232,8 +236,8 @@ namespace DiccionarioJuridicoV2.Models
                                                         " Fuente = @Fuente, FuenteStr = @FuenteStr WHERE IdSinonimo = @IdSinonimo";
                 dataAdapter.UpdateCommand.Parameters.Add("@Sinonimo", OleDbType.VarChar, 0, "Sinonimo");
                 dataAdapter.UpdateCommand.Parameters.Add("@SinonimoStr", OleDbType.VarChar, 0, "SinonimoStr");
-                dataAdapter.InsertCommand.Parameters.Add("@Fuente", OleDbType.VarChar, 0, "Fuente");
-                dataAdapter.InsertCommand.Parameters.Add("@FuenteStr", OleDbType.VarChar, 0, "FuenteStr");
+                dataAdapter.UpdateCommand.Parameters.Add("@Fuente", OleDbType.VarChar, 0, "Fuente");
+                dataAdapter.UpdateCommand.Parameters.Add("@FuenteStr", OleDbType.VarChar, 0, "FuenteStr");
                 dataAdapter.UpdateCommand.Parameters.Add("@IdSinonimo", OleDbType.Numeric, 0, "IdSinonimo");
 
                 dataAdapter.Update(dataSet, "Sinonimos");
@@ -260,8 +264,6 @@ namespace DiccionarioJuridicoV2.Models
                 connection.Close();
             }
         }
-
-        
 
         public void DeleteConcepto(Sinonimos sinonimo)
         {

@@ -42,7 +42,7 @@ namespace DiccionarioJuridicoV2.UserControls
         {
             SelectedGenerico = RLstGenericos.SelectedItem as Genericos;
 
-            TxtDefinicion.Text = SelectedGenerico.Definicion;
+            TxtDefinicion.DataContext = SelectedGenerico;
 
             RLstSinonimos.DataContext = SelectedGenerico.Sinonimos;
         }
@@ -58,6 +58,30 @@ namespace DiccionarioJuridicoV2.UserControls
             MessageBoxResult result = MessageBox.Show("Estas a punto de eliminar el tema \"" + GenericoPorEliminar.Termino + 
                 "\" y agregar su información al tema \"" + SelectedGenerico.Termino + "\" ¿Deseas continuar?",
                 "ATENCIÓN:", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+            if (result == MessageBoxResult.Yes)
+            {
+                SelectedGenerico.Definicion += "\n\r\n\r" + GenericoPorEliminar.Definicion;
+
+                new GenericosModel().UpdateTerminoGenerico(SelectedGenerico);
+
+                RelacionesModel model = new RelacionesModel();
+                foreach (Sinonimos sinonimo in GenericoPorEliminar.Sinonimos)
+                {
+                    SelectedGenerico.Sinonimos.Add(sinonimo);
+                    model.UpdateRelation(2, SelectedGenerico.IdGenerico, GenericoPorEliminar.IdGenerico, sinonimo.IdSinonimo);
+                    
+                }
+
+                foreach (TesauroScjn conceptoScjn in GenericoPorEliminar.ConceptosScjn)
+                {
+                    SelectedGenerico.ConceptosScjn.Add(conceptoScjn);
+                    model.UpdateRelation(9, SelectedGenerico.IdGenerico, GenericoPorEliminar.IdGenerico, conceptoScjn.Id);
+                }
+
+                listaGenericos.Remove(GenericoPorEliminar);
+                new GenericosModel().DeleteTerminoGenerico(GenericoPorEliminar);
+            }
         }
 
         private void CortarInfo(object sender, Telerik.Windows.RadRoutedEventArgs e)

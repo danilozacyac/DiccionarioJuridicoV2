@@ -69,6 +69,7 @@
                      HorizontalAlignment="Stretch"
                      VerticalAlignment="Stretch"
                      AcceptsReturn="True"
+                     Text="{Binding Definicion,Mode=TwoWay}"
                      FontSize="16"
                      TextWrapping="Wrap" />
             <Label Grid.Row="1"

@@ -310,5 +310,69 @@ namespace DiccionarioJuridicoV2.Models
         }
 
 
+        /// <summary>
+        /// Actualiza la relación establecida entre dos entidades, para asociar a una diferente
+        /// </summary>
+        /// <param name="tipoRelacion">Tipo de relación que se establece</param>
+        /// <param name="idTemaAsociar">Tema al cual se asociará la entidad</param>
+        /// <param name="temaAnterior">Tema que poseía previamente la relación</param>
+        /// <param name="relacionExterna">Tema que se esta relacionando</param>
+        public void UpdateRelation(int tipoRelacion, int idTemaAsociar, int temaAnterior, int relacionExterna)
+        {
+            OleDbConnection connection = new OleDbConnection(ConfigurationManager.ConnectionStrings["Diccionario"].ToString());
+
+            OleDbDataAdapter dataAdapter;
+
+            DataSet dataSet = new DataSet();
+            DataRow dr;
+
+            try
+            {
+
+                string sqlCadena = "SELECT * FROM Relaciones WHERE IdConcepto = @IdConcepto AND IdRelExterna = @IdRelExterna AND TipoRelacion = @TipoRelacion";
+
+                dataAdapter = new OleDbDataAdapter();
+                dataAdapter.SelectCommand = new OleDbCommand(sqlCadena, connection);
+                dataAdapter.SelectCommand.Parameters.AddWithValue("@IdConcepto", temaAnterior);
+                dataAdapter.SelectCommand.Parameters.AddWithValue("@IdRelExterna", relacionExterna);
+                dataAdapter.SelectCommand.Parameters.AddWithValue("@TipoRelacion", tipoRelacion);
+                dataAdapter.Fill(dataSet, "Relaciones");
+
+                dr = dataSet.Tables["Relaciones"].Rows[0];
+                dr.BeginEdit();
+                dr["IdConcepto"] = idTemaAsociar;
+                dr.EndEdit();
+
+
+
+                dataAdapter.UpdateCommand = connection.CreateCommand();
+
+                dataAdapter.UpdateCommand.CommandText = "UPDATE Relaciones SET IdConcepto = @IdConcepto WHERE IdConcepto = " + temaAnterior + " AND TipoRelacion = @TipoRelacion";
+                dataAdapter.UpdateCommand.Parameters.Add("@IdConcepto", OleDbType.Numeric, 0, "IdConcepto");
+                dataAdapter.UpdateCommand.Parameters.Add("@TipoRelacion", OleDbType.Numeric, 0, "TipoRelacion");
+                dataAdapter.Update(dataSet, "Relaciones");
+                dataSet.Dispose();
+                dataAdapter.Dispose();
+
+            }
+            catch (OleDbException ex)
+            {
+                string methodName = System.Reflection.MethodBase.GetCurrentMethod().Name;
+
+                MessageBox.Show("Error ({0}) : {1}" + ex.Source + ex.Message, methodName, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                ErrorUtilities.SetNewErrorMessage(ex, methodName, 0);
+            }
+            catch (Exception ex)
+            {
+                string methodName = System.Reflection.MethodBase.GetCurrentMethod().Name;
+
+                MessageBox.Show("Error ({0}) : {1}" + ex.Source + ex.Message, methodName, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                ErrorUtilities.SetNewErrorMessage(ex, methodName, 0);
+            }
+            finally
+            {
+                connection.Close();
+            }
+        }
     }
 }
