@@ -6,7 +6,6 @@ using System.Data;
 using System.Data.Common;
 using System.Data.SqlClient;
 using System.Linq;
-using Telerik.Windows.Controls;
 
 namespace DiccionarioJuridicoV2.Dto
 {
@@ -240,7 +239,7 @@ namespace DiccionarioJuridicoV2.Dto
 
     public class Temas : INotifyPropertyChanged
     {
-        static readonly Temas DummyChild = new Temas();
+        static readonly Temas dummyChild = new Temas();
 
         Temas parent;// {get;set;};
 
@@ -249,17 +248,17 @@ namespace DiccionarioJuridicoV2.Dto
 
         private Temas parentItem;
 
-        private int _IDTema;
+        private int idTema;
 
         public int IDTema
         {
             get
             {
-                return _IDTema;
+                return idTema;
             }
             set
             {
-                _IDTema = value;
+                idTema = value;
             }
         }
 
@@ -280,143 +279,143 @@ namespace DiccionarioJuridicoV2.Dto
 
         }
 
-        private string _DescripcionStr = "";
+        private string descripcionStr = "";
 
         public string DescripcionStr
         {
             get
             {
-                return _DescripcionStr;
+                return descripcionStr;
             }
             set
             {
-                _DescripcionStr = value;
+                descripcionStr = value;
             }
         }
 
-        private int _Nivel;
+        private int nivel;
 
         public int Nivel
         {
             get
             {
-                return _Nivel;
+                return nivel;
             }
             set
             {
-                _Nivel = value;
+                nivel = value;
             }
         }
 
-        private int _IDPadre;
+        private int idPadre;
 
         public int IDPadre
         {
             get
             {
-                return _IDPadre;
+                return idPadre;
             }
             set
             {
-                _IDPadre = value;
+                idPadre = value;
             }
         }
 
-        private int _IDUser;
+        private int idUser;
 
         public int IDUser
         {
             get
             {
-                return _IDUser;
+                return idUser;
             }
             set
             {
-                _IDUser = value;
+                idUser = value;
             }
         }
 
-        private DateTime _Fecha;
+        private DateTime fecha;
 
         public DateTime Fecha
         {
             get
             {
-                return _Fecha;
+                return fecha;
             }
             set
             {
-                _Fecha = value;
+                fecha = value;
             }
         }
 
-        private DateTime _Hora;
+        private DateTime hora;
 
         public DateTime Hora
         {
             get
             {
-                return _Hora;
+                return hora;
             }
             set
             {
-                _Hora = value;
+                hora = value;
             }
         }
 
-        private String _Nota = "";
+        private String nota = "";
 
         public String Nota
         {
             get
             {
-                return _Nota;
+                return nota;
             }
             set
             {
-                _Nota = value;
+                nota = value;
             }
         }
 
-        private String _Observaciones = "";
+        private String observaciones = "";
 
         public String Observaciones
         {
             get
             {
-                return _Observaciones;
+                return observaciones;
             }
             set
             {
-                _Observaciones = value;
+                observaciones = value;
             }
         }
 
-        private int _Materia;
+        private int materia;
 
         public int Materia
         {
             get
             {
-                return _Materia;
+                return materia;
             }
             set
             {
-                _Materia = value;
+                materia = value;
             }
         }
 
-        private int _Status;
+        private int status;
 
         public int Status
         {
             get
             {
-                return _Status;
+                return status;
             }
             set
             {
-                _Status = value;
+                status = value;
             }
         }
 
@@ -541,25 +540,25 @@ namespace DiccionarioJuridicoV2.Dto
             subtemas = new ObservableCollection<Temas>();
 
             if (lazyLoadChildren)
-                subtemas.Add(DummyChild);
+                subtemas.Add(dummyChild);
         }
 
         public Temas(int idTema, string descripcion, string descripcionStr,
             int nivel, int idPadre, int idUser, DateTime fecha, DateTime hora,
             String nota, String observaciones, int materia, int status, int idOrigen)
         {
-            _IDTema = idTema;
+            this.idTema = idTema;
             this.descripcion = descripcion;
-            _DescripcionStr = descripcionStr;
-            _Nivel = nivel;
-            _IDPadre = idPadre;
-            _IDUser = idUser;
-            _Fecha = fecha;
-            _Hora = hora;
-            _Nota = nota;
-            _Observaciones = observaciones;
-            _Materia = materia;
-            _Status = status;
+            this.descripcionStr = descripcionStr;
+            this.nivel = nivel;
+            this.idPadre = idPadre;
+            this.idUser = idUser;
+            this.fecha = fecha;
+            this.hora = hora;
+            this.nota = nota;
+            this.observaciones = observaciones;
+            this.materia = materia;
+            this.status = status;
             this.idOrigen = idOrigen;
         }
 
@@ -567,18 +566,18 @@ namespace DiccionarioJuridicoV2.Dto
             int nivel, int idPadre, int idUser, DateTime fecha, DateTime hora,
             String nota, String observaciones, int materia, int status, int idOrigen, int idTemaOrigen, int tesisRelacionadas)
         {
-            _IDTema = idTema;
+            this.idTema = idTema;
             this.descripcion = descripcion;
-            _DescripcionStr = descripcionStr;
-            _Nivel = nivel;
-            _IDPadre = idPadre;
-            _IDUser = idUser;
-            _Fecha = fecha;
-            _Hora = hora;
-            _Nota = nota;
-            _Observaciones = observaciones;
-            _Materia = materia;
-            _Status = status;
+            this.descripcionStr = descripcionStr;
+            this.nivel = nivel;
+            this.idPadre = idPadre;
+            this.idUser = idUser;
+            this.fecha = fecha;
+            this.hora = hora;
+            this.nota = nota;
+            this.observaciones = observaciones;
+            this.materia = materia;
+            this.status = status;
             this.idOrigen = idOrigen;
             this.idTemaOrigen = idTemaOrigen;
             this.tesisRelacionadas = tesisRelacionadas;
@@ -595,7 +594,7 @@ namespace DiccionarioJuridicoV2.Dto
         {
             get
             {
-                return this.SubTemas.Count == 1 && this.SubTemas[0] == DummyChild;
+                return this.SubTemas.Count == 1 && this.SubTemas[0] == dummyChild;
             }
         }
 
@@ -642,7 +641,7 @@ namespace DiccionarioJuridicoV2.Dto
                 // Lazy load the child items, if necessary.
                 if (this.HasDummyChild)
                 {
-                    this.SubTemas.Remove(DummyChild);
+                    this.SubTemas.Remove(dummyChild);
                     this.LoadChildren();
                 }
             }

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
@@ -8,7 +7,6 @@ using System.Windows.Controls;
 using DiccionarioJuridicoV2.Dto;
 using DiccionarioJuridicoV2.Models;
 using DiccionarioJuridicoV2.Singletons;
-using ScjnUtilities;
 using Telerik.Windows.Controls;
 
 namespace DiccionarioJuridicoV2.UserControls
