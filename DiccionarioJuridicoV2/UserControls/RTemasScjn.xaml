@@ -43,12 +43,11 @@
                                      SelectedValuePath="Id"
                                      SelectionChanged="CbxMaterias_SelectionChanged" />
                 <telerik:RadTreeView x:Name="TreeMaterias"
-                                     Grid.Row="1"
-                                     Margin="15,15,15,15"
+                                     Margin="15,95,15,35"
                                      HorizontalAlignment="Stretch"
                                      VerticalAlignment="Stretch"
                                      ItemsSource="{Binding}"
-                                     SelectionChanged="TreeMaterias_SelectionChanged">
+                                     SelectionChanged="TreeMaterias_SelectionChanged" Grid.RowSpan="2">
                     <telerik:RadTreeView.ItemContainerStyle>
 
                         <Style TargetType="{x:Type telerik:RadTreeViewItem}">
