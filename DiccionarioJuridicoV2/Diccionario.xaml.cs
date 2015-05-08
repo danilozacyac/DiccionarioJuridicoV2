@@ -146,12 +146,47 @@ namespace DiccionarioJuridicoV2
 
         private void CortarInfo(object sender, RoutedEventArgs e)
         {
+            rGrnSin.GenericoPorEliminar = rGrnSin.RLstGenericos.SelectedItem as Genericos;
 
+            rGrnSin.RConPasteInfo.IsEnabled = true;
+            RBtnCortarInfo.IsEnabled = true;
         }
 
         private void PegarInfo(object sender, RoutedEventArgs e)
         {
+            if (rGrnSin.GenericoPorEliminar.IdGenerico == rGrnSin.SelectedGenerico.IdGenerico)
+            {
+                MessageBox.Show("El origen y destino de la información es el mismo");
+                return;
+            }
 
+            MessageBoxResult result = MessageBox.Show("Estas a punto de eliminar el tema \"" + rGrnSin.GenericoPorEliminar.Termino +
+                "\" y agregar su información al tema \"" + rGrnSin.SelectedGenerico.Termino + "\" ¿Deseas continuar?",
+                "ATENCIÓN:", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+            if (result == MessageBoxResult.Yes)
+            {
+                rGrnSin.SelectedGenerico.Definicion += "\n\r\n\r" + rGrnSin.GenericoPorEliminar.Definicion;
+
+                new GenericosModel().UpdateTerminoGenerico(rGrnSin.SelectedGenerico);
+
+                RelacionesModel model = new RelacionesModel();
+                foreach (Sinonimos sinonimo in rGrnSin.GenericoPorEliminar.Sinonimos)
+                {
+                    rGrnSin.SelectedGenerico.Sinonimos.Add(sinonimo);
+                    model.UpdateRelation(2, rGrnSin.SelectedGenerico.IdGenerico, rGrnSin.GenericoPorEliminar.IdGenerico, sinonimo.IdSinonimo);
+
+                }
+
+                foreach (TesauroScjn conceptoScjn in rGrnSin.GenericoPorEliminar.ConceptosScjn)
+                {
+                    rGrnSin.SelectedGenerico.ConceptosScjn.Add(conceptoScjn);
+                    model.UpdateRelation(9, rGrnSin.SelectedGenerico.IdGenerico, rGrnSin.GenericoPorEliminar.IdGenerico, conceptoScjn.Id);
+                }
+
+                listaGenericos.Remove(rGrnSin.GenericoPorEliminar);
+                new GenericosModel().DeleteTerminoGenerico(rGrnSin.GenericoPorEliminar);
+            }
         }
 
 
@@ -194,7 +229,18 @@ namespace DiccionarioJuridicoV2
         #endregion
 
 
+        #region Tematicos
 
+        private void RBtnArbolPdf_Click(object sender, RoutedEventArgs e)
+        {
+            RadRibbonButton button = sender as RadRibbonButton;
+
+            uid = Convert.ToInt32(button.Uid);
+            this.LaunchBusyIndicator();
+
+        }
+
+        #endregion
 
 
 
@@ -212,6 +258,11 @@ namespace DiccionarioJuridicoV2
                     x = ArbolesSingleton.Temas(16);
                     x = ArbolesSingleton.Temas(32);
                     x = null;
+                    break;
+                case 101:
+                    Materias materia = RBtnArbolPdf.Tag as Materias;
+                    ArbolesEnPdf pdf = new ArbolesEnPdf(ArbolesSingleton.Temas(materia.Id));
+                    pdf.GeneraPdf();
                     break;
             }
         }
@@ -234,13 +285,7 @@ namespace DiccionarioJuridicoV2
 
         #endregion
 
-        private void RBtnArbolPdf_Click(object sender, RoutedEventArgs e)
-        {
-            Materias materia = RBtnArbolPdf.Tag as Materias;
-
-            ArbolesEnPdf pdf = new ArbolesEnPdf(ArbolesSingleton.Temas( materia.Id));
-            pdf.GeneraPdf();
-        }
+       
 
         
 

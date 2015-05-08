@@ -65,6 +65,7 @@
                    Content="Definición:" />
             <TextBox x:Name="TxtDefinicion"
                      Grid.Row="0"
+                     IsReadOnly="True"
                      Margin="20,50,20,20"
                      HorizontalAlignment="Stretch"
                      VerticalAlignment="Stretch"

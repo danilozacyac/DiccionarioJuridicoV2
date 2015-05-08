@@ -84,7 +84,7 @@ namespace DiccionarioJuridicoV2.UserControls {
         #line hidden
         
         
-        #line 83 "..\..\..\UserControls\RTemasScjn.xaml"
+        #line 82 "..\..\..\UserControls\RTemasScjn.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal UIControls.SearchTextBox SearchBox;
         
@@ -92,7 +92,7 @@ namespace DiccionarioJuridicoV2.UserControls {
         #line hidden
         
         
-        #line 102 "..\..\..\UserControls\RTemasScjn.xaml"
+        #line 101 "..\..\..\UserControls\RTemasScjn.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal Telerik.Windows.Controls.RadGridView ConcepScjn;
         
@@ -100,7 +100,7 @@ namespace DiccionarioJuridicoV2.UserControls {
         #line hidden
         
         
-        #line 137 "..\..\..\UserControls\RTemasScjn.xaml"
+        #line 136 "..\..\..\UserControls\RTemasScjn.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.TextBox TxtIdTemaScjn;
         
@@ -108,7 +108,7 @@ namespace DiccionarioJuridicoV2.UserControls {
         #line hidden
         
         
-        #line 149 "..\..\..\UserControls\RTemasScjn.xaml"
+        #line 148 "..\..\..\UserControls\RTemasScjn.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.TextBox TxtConceptoScjn;
         
@@ -116,7 +116,7 @@ namespace DiccionarioJuridicoV2.UserControls {
         #line hidden
         
         
-        #line 155 "..\..\..\UserControls\RTemasScjn.xaml"
+        #line 154 "..\..\..\UserControls\RTemasScjn.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal Telerik.Windows.Controls.RadButton BtnLimpiar;
         
@@ -124,7 +124,7 @@ namespace DiccionarioJuridicoV2.UserControls {
         #line hidden
         
         
-        #line 163 "..\..\..\UserControls\RTemasScjn.xaml"
+        #line 162 "..\..\..\UserControls\RTemasScjn.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal Telerik.Windows.Controls.RadButton BtnAddRelaciona;
         
@@ -184,7 +184,7 @@ namespace DiccionarioJuridicoV2.UserControls {
             case 4:
             this.TreeMaterias = ((Telerik.Windows.Controls.RadTreeView)(target));
             
-            #line 51 "..\..\..\UserControls\RTemasScjn.xaml"
+            #line 50 "..\..\..\UserControls\RTemasScjn.xaml"
             this.TreeMaterias.SelectionChanged += new System.Windows.Controls.SelectionChangedEventHandler(this.TreeMaterias_SelectionChanged);
             
             #line default
@@ -193,7 +193,7 @@ namespace DiccionarioJuridicoV2.UserControls {
             case 5:
             this.SearchBox = ((UIControls.SearchTextBox)(target));
             
-            #line 88 "..\..\..\UserControls\RTemasScjn.xaml"
+            #line 87 "..\..\..\UserControls\RTemasScjn.xaml"
             this.SearchBox.Search += new System.Windows.RoutedEventHandler(this.SearchTextBox_Search);
             
             #line default
@@ -211,7 +211,7 @@ namespace DiccionarioJuridicoV2.UserControls {
             case 9:
             this.BtnLimpiar = ((Telerik.Windows.Controls.RadButton)(target));
             
-            #line 161 "..\..\..\UserControls\RTemasScjn.xaml"
+            #line 160 "..\..\..\UserControls\RTemasScjn.xaml"
             this.BtnLimpiar.Click += new System.Windows.RoutedEventHandler(this.BtnLimpiar_Click);
             
             #line default
@@ -220,7 +220,7 @@ namespace DiccionarioJuridicoV2.UserControls {
             case 10:
             this.BtnAddRelaciona = ((Telerik.Windows.Controls.RadButton)(target));
             
-            #line 169 "..\..\..\UserControls\RTemasScjn.xaml"
+            #line 168 "..\..\..\UserControls\RTemasScjn.xaml"
             this.BtnAddRelaciona.Click += new System.Windows.RoutedEventHandler(this.BtnAddRelaciona_Click);
             
             #line default
