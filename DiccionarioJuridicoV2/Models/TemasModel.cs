@@ -22,14 +22,14 @@ namespace DiccionarioJuridicoV2.Models
         //{
         //    this.textoBuscado = textoBuscado;
         //}
-        public static ObservableCollection<Temas> GetTemasConstitucional(Temas temaPadre)
+        public ObservableCollection<Temas> GetTemasConstitucional(Temas temaPadre)
         {
             SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["Constitucional"].ToString());
 
             ObservableCollection<Temas> listaTemas = new ObservableCollection<Temas>();
 
             SqlCommand cmd;
-            SqlDataReader dataReader;
+            SqlDataReader reader;
 
             cmd = connection.CreateCommand();
             cmd.Connection = connection;
@@ -43,17 +43,18 @@ namespace DiccionarioJuridicoV2.Models
                 if (temaPadre == null)
                     cmd.Parameters.AddWithValue("@IDPadre", 0);
                 else
-                    cmd.Parameters.AddWithValue("@IDPadre", temaPadre.IDPadre);
-                dataReader = cmd.ExecuteReader();
+                    cmd.Parameters.AddWithValue("@IDPadre", temaPadre.IDTema);
+                reader = cmd.ExecuteReader();
 
-                while (dataReader.Read())
+                while (reader.Read())
                 {
+                    //Temas tema = new Temas();
                     Temas tema = new Temas(temaPadre);
-                    tema.IDTema = Convert.ToInt32(dataReader["IdTema"].ToString());
-                    tema.Nivel = Convert.ToInt32(dataReader["Nivel"].ToString());
-                    tema.IDPadre = Convert.ToInt32(dataReader["IDPadre"].ToString());
-                    tema.Descripcion = dataReader["Descripcion"].ToString();
-                    tema.SubTemas = TemasModel.GetTemasConstitucional(tema);
+                    tema.IDTema = Convert.ToInt32(reader["IdTema"]);
+                    tema.Nivel = Convert.ToInt32(reader["Nivel"]);
+                    tema.IDPadre = Convert.ToInt32(reader["IDPadre"]);
+                    tema.Descripcion = reader["Descripcion"].ToString();
+                    tema.SubTemas = GetTemasConstitucional(tema);
 
                     listaTemas.Add(tema);
                 }
@@ -80,7 +81,7 @@ namespace DiccionarioJuridicoV2.Models
             return listaTemas;
         }
 
-        public static ObservableCollection<Temas> GetTemasTematico(Temas temaPadre, int materia, bool buscaAbogado)
+        public ObservableCollection<Temas> GetTemasTematico(Temas temaPadre, int materia, bool buscaAbogado)
         {
             SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["Tematicos"].ToString());
 
@@ -117,7 +118,7 @@ namespace DiccionarioJuridicoV2.Models
                     tema.Nivel = Convert.ToInt32(reader["Nivel"].ToString());
                     tema.IDPadre = Convert.ToInt32(reader["IDPadre"].ToString());
                     tema.Descripcion = reader["Descripcion"].ToString();
-                    tema.SubTemas = TemasModel.GetTemasTematico(tema, materia, buscaAbogado);
+                    tema.SubTemas = GetTemasTematico(tema, materia, buscaAbogado);
                     tema.IdOrigen = reader["IdOrigen"] as int? ?? -1;
                     tema.Materia = reader["Materia"] as int? ?? -1;
                     TemasModel.GetTesisRelacionadas(tema);

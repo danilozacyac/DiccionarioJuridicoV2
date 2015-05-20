@@ -8,6 +8,7 @@ namespace DiccionarioJuridicoV2.Singletons
 {
     public class ArbolesSingleton
     {
+        
 
         private static ObservableCollection<Temas> constitucional;
         private static ObservableCollection<Temas> penal;
@@ -23,47 +24,49 @@ namespace DiccionarioJuridicoV2.Singletons
 
         public static ObservableCollection<Temas> Temas(int idMateria)
         {
+            TemasModel model = new TemasModel();
+
             switch (idMateria)
             {
                 case 1:
                     if (constitucional == null)
-                        constitucional = TemasModel.GetTemasConstitucional(null);
+                        constitucional = model.GetTemasConstitucional(null);
 
                     return constitucional;
 
                 case 2:
                     if (penal == null)
-                        penal = TemasModel.GetTemasTematico(null, idMateria,false);
+                        penal = model.GetTemasTematico(null, idMateria, false);
 
                     return penal;
 
                 case 4:
                     if (civil == null)
-                        civil = TemasModel.GetTemasTematico(null, idMateria,false);
+                        civil = model.GetTemasTematico(null, idMateria, false);
 
                     return civil;
 
                 case 8:
                     if (administrativa == null)
-                        administrativa = TemasModel.GetTemasTematico(null, idMateria,false);
+                        administrativa = model.GetTemasTematico(null, idMateria, false);
 
                     return administrativa;
 
                 case 16:
                     if (laboral == null)
-                        laboral = TemasModel.GetTemasTematico(null, idMateria,false);
+                        laboral = model.GetTemasTematico(null, idMateria, false);
 
                     return laboral;
 
                 case 32:
                     if (comun == null)
-                        comun = TemasModel.GetTemasTematico(null, idMateria,false);
+                        comun = model.GetTemasTematico(null, idMateria, false);
 
                     return comun;
 
                 case 64:
                     if (derechos == null)
-                        derechos = TemasModel.GetTemasTematico(null, idMateria,false);
+                        derechos = model.GetTemasTematico(null, idMateria, false);
 
                     return derechos;
 

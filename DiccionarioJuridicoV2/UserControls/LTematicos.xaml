@@ -11,7 +11,7 @@
     <UserControl.Resources>
         <converter:ForegroundConverter x:Key="foreground"/>
         
-        <HierarchicalDataTemplate x:Key="TreeDataTemp" ItemsSource="{Binding TemasHijo}">
+        <HierarchicalDataTemplate x:Key="TreeDataTemp" ItemsSource="{Binding SubTemas}">
             <StackPanel Orientation="Horizontal">
                 <TextBlock VerticalAlignment="Center" Text="{Binding Descripcion}" Foreground="{Binding IdColorLetra,Converter={StaticResource foreground}}" />
             </StackPanel>

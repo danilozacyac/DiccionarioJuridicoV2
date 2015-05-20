@@ -43,14 +43,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="DiccionarioJuridicoV2.exe" size="1722880">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="DiccionarioJuridicoV2.exe" size="1723904">
       <assemblyIdentity name="DiccionarioJuridicoV2" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>/rwNceEURakeCvSUCVRwGaDM2L1T2IGNd7C6golVKy8=</dsig:DigestValue>
+        <dsig:DigestValue>13pQXYTxRNEJL726OOkku5TpECc4yRb+ETVcbYXvcEU=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -67,14 +67,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="ScjnUtilities.dll" size="18944">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="ScjnUtilities.dll" size="19456">
       <assemblyIdentity name="ScjnUtilities" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>5knCZiKs5nf2bzja6tkKC3WcyjBXR93BoYFsMHxjGwU=</dsig:DigestValue>
+        <dsig:DigestValue>ieOSOiMytwScRRONLxQqIlkH3JmOH8NpnTI+7yveuFk=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
