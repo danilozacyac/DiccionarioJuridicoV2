@@ -657,9 +657,9 @@ namespace DiccionarioJuridicoV2.Dto
         /// </summary>
         protected virtual void LoadChildren()
         {
-            //SubTemas = this.GetTemas(this, this.Materia);
-            foreach (var item in this.GetTemas(this, this.Materia))
-                SubTemas.Add(item);
+            //Esto es lo que comente si hago Load OnDemand debo quitar este comentario
+            //foreach (var item in this.GetTemas(this, this.Materia))
+            //    SubTemas.Add(item);
         }
 
         #endregion // LoadChildren
@@ -788,7 +788,7 @@ namespace DiccionarioJuridicoV2.Dto
             //    //MessageBox.Show(ConfigurationManager.AppSettings.Get("MensajeAppPrueba"));
             //}
             //else
-                bdStringSql = ConfigurationManager.ConnectionStrings["Tematicos"].ConnectionString;
+            bdStringSql = ConfigurationManager.ConnectionStrings["Tematicos"].ConnectionString;
             DbConnection realConnection = new SqlConnection(bdStringSql);
             return realConnection;
 

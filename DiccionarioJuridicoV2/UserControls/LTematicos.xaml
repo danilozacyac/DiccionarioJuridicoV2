@@ -1,19 +1,22 @@
 ﻿<UserControl x:Class="DiccionarioJuridicoV2.UserControls.LTematicos"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:converter="clr-namespace:DiccionarioJuridicoV2.Converters"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
-             xmlns:converter="clr-namespace:DiccionarioJuridicoV2.Converters"
              d:DesignHeight="300"
              d:DesignWidth="500"
              mc:Ignorable="d">
     <UserControl.Resources>
-        <converter:ForegroundConverter x:Key="foreground"/>
-        
+        <converter:ForegroundConverter x:Key="foreground" />
+
         <HierarchicalDataTemplate x:Key="TreeDataTemp" ItemsSource="{Binding SubTemas}">
             <StackPanel Orientation="Horizontal">
-                <TextBlock VerticalAlignment="Center" Text="{Binding Descripcion}" Foreground="{Binding IdColorLetra,Converter={StaticResource foreground}}" />
+                <TextBlock VerticalAlignment="Center"
+                           Foreground="{Binding IdColorLetra,
+                                                Converter={StaticResource foreground}}"
+                           Text="{Binding Descripcion}" />
             </StackPanel>
         </HierarchicalDataTemplate>
     </UserControl.Resources>
@@ -21,92 +24,127 @@
                               Grid.Row="1"
                               IsIndeterminate="True"
                               telerik:StyleManager.Theme="Windows7">
+        <Grid>
 
-        <telerik:RadTabControl x:Name="Opciones"
-                               HorizontalAlignment="Stretch"
-                               VerticalAlignment="Stretch"
-                               SelectionChanged="RadTabControl_SelectionChanged">
-            <telerik:RadTabItem x:Name="RadConst"
-                                Width="100"
-                                Height="50"
-                                Header="Constitucional"
-                                Uid="1">
-                <telerik:RadTreeView x:Name="TreeConst"
-                                     Grid.Row="1"
-                                     Margin="15,15,15,15"
-                                     HorizontalAlignment="Stretch"
-                                     VerticalAlignment="Stretch"
-                                     ItemTemplate="{StaticResource TreeDataTemp}"
-                                     ItemsSource="{Binding}" />
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="4*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <telerik:RadTabControl x:Name="Opciones"
+                                   HorizontalAlignment="Stretch"
+                                   VerticalAlignment="Stretch"
+                                   SelectionChanged="RadTabControl_SelectionChanged">
+                <telerik:RadTabItem x:Name="RadConst"
+                                    Width="100"
+                                    Height="50"
+                                    Header="Constitucional"
+                                    Uid="1">
+                    <telerik:RadTreeView x:Name="TreeConst"
+                                         Grid.Row="1"
+                                         Margin="15,15,15,15"
+                                         HorizontalAlignment="Stretch"
+                                         VerticalAlignment="Stretch"
+                                         ItemTemplate="{StaticResource TreeDataTemp}"
+                                         ItemsSource="{Binding}"
+                                         SelectionChanged="TreeSelectionChanged"
+                                         Tag="1" />
 
 
-            </telerik:RadTabItem>
-            <telerik:RadTabItem x:Name="RadPenal"
-                                Width="100"
-                                Height="50"
-                                Header="Penal"
-                                Uid="2">
-                <telerik:RadTreeView x:Name="TreePenal"
-                                     Grid.Row="1"
-                                     Margin="15,15,15,15"
-                                     HorizontalAlignment="Stretch"
-                                     VerticalAlignment="Stretch"
-                                     ItemTemplate="{StaticResource TreeDataTemp}"
-                                     ItemsSource="{Binding}" />
-            </telerik:RadTabItem>
-            <telerik:RadTabItem x:Name="RadCivil"
-                                Width="100"
-                                Height="50"
-                                Header="Civil"
-                                Uid="4">
-                <telerik:RadTreeView x:Name="TreeCivil"
-                                     Grid.Row="1"
-                                     Margin="15,15,15,15"
-                                     HorizontalAlignment="Stretch"
-                                     VerticalAlignment="Stretch"
-                                     ItemTemplate="{StaticResource TreeDataTemp}"
-                                     ItemsSource="{Binding}" />
-            </telerik:RadTabItem>
-            <telerik:RadTabItem x:Name="RadAdmin"
-                                Width="100"
-                                Height="50"
-                                Header="Administrativa"
-                                Uid="8">
-                <telerik:RadTreeView x:Name="TreeAdmin"
-                                     Grid.Row="1"
-                                     Margin="15,15,15,15"
-                                     HorizontalAlignment="Stretch"
-                                     VerticalAlignment="Stretch"
-                                     ItemTemplate="{StaticResource TreeDataTemp}"
-                                     ItemsSource="{Binding}" />
-            </telerik:RadTabItem>
-            <telerik:RadTabItem x:Name="RadLaboral"
-                                Width="100"
-                                Height="50"
-                                Header="Laboral"
-                                Uid="16">
-                <telerik:RadTreeView x:Name="TreeLaboral"
-                                     Grid.Row="1"
-                                     Margin="15,15,15,15"
-                                     HorizontalAlignment="Stretch"
-                                     VerticalAlignment="Stretch"
-                                     ItemTemplate="{StaticResource TreeDataTemp}"
-                                     ItemsSource="{Binding}" />
-            </telerik:RadTabItem>
-            <telerik:RadTabItem x:Name="RadComun"
-                                Width="100"
-                                Height="50"
-                                Header="Comun"
-                                Uid="32">
-                <telerik:RadTreeView x:Name="TreeComun"
-                                     Grid.Row="1"
-                                     Margin="15,15,15,15"
-                                     HorizontalAlignment="Stretch"
-                                     VerticalAlignment="Stretch"
-                                     ItemTemplate="{StaticResource TreeDataTemp}"
-                                     ItemsSource="{Binding}" />
-            </telerik:RadTabItem>
-        </telerik:RadTabControl>
+                </telerik:RadTabItem>
+                <telerik:RadTabItem x:Name="RadPenal"
+                                    Width="100"
+                                    Height="50"
+                                    Header="Penal"
+                                    Uid="2">
+                    <telerik:RadTreeView x:Name="TreePenal"
+                                         Grid.Row="1"
+                                         Margin="15,15,15,15"
+                                         HorizontalAlignment="Stretch"
+                                         VerticalAlignment="Stretch"
+                                         ItemTemplate="{StaticResource TreeDataTemp}"
+                                         ItemsSource="{Binding}"
+                                         SelectionChanged="TreeSelectionChanged"
+                                         Tag="2" />
+                </telerik:RadTabItem>
+                <telerik:RadTabItem x:Name="RadCivil"
+                                    Width="100"
+                                    Height="50"
+                                    Header="Civil"
+                                    Uid="4">
+                    <telerik:RadTreeView x:Name="TreeCivil"
+                                         Grid.Row="1"
+                                         Margin="15,15,15,15"
+                                         HorizontalAlignment="Stretch"
+                                         VerticalAlignment="Stretch"
+                                         ItemTemplate="{StaticResource TreeDataTemp}"
+                                         ItemsSource="{Binding}"
+                                         SelectionChanged="TreeSelectionChanged"
+                                         Tag="4" />
+                </telerik:RadTabItem>
+                <telerik:RadTabItem x:Name="RadAdmin"
+                                    Width="100"
+                                    Height="50"
+                                    Header="Administrativa"
+                                    Uid="8">
+                    <telerik:RadTreeView x:Name="TreeAdmin"
+                                         Grid.Row="1"
+                                         Margin="15,15,15,15"
+                                         HorizontalAlignment="Stretch"
+                                         VerticalAlignment="Stretch"
+                                         ItemTemplate="{StaticResource TreeDataTemp}"
+                                         ItemsSource="{Binding}"
+                                         SelectionChanged="TreeSelectionChanged"
+                                         Tag="8" />
+                </telerik:RadTabItem>
+                <telerik:RadTabItem x:Name="RadLaboral"
+                                    Width="100"
+                                    Height="50"
+                                    Header="Laboral"
+                                    Uid="16">
+                    <telerik:RadTreeView x:Name="TreeLaboral"
+                                         Grid.Row="1"
+                                         Margin="15,15,15,15"
+                                         HorizontalAlignment="Stretch"
+                                         VerticalAlignment="Stretch"
+                                         ItemTemplate="{StaticResource TreeDataTemp}"
+                                         ItemsSource="{Binding}"
+                                         SelectionChanged="TreeSelectionChanged"
+                                         Tag="16" />
+                </telerik:RadTabItem>
+                <telerik:RadTabItem x:Name="RadComun"
+                                    Width="100"
+                                    Height="50"
+                                    Header="Comun"
+                                    Uid="32">
+                    <telerik:RadTreeView x:Name="TreeComun"
+                                         Grid.Row="1"
+                                         Margin="15,15,15,15"
+                                         HorizontalAlignment="Stretch"
+                                         VerticalAlignment="Stretch"
+                                         ItemTemplate="{StaticResource TreeDataTemp}"
+                                         ItemsSource="{Binding}"
+                                         SelectionChanged="TreeSelectionChanged"
+                                         Tag="32" />
+                </telerik:RadTabItem>
+            </telerik:RadTabControl>
 
+            <Grid Grid.Column="1">
+                <Label Margin="10,24,0,0"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Top"
+                       Content="Sinónimos"
+                       FontSize="16"
+                       FontWeight="Black" />
+                <telerik:RadListBox x:Name="LstSinonimos"
+                                    Margin="0,55,0,0"
+                                    ItemsSource="{Binding}"
+                                    DisplayMemberPath="Descripcion"
+                                    HorizontalAlignment="Stretch"
+                                    VerticalAlignment="Stretch" />
+
+            </Grid>
+
+        </Grid>
     </telerik:RadBusyIndicator>
 </UserControl>

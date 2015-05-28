@@ -300,5 +300,14 @@ namespace DiccionarioJuridicoV2.Models
                 connection.Close();
             }
         }
+
+
+        #region Sinonimos Tematicos
+
+
+
+
+        #endregion
+
     }
 }

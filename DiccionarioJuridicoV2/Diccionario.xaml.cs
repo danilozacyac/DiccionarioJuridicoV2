@@ -33,8 +33,6 @@ namespace DiccionarioJuridicoV2
             worker.RunWorkerCompleted += WorkerRunWorkerCompleted;
         }
 
-        
-
         private void RadWindow_Loaded(object sender, RoutedEventArgs e)
         {
         }
@@ -269,7 +267,6 @@ namespace DiccionarioJuridicoV2
 
         void WorkerRunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            //Dispatcher.BeginInvoke(new Action<ObservableCollection<Organismos>>(this.UpdateGridDataSource), e.Result);
             this.BusyIndicator.IsBusy = false;
         }
 

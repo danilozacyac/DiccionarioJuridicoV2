@@ -13,18 +13,16 @@ namespace DiccionarioJuridicoV2.Models
 {
     public class TemasModel
     {
-        private readonly String connectionString = ConfigurationManager.ConnectionStrings["Tematicos"].ConnectionString;
+        private readonly String connectionString = ConfigurationManager.ConnectionStrings["Tematico"].ConnectionString;
 
-        //private readonly string textoBuscado;
-        //private ObservableCollection<Temas> temasEnLista = new ObservableCollection<Temas>();
-        //public TemasModel() { }
-        //public TemasModel(string textoBuscado)
-        //{
-        //    this.textoBuscado = textoBuscado;
-        //}
+        /// <summary>
+        /// Obtiene la estructura completa del árbol de materia constitucional
+        /// </summary>
+        /// <param name="temaPadre"></param>
+        /// <returns></returns>
         public ObservableCollection<Temas> GetTemasConstitucional(Temas temaPadre)
         {
-            SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["Constitucional"].ToString());
+            SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["Constitucional"].ConnectionString);
 
             ObservableCollection<Temas> listaTemas = new ObservableCollection<Temas>();
 
@@ -48,7 +46,6 @@ namespace DiccionarioJuridicoV2.Models
 
                 while (reader.Read())
                 {
-                    //Temas tema = new Temas();
                     Temas tema = new Temas(temaPadre);
                     tema.IDTema = Convert.ToInt32(reader["IdTema"]);
                     tema.Nivel = Convert.ToInt32(reader["Nivel"]);
@@ -81,9 +78,15 @@ namespace DiccionarioJuridicoV2.Models
             return listaTemas;
         }
 
-        public ObservableCollection<Temas> GetTemasTematico(Temas temaPadre, int materia, bool buscaAbogado)
+        /// <summary>
+        /// Obtiene la estructura completa de los temáticos de acuerdo a la materia seleccionada
+        /// </summary>
+        /// <param name="temaPadre"></param>
+        /// <param name="materia">Identificador de la materia que se esta solicitando</param>
+        /// <returns></returns>
+        public ObservableCollection<Temas> GetTemasTematico(Temas temaPadre, int materia)
         {
-            SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["Tematicos"].ToString());
+            SqlConnection connection = new SqlConnection(connectionString);
 
             ObservableCollection<Temas> listaTemas = new ObservableCollection<Temas>();
 
@@ -118,10 +121,10 @@ namespace DiccionarioJuridicoV2.Models
                     tema.Nivel = Convert.ToInt32(reader["Nivel"].ToString());
                     tema.IDPadre = Convert.ToInt32(reader["IDPadre"].ToString());
                     tema.Descripcion = reader["Descripcion"].ToString();
-                    tema.SubTemas = GetTemasTematico(tema, materia, buscaAbogado);
+                    tema.SubTemas = GetTemasTematico(tema, materia);
                     tema.IdOrigen = reader["IdOrigen"] as int? ?? -1;
                     tema.Materia = reader["Materia"] as int? ?? -1;
-                    TemasModel.GetTesisRelacionadas(tema);
+                    this.GetTesisRelacionadas(tema);
 
                     listaTemas.Add(tema);
                 }
@@ -148,9 +151,13 @@ namespace DiccionarioJuridicoV2.Models
             return listaTemas;
         }
 
-        public static void GetAbogadoCrea(Temas temaBusca)
+        /// <summary>
+        /// Obtiene el usuario del abogado que generoel tema en cuestión
+        /// </summary>
+        /// <param name="temaBusca"></param>
+        public void GetAbogadoCrea(Temas temaBusca)
         {
-            SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["Tematicos"].ToString());
+            SqlConnection connection = new SqlConnection(connectionString);
 
             SqlCommand cmd;
             SqlDataReader reader;
@@ -161,12 +168,12 @@ namespace DiccionarioJuridicoV2.Models
             try
             {
                 connection.Open();
-                
+
                 cmd.CommandText = "SELECT A.nombre, * FROM bitacora B INNER JOIN Acceso A ON B.IdUsuario = A.Id " +
                                   " WHERE (IdSeccion = 1 AND idMovimiento = 1) AND IdTema = @IdTema AND IdMateria = @IdMateria";
                 cmd.Parameters.AddWithValue("@IdTema", temaBusca.IDTema);
                 cmd.Parameters.AddWithValue("@IdMateria", temaBusca.Materia);
-                
+
                 reader = cmd.ExecuteReader();
 
                 while (reader.Read())
@@ -194,9 +201,13 @@ namespace DiccionarioJuridicoV2.Models
             }
         }
 
-        public static void GetTesisRelacionadas(Temas temaBusca)
+        /// <summary>
+        /// Obtiene el listado de todas aquellas tesis relacionadas con el tema seleccionado
+        /// </summary>
+        /// <param name="temaBusca"></param>
+        public void GetTesisRelacionadas(Temas temaBusca)
         {
-            SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["Tematicos"].ToString());
+            SqlConnection connection = new SqlConnection(connectionString);
 
             SqlCommand cmd;
             SqlDataReader reader;
@@ -335,18 +346,35 @@ namespace DiccionarioJuridicoV2.Models
 
         public ObservableCollection<Temas> GetTemasBusqueda(Temas parentModule, int materia)
         {
-            SqlConnection connection = new SqlConnection(connectionString);
-
+            SqlConnection connection = null;
             ObservableCollection<Temas> modulos = new ObservableCollection<Temas>();
+
+            string sqlCadena = String.Empty;
+            SqlCommand cmd = null;
 
             try
             {
-                connection.Open();
+                if (materia == 1)
+                {
+                    connection = new SqlConnection(ConfigurationManager.ConnectionStrings["Constitucional"].ConnectionString);
+                    connection.Open();
 
-                string sqlCadena = "SELECT *, (SELECT COUNT(idTEma) FROM TemasTesis T WHERE T.idTema = Temas.Idtema and T.idMateria = Temas.Materia ) Total " +
-                                   "FROM Temas WHERE (" + this.ArmaCadenaBusqueda(textoBuscado) + ")  AND Materia = @IdMateria  AND idtema >= 0 and idPadre <> -1 ORDER BY DescripcionStr ";
-                SqlCommand cmd = new SqlCommand(sqlCadena, connection);
-                cmd.Parameters.AddWithValue("@IdMateria", materia);
+                    sqlCadena = "SELECT *  " +
+                                       "FROM The_Temas WHERE (" + this.ArmaCadenaBusqueda(textoBuscado) + ")  AND idPadre <> -1 ORDER BY DescripcionStr ";
+                    cmd = new SqlCommand(sqlCadena, connection);
+                }
+                else
+                {
+                    connection = new SqlConnection(ConfigurationManager.ConnectionStrings["Tematico"].ConnectionString);
+                    connection.Open();
+
+                    sqlCadena = "SELECT *, (SELECT COUNT(idTEma) FROM TemasTesis T WHERE T.idTema = Temas.Idtema and T.idMateria = Temas.Materia ) Total " +
+                                       "FROM Temas WHERE (" + this.ArmaCadenaBusqueda(textoBuscado) + ")  AND Materia = @IdMateria  AND idtema >= 0 and idPadre <> -1 ORDER BY DescripcionStr ";
+                    cmd = new SqlCommand(sqlCadena, connection);
+                    cmd.Parameters.AddWithValue("@IdMateria", materia);
+                }
+
+                
                 SqlDataReader reader = cmd.ExecuteReader();
 
                 if (reader.HasRows)
@@ -355,13 +383,20 @@ namespace DiccionarioJuridicoV2.Models
                     {
                         Temas tema = new Temas(null, true);
                             
-                        tema.Materia = Convert.ToInt32(reader["Materia"]);
+                        
                         tema.IDTema = Convert.ToInt32(reader["idTema"]);
                         tema.IDPadre = Convert.ToInt32(reader["IDPadre"]);
                         tema.Nivel = Convert.ToInt32(reader["Nivel"]);
                         tema.Descripcion = reader["Descripcion"].ToString();
                         tema.IdOrigen = 99;
-                        tema.TesisRelacionadas = Convert.ToInt32(reader["Total"]);
+
+                        if (materia > 1)
+                        {
+                            tema.TesisRelacionadas = Convert.ToInt32(reader["Total"]);
+                            tema.Materia = Convert.ToInt32(reader["Materia"]);
+                        }
+                        else
+                            tema.Materia = 1;
                             
                         List<Temas> buscaExistaTema = (from n in temasEnLista
                                                        where n.IDTema == tema.IDTema && n.Materia == tema.Materia
@@ -385,7 +420,6 @@ namespace DiccionarioJuridicoV2.Models
                                                                 select n).ToList();
 
                                 if (buscaExistaPadre != null && buscaExistaPadre.Count > 0)
-                                //if (temasEnLista.Contains(tema.IDPadre) )
                                 {
                                     foreach (Temas tematico in modulos)
                                     {
@@ -729,35 +763,68 @@ namespace DiccionarioJuridicoV2.Models
             return modulos;
         }
 
-        private Temas GetTemaByIdTema(int idTema, int mat)
+        /// <summary>
+        /// Obtiene la información completa de un tema a partir de su ID y la materia a la que pertenece. 
+        /// </summary>
+        /// <param name="idTema">Identificador del tema</param>
+        /// <param name="materia">Identificador de la materia a la que pertenece el tema</param>
+        /// <returns></returns>
+        private Temas GetTemaByIdTema(int idTema, int materia)
         {
-            SqlConnection connection = new SqlConnection(connectionString);
+            string cadenaUsar = (materia == 1) ? "Constitucional" : "Tematico";
+            SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings[cadenaUsar].ConnectionString);
 
-            Temas tema = new Temas();
+            Temas tema = null;
+
             try
             {
-                connection.Open();
-
-                string sqlCadena = "SELECT *, (SELECT COUNT(idTEma) FROM TemasTesis T WHERE T.idTema = Temas.Idtema and T.idMateria = Temas.Materia ) Total " +
-                                   "FROM Temas WHERE  IdTema = @IdTema AND Materia = @Materia  ORDER BY DescripcionStr ";
-                SqlCommand cmd = new SqlCommand(sqlCadena, connection);
-                SqlParameter idTemas = cmd.Parameters.Add("@IdTema", SqlDbType.Int, 0);
-                idTemas.Value = idTema;
-                SqlParameter materia = cmd.Parameters.Add("@Materia", SqlDbType.Int, 0);
-                materia.Value = mat;
-                SqlDataReader reader = cmd.ExecuteReader();
-
-                if (reader.HasRows)
+                if (materia == 1)
                 {
+                    connection.Open();
+                    string miQry = "SELECT * FROM The_Temas WHERE IDTema = @IDTema";
+
+                    SqlCommand cmd = new SqlCommand(miQry, connection);
+                    cmd.Parameters.AddWithValue("@IDTema", idTema);
+                    SqlDataReader reader = cmd.ExecuteReader();
+
                     while (reader.Read())
                     {
-                        tema.Materia = Convert.ToInt32(reader["Materia"]);
-                        tema.IDTema = Convert.ToInt32(reader["idTema"]);
-                        tema.IDPadre = Convert.ToInt32(reader["IDPadre"]);
+                        tema = new Temas();
+                        tema.IDTema = Convert.ToInt32(reader["IdTema"]);
                         tema.Nivel = Convert.ToInt32(reader["Nivel"]);
+                        tema.IDPadre = Convert.ToInt32(reader["IDPadre"]);
                         tema.Descripcion = reader["Descripcion"].ToString();
-                        tema.IdTemaOrigen = Convert.ToInt32(reader["IdTemaOrigen"]);
-                        tema.TesisRelacionadas = Convert.ToInt32(reader["Total"]);
+                        tema.Materia = materia;
+                    }
+                }
+                else
+                {
+                    tema = new Temas();
+
+                    connection.Open();
+
+                    string sqlCadena = "SELECT *, (SELECT COUNT(idTEma) FROM TemasTesis T WHERE T.idTema = Temas.Idtema and T.idMateria = Temas.Materia ) Total " +
+                                       "FROM Temas WHERE  IdTema = @IdTema AND Materia = @Materia  ORDER BY DescripcionStr ";
+
+                    SqlCommand cmd = new SqlCommand(sqlCadena, connection);
+                    cmd.Parameters.AddWithValue("@IdTema", idTema);
+                    cmd.Parameters.AddWithValue("@Materia", materia);
+
+                    SqlDataReader reader = cmd.ExecuteReader();
+
+                    if (reader.HasRows)
+                    {
+                        while (reader.Read())
+                        {
+                            tema.Materia = Convert.ToInt32(reader["Materia"]);
+                            tema.IDTema = Convert.ToInt32(reader["idTema"]);
+                            tema.IDPadre = Convert.ToInt32(reader["IDPadre"]);
+                            tema.Nivel = Convert.ToInt32(reader["Nivel"]);
+                            tema.Descripcion = reader["Descripcion"].ToString();
+                            tema.IdTemaOrigen = Convert.ToInt32(reader["IdTemaOrigen"]);
+                            tema.TesisRelacionadas = Convert.ToInt32(reader["Total"]);
+                            tema.Materia = materia;
+                        }
                     }
                 }
             }
@@ -848,5 +915,15 @@ namespace DiccionarioJuridicoV2.Models
                         break;
                 }
         }
+
+
+        #region Busqueda Constitucional
+
+
+
+
+        #endregion
+
+
     }
 }

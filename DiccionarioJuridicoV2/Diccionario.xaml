@@ -57,13 +57,16 @@
                     </StackPanel>
                     <StackPanel Orientation="Vertical">
                         <telerik:RadRibbonButton x:Name="RBtnCortarInfo"
+                                                 Click="CortarInfo"
                                                  Content="Cortar info."
                                                  Size="Medium"
-                                                 SmallImage="Resources/copy_32.png" Click="CortarInfo" />
+                                                 SmallImage="Resources/copy_32.png" />
                         <telerik:RadRibbonButton x:Name="RBtnPegarInfo"
+                                                 Click="PegarInfo"
                                                  Content="Pegar info."
-                                                 Size="Medium" IsEnabled="False"
-                                                 SmallImage="Resources/paste_32.png" Click="PegarInfo" />
+                                                 IsEnabled="False"
+                                                 Size="Medium"
+                                                 SmallImage="Resources/paste_32.png" />
                     </StackPanel>
                     <telerik:RadRibbonButton x:Name="RBtnGenericRelaciones"
                                              Click="RBtnGenericRelaciones_Click"
@@ -135,9 +138,9 @@
                     <telerik:RadRibbonButton x:Name="RBtnArbolPdf"
                                              Click="RBtnArbolPdf_Click"
                                              IsEnabled="False"
-                                             Uid="101"
                                              LargeImage="Resources/tesa_256.png"
-                                             Size="Large">
+                                             Size="Large"
+                                             Uid="101">
                         <StackPanel Orientation="Vertical">
                             <TextBlock HorizontalAlignment="Center" Text="Generar" />
                             <TextBlock HorizontalAlignment="Center" Text="PDF" />

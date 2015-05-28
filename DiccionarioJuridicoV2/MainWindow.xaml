@@ -7,18 +7,20 @@
         Height="350"
         AllowsTransparency="True"
         Background="Transparent"
+        Icon="Resources/Dictionary_128.png"
         Loaded="Window_Loaded"
         WindowStartupLocation="CenterScreen"
         WindowStyle="None">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="80"/>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="80" />
         </Grid.RowDefinitions>
-            <Image HorizontalAlignment="Stretch"
+        <Image HorizontalAlignment="Stretch"
                VerticalAlignment="Stretch"
                Source="Resources/dictionary.png" />
-        <telerik:RadBusyIndicator x:Name="BusyIndicator" Grid.Row="1"
+        <telerik:RadBusyIndicator x:Name="BusyIndicator"
+                                  Grid.Row="1"
                                   IsIndeterminate="True"
                                   telerik:StyleManager.Theme="Windows8Touch" />
     </Grid>

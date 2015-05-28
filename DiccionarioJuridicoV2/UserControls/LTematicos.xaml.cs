@@ -2,8 +2,10 @@
 using System.ComponentModel;
 using System.Linq;
 using System.Windows.Controls;
+using DiccionarioJuridicoV2.Dto;
 using DiccionarioJuridicoV2.Singletons;
 using Telerik.Windows.Controls;
+using TesauroUtilities;
 
 namespace DiccionarioJuridicoV2.UserControls
 {
@@ -13,6 +15,8 @@ namespace DiccionarioJuridicoV2.UserControls
     public partial class LTematicos : UserControl
     {
         private int uid;
+        private Temas selectedTema;
+        private int materiaTemaSelect;
 
         public LTematicos()
         {
@@ -26,9 +30,21 @@ namespace DiccionarioJuridicoV2.UserControls
             RadTabItem item = Opciones.SelectedItem as RadTabItem;
 
             uid = Convert.ToInt16(item.Uid);
+            //materiaTemaSelect = Convert.ToInt16(item.Tag);
 
             this.LaunchBusyIndicator();
 
+        }
+
+        private void TreeSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            RadTreeView tree = sender as RadTreeView;
+
+            selectedTema = tree.SelectedItem as Temas;
+
+            materiaTemaSelect = Convert.ToInt16(tree.Tag);
+
+            LstSinonimos.DataContext = new TesauroDAC().GetSinonimosForTema(selectedTema.IDTema, "IdTema", materiaTemaSelect);
         }
 
         #region Background Worker
@@ -73,5 +89,7 @@ namespace DiccionarioJuridicoV2.UserControls
         }
 
         #endregion
+
+        
     }
 }

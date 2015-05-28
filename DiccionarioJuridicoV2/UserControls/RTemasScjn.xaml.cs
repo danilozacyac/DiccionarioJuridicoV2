@@ -34,6 +34,7 @@ namespace DiccionarioJuridicoV2.UserControls
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
+            if(TreeMaterias.DataContext == null)
             CbxMaterias.DataContext = new Materias().GetMateriasBase();
         }
 
@@ -44,7 +45,7 @@ namespace DiccionarioJuridicoV2.UserControls
 
             this.LaunchBusyIndicator();
 
-            SearchBox.IsEnabled = (selectedMateria.Id == 1) ? false : true;
+            //SearchBox.IsEnabled = (selectedMateria.Id == 1) ? false : true;
 
             botonPdf.Tag = selectedMateria;
         }

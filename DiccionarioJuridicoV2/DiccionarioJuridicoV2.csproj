@@ -129,6 +129,12 @@
       <HintPath>..\lib\RCWPF\2014.2.729.45\Telerik.Windows.Data.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="TesauroTO">
+      <HintPath>..\..\..\..\Visual Studio 2010\Projects\AppTesauros\AppTesauro09wpf\AppTesauro09wpf\bin\Debug\TesauroTO.dll</HintPath>
+    </Reference>
+    <Reference Include="TesauroUtilities">
+      <HintPath>..\..\..\..\Visual Studio 2010\Projects\AppTesauros\AppTesauro09wpf\AppTesauro09wpf\bin\Debug\TesauroUtilities.dll</HintPath>
+    </Reference>
     <Reference Include="UIAutomationProvider" />
     <Reference Include="UIAutomationTypes" />
     <Reference Include="UIControls">
@@ -293,7 +299,9 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\add_blue Menos.png" />

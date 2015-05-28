@@ -14,13 +14,13 @@ namespace DiccionarioJuridicoV2.Reportes
 
         private Document myDocument;
 
-        private readonly int materia;
-        private ObservableCollection<Temas> coleccionTemas;
+        //private readonly int materia;
+        private readonly ObservableCollection<Temas> coleccionTemas;
 
-        public ArbolesEnPdf(int materia)
-        {
-            this.materia = materia;
-        }
+        //public ArbolesEnPdf(int materia)
+        //{
+        //    this.materia = materia;
+        //}
 
         public ArbolesEnPdf(ObservableCollection<Temas> coleccionTemas)
         {
@@ -95,7 +95,7 @@ namespace DiccionarioJuridicoV2.Reportes
             {
 
                 if (tema.IdOrigen == 0)
-                    TemasModel.GetAbogadoCrea(tema);
+                    new TemasModel().GetAbogadoCrea(tema);
 
                 iTextSharp.text.Paragraph par;
 
