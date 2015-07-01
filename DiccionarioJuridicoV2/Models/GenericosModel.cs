@@ -274,7 +274,11 @@ namespace DiccionarioJuridicoV2.Models
                 dr = dataSet.Tables["Definiciones"].NewRow();
                 dr["IdConcepto"] = generico.IdGenerico;
                 dr["Definicion"] = generico.Definicion;
-                dr["DefinicionStr"] = ScjnUtilities.StringUtilities.PrepareToAlphabeticalOrder(generico.Definicion);
+
+                if (!String.IsNullOrWhiteSpace(generico.Definicion))
+                    dr["DefinicionStr"] = ScjnUtilities.StringUtilities.PrepareToAlphabeticalOrder(generico.Definicion);
+                else
+                    dr["DefinicionStr"] = String.Empty;
                 dr["FechaAlta"] = DateTime.Now;
                 dr["FechaAltaInt"] = DateTimeUtilities.DateToInt(DateTime.Now);
 

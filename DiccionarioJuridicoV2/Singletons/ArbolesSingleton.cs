@@ -30,43 +30,43 @@ namespace DiccionarioJuridicoV2.Singletons
             {
                 case 1:
                     if (constitucional == null)
-                        constitucional = model.GetTemasConstitucional(null);
+                        constitucional = model.GetTemasByDemand(null,idMateria);
 
                     return constitucional;
 
                 case 2:
                     if (penal == null)
-                        penal = model.GetTemasTematico(null, idMateria);
+                        penal = model.GetTemasByDemand(null, idMateria);
 
                     return penal;
 
                 case 4:
                     if (civil == null)
-                        civil = model.GetTemasTematico(null, idMateria);
+                        civil = model.GetTemasByDemand(null, idMateria);
 
                     return civil;
 
                 case 8:
                     if (administrativa == null)
-                        administrativa = model.GetTemasTematico(null, idMateria);
+                        administrativa = model.GetTemasByDemand(null, idMateria);
 
                     return administrativa;
 
                 case 16:
                     if (laboral == null)
-                        laboral = model.GetTemasTematico(null, idMateria);
+                        laboral = model.GetTemasByDemand(null, idMateria);
 
                     return laboral;
 
                 case 32:
                     if (comun == null)
-                        comun = model.GetTemasTematico(null, idMateria);
+                        comun = model.GetTemasByDemand(null, idMateria);
 
                     return comun;
 
                 case 64:
                     if (derechos == null)
-                        derechos = model.GetTemasTematico(null, idMateria);
+                        derechos = model.GetTemasByDemand(null, idMateria);
 
                     return derechos;
 

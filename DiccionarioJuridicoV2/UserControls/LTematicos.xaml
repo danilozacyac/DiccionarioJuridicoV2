@@ -19,6 +19,17 @@
                            Text="{Binding Descripcion}" />
             </StackPanel>
         </HierarchicalDataTemplate>
+        <Style TargetType="{x:Type telerik:RadTreeViewItem}">
+            <Setter Property="IsExpanded" Value="{Binding IsExpanded, Mode=TwoWay}" />
+            <Setter Property="IsSelected" Value="{Binding IsSelected, Mode=TwoWay}" />
+            <Setter Property="FontWeight" Value="Normal" />
+            <Style.Triggers>
+                <Trigger Property="IsSelected" Value="True">
+                    <Setter Property="FontWeight" Value="Bold" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
     </UserControl.Resources>
     <telerik:RadBusyIndicator x:Name="BusyIndicator"
                               Grid.Row="1"
@@ -138,10 +149,10 @@
                        FontWeight="Black" />
                 <telerik:RadListBox x:Name="LstSinonimos"
                                     Margin="0,55,0,0"
-                                    ItemsSource="{Binding}"
-                                    DisplayMemberPath="Descripcion"
                                     HorizontalAlignment="Stretch"
-                                    VerticalAlignment="Stretch" />
+                                    VerticalAlignment="Stretch"
+                                    DisplayMemberPath="Descripcion"
+                                    ItemsSource="{Binding}" />
 
             </Grid>
 

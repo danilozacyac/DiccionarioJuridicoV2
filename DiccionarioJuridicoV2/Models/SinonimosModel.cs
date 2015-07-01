@@ -3,15 +3,22 @@ using System.Collections.ObjectModel;
 using System.Configuration;
 using System.Data;
 using System.Data.OleDb;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Windows.Forms;
 using DiccionarioJuridicoV2.Dto;
 using ScjnUtilities;
+using TesauroTO;
 
 namespace DiccionarioJuridicoV2.Models
 {
     public class SinonimosModel
     {
+        /*
+         * En esta clase la mayor parte de los métodos hacen referencia a los sinónimos de las palabras existentes en el 
+         * diccionario. Los sinónimod mostrados en los temáticos usan el API propia de los mismos para ser mostrados, a 
+         * excepción del Temático Constitucional que si esta contenido dentro de esta clase y se identifica expresamente
+         * */
 
         public ObservableCollection<Sinonimos> GetSinonimos(int idConcepto)
         {
@@ -302,9 +309,60 @@ namespace DiccionarioJuridicoV2.Models
         }
 
 
-        #region Sinonimos Tematicos
+        #region Sinonimos Constitucional
 
+        public ObservableCollection<SinonimoTO> GetSinonimosConstitucional(int idTemaPadre)
+        {
+            ObservableCollection<SinonimoTO> sinonimos = new ObservableCollection<SinonimoTO>();
 
+            SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["Constitucional"].ToString());
+            SqlCommand cmd;
+            SqlDataReader reader = null;
+
+            try
+            {
+                connection.Open();
+
+                string sqlCadena = "SELECT * FROM The_Sinonimos " +
+                                   " WHERE IdPadre = @IdPadre AND Tipo = 1";
+
+                cmd = new SqlCommand(sqlCadena, connection);
+                cmd.Parameters.AddWithValue("@IdPadre", idTemaPadre);
+                reader = cmd.ExecuteReader();
+
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        SinonimoTO sinonimo = new SinonimoTO(Convert.ToInt32(reader["IdTema"]), Convert.ToInt32(reader["IdPadre"]),
+                            reader["Descripcion"].ToString(),1,reader["DescripcionStr"].ToString(),0,DateTime.Now,DateTime.Now,"","");
+
+                        sinonimos.Add(sinonimo);
+                    }
+                }
+            }
+            catch (OleDbException ex)
+            {
+                string methodName = System.Reflection.MethodBase.GetCurrentMethod().Name;
+
+                MessageBox.Show("Error ({0}) : {1}" + ex.Source + ex.Message, methodName, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                ErrorUtilities.SetNewErrorMessage(ex, methodName, 0);
+            }
+            catch (Exception ex)
+            {
+                string methodName = System.Reflection.MethodBase.GetCurrentMethod().Name;
+
+                MessageBox.Show("Error ({0}) : {1}" + ex.Source + ex.Message, methodName, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                ErrorUtilities.SetNewErrorMessage(ex, methodName, 0);
+            }
+            finally
+            {
+                reader.Close();
+                connection.Close();
+            }
+
+            return sinonimos;
+        }
 
 
         #endregion

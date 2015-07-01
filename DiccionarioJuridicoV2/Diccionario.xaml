@@ -14,7 +14,9 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <telerik:RadRibbonView x:Name="Ribbon" VerticalAlignment="Top">
+        <telerik:RadRibbonView x:Name="Ribbon"
+                               VerticalAlignment="Top"
+                               ApplicationName="Diccionario Jurídico de la CCST">
             <telerik:RadRibbonTab Header="Vistas">
                 <telerik:RadRibbonGroup Header="Listados">
                     <telerik:RadRibbonButton x:Name="RBtnTermGen"

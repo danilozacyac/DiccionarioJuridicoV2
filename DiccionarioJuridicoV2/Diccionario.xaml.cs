@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Windows;
+using System.Windows.Media.Imaging;
 using DiccionarioJuridicoV2.AddUpdates;
 using DiccionarioJuridicoV2.Dto;
 using DiccionarioJuridicoV2.Models;
@@ -31,10 +32,21 @@ namespace DiccionarioJuridicoV2
             this.listaGenericos = listaGenericos;
             worker.DoWork += this.WorkerDoWork;
             worker.RunWorkerCompleted += WorkerRunWorkerCompleted;
+            this.ShowInTaskbar(this, "Diccionario Jurídico");
         }
 
         private void RadWindow_Loaded(object sender, RoutedEventArgs e)
         {
+        }
+
+        public void ShowInTaskbar(RadWindow control, string title)
+        {
+            control.Show();
+            var window = control.ParentOfType<Window>();
+            window.ShowInTaskbar = true;
+            window.Title = title;
+            var uri = new Uri("pack://application:,,,/DiccionarioJuridicoV2;component/Resources/Dictionary_128.png");
+            window.Icon = BitmapFrame.Create(uri);
         }
         
         private void RBtnTermGen_Click(object sender, RoutedEventArgs e)

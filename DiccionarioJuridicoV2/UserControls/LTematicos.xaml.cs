@@ -3,6 +3,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Windows.Controls;
 using DiccionarioJuridicoV2.Dto;
+using DiccionarioJuridicoV2.Models;
 using DiccionarioJuridicoV2.Singletons;
 using Telerik.Windows.Controls;
 using TesauroUtilities;
@@ -44,7 +45,10 @@ namespace DiccionarioJuridicoV2.UserControls
 
             materiaTemaSelect = Convert.ToInt16(tree.Tag);
 
-            LstSinonimos.DataContext = new TesauroDAC().GetSinonimosForTema(selectedTema.IDTema, "IdTema", materiaTemaSelect);
+            if (materiaTemaSelect > 1)
+                LstSinonimos.DataContext = new TesauroDAC().GetSinonimosForTema(selectedTema.IDTema, "IdTema", materiaTemaSelect);
+            else
+                LstSinonimos.DataContext = new SinonimosModel().GetSinonimosConstitucional(selectedTema.IDTema);
         }
 
         #region Background Worker

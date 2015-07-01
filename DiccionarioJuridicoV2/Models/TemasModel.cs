@@ -151,6 +151,90 @@ namespace DiccionarioJuridicoV2.Models
             return listaTemas;
         }
 
+
+        public ObservableCollection<Temas> GetTemasByDemand(Temas parentModule, int idMateria)
+        {
+            string cadenaUsar = (idMateria == 1) ? "Constitucional" : "Tematico";
+            SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings[cadenaUsar].ConnectionString);
+
+            ObservableCollection<Temas> modulos = new ObservableCollection<Temas>();
+
+            try
+            {
+                connection.Open();
+
+                SqlCommand cmd = null;
+
+                string sqlCadena;
+
+                if (idMateria == 1)
+                {
+                    sqlCadena = "SELECT * FROM The_Temas WHERE IdPadre = @IdPadre ORDER BY DescripcionStr";
+                    cmd = new SqlCommand(sqlCadena, connection);
+                    cmd.Parameters.AddWithValue("@IdPadre", (parentModule != null) ? parentModule.IDTema : 0);
+                    
+                }
+                else
+                {
+                    sqlCadena = "SELECT *, (SELECT COUNT(idTEma) FROM TemasTesis T WHERE T.idTema = Temas.Idtema and T.idMateria = Temas.Materia ) Total " +
+                                   "FROM Temas WHERE IdPadre = @IdPadre AND Materia = @IdMateria ORDER BY DescripcionStr ";
+                    cmd = new SqlCommand(sqlCadena, connection);
+                    cmd.Parameters.AddWithValue("@IdPadre", (parentModule != null) ? parentModule.IDTema : 0);
+                    cmd.Parameters.AddWithValue("@IdMateria", idMateria);
+                }
+
+                
+                SqlDataReader reader = cmd.ExecuteReader();
+
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        Temas tema;
+
+                        if (parentModule != null)
+                            tema = new Temas(parentModule, true);
+                        else
+                            tema = new Temas(null, true);
+
+                        tema.Materia = idMateria;
+                        tema.IDTema = Convert.ToInt32(reader["idTema"]);
+                        tema.IDPadre = Convert.ToInt32(reader["IDPadre"]);
+                        tema.Nivel = Convert.ToInt32(reader["Nivel"]);
+                        tema.Descripcion = reader["Descripcion"].ToString();
+
+                        if (idMateria > 1)
+                        {
+                            tema.IdOrigen = Convert.ToInt32(reader["IdOrigen"]);
+                            tema.IdTemaOrigen = Convert.ToInt32(reader["IdTemaOrigen"]);
+                            tema.TesisRelacionadas = Convert.ToInt32(reader["Total"]);
+                        }
+
+                        modulos.Add(tema);
+                    }
+                }
+            }
+            catch (SqlException ex)
+            {
+                string methodName = System.Reflection.MethodBase.GetCurrentMethod().Name;
+
+                MessageBox.Show("Error ({0}) : {1}" + ex.Source + ex.Message, methodName, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                ErrorUtilities.SetNewErrorMessage(ex, methodName, 0);
+            }
+            catch (Exception ex)
+            {
+                string methodName = System.Reflection.MethodBase.GetCurrentMethod().Name;
+
+                MessageBox.Show("Error ({0}) : {1}" + ex.Source + ex.Message, methodName, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                ErrorUtilities.SetNewErrorMessage(ex, methodName, 0);
+            }
+            finally
+            {
+                connection.Close();
+            }
+            return modulos;
+        }
+
         /// <summary>
         /// Obtiene el usuario del abogado que generoel tema en cuestión
         /// </summary>
@@ -917,12 +1001,7 @@ namespace DiccionarioJuridicoV2.Models
         }
 
 
-        #region Busqueda Constitucional
-
-
-
-
-        #endregion
+      
 
 
     }

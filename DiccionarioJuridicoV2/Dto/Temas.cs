@@ -6,6 +6,7 @@ using System.Data;
 using System.Data.Common;
 using System.Data.SqlClient;
 using System.Linq;
+using DiccionarioJuridicoV2.Models;
 
 namespace DiccionarioJuridicoV2.Dto
 {
@@ -522,15 +523,17 @@ namespace DiccionarioJuridicoV2.Dto
 
         }
 
-        public Temas(Temas parent)
-        {
-            this.parentItem = parent;
-        }
+        
 
         #region Constructores
 
         public Temas()
         {
+        }
+
+        public Temas(Temas parent)
+        {
+            this.parentItem = parent;
         }
 
         public Temas(Temas parent, bool lazyLoadChildren)
@@ -541,46 +544,6 @@ namespace DiccionarioJuridicoV2.Dto
 
             if (lazyLoadChildren)
                 subtemas.Add(dummyChild);
-        }
-
-        public Temas(int idTema, string descripcion, string descripcionStr,
-            int nivel, int idPadre, int idUser, DateTime fecha, DateTime hora,
-            String nota, String observaciones, int materia, int status, int idOrigen)
-        {
-            this.idTema = idTema;
-            this.descripcion = descripcion;
-            this.descripcionStr = descripcionStr;
-            this.nivel = nivel;
-            this.idPadre = idPadre;
-            this.idUser = idUser;
-            this.fecha = fecha;
-            this.hora = hora;
-            this.nota = nota;
-            this.observaciones = observaciones;
-            this.materia = materia;
-            this.status = status;
-            this.idOrigen = idOrigen;
-        }
-
-        public Temas(int idTema, string descripcion, string descripcionStr,
-            int nivel, int idPadre, int idUser, DateTime fecha, DateTime hora,
-            String nota, String observaciones, int materia, int status, int idOrigen, int idTemaOrigen, int tesisRelacionadas)
-        {
-            this.idTema = idTema;
-            this.descripcion = descripcion;
-            this.descripcionStr = descripcionStr;
-            this.nivel = nivel;
-            this.idPadre = idPadre;
-            this.idUser = idUser;
-            this.fecha = fecha;
-            this.hora = hora;
-            this.nota = nota;
-            this.observaciones = observaciones;
-            this.materia = materia;
-            this.status = status;
-            this.idOrigen = idOrigen;
-            this.idTemaOrigen = idTemaOrigen;
-            this.tesisRelacionadas = tesisRelacionadas;
         }
 
         #endregion
@@ -657,9 +620,8 @@ namespace DiccionarioJuridicoV2.Dto
         /// </summary>
         protected virtual void LoadChildren()
         {
-            //Esto es lo que comente si hago Load OnDemand debo quitar este comentario
-            //foreach (var item in this.GetTemas(this, this.Materia))
-            //    SubTemas.Add(item);
+            foreach (var item in new TemasModel().GetTemasByDemand(this, this.Materia))
+                SubTemas.Add(item);
         }
 
         #endregion // LoadChildren
@@ -718,81 +680,6 @@ namespace DiccionarioJuridicoV2.Dto
 
         #endregion // INotifyPropertyChanged Members
 
-        public ObservableCollection<Temas> GetTemas(Temas parentModule, int idMateria)
-        {
-            SqlConnection sqlConne = (SqlConnection)this.GetConnection();
 
-            ObservableCollection<Temas> modulos = new ObservableCollection<Temas>();
-
-            try
-            {
-                sqlConne.Open();
-
-                string sqlCadena = "SELECT *, (SELECT COUNT(idTEma) FROM TemasTesis T WHERE T.idTema = Temas.Idtema and T.idMateria = Temas.Materia ) Total " +
-                                   "FROM Temas WHERE IdPadre = @padre AND Materia = @IdMateria ORDER BY DescripcionStr ";
-                SqlCommand cmd = new SqlCommand(sqlCadena, sqlConne);
-                SqlParameter name = cmd.Parameters.Add("@padre", SqlDbType.Int, 0);
-                name.Value = (parentModule != null) ? parentModule.IDTema : 0;
-                SqlParameter materia = cmd.Parameters.Add("@IdMateria", SqlDbType.Int, 0);
-                materia.Value = idMateria;
-                SqlDataReader reader = cmd.ExecuteReader();
-
-                if (reader.HasRows)
-                {
-                    while (reader.Read())
-                    {
-                        Temas tema;
-
-                        if (parentModule != null)
-                            tema = new Temas(parentModule, true);
-                        else
-                            tema = new Temas(null, true);
-
-                        tema.Materia = Convert.ToInt32(reader["Materia"]);
-                        tema.IDTema = Convert.ToInt32(reader["idTema"]);
-                        tema.IDPadre = Convert.ToInt32(reader["IDPadre"]);
-                        tema.Nivel = Convert.ToInt32(reader["Nivel"]);
-                        tema.Descripcion = reader["Descripcion"].ToString();
-                        tema.IdOrigen = Convert.ToInt32(reader["IdOrigen"]);
-                        tema.IdTemaOrigen = Convert.ToInt32(reader["IdTemaOrigen"]);
-                        tema.TesisRelacionadas = Convert.ToInt32(reader["Total"]);
-
-                        modulos.Add(tema);
-                    }
-                }
-            }
-            catch (SqlException)
-            {
-                //MessageBox.Show("Error ({0}) : {1}" + sql.Source + sql.Message, "Error Interno");
-            }
-            catch (Exception)
-            {
-                // MessageBox.Show("Error ({0}) : {1}" + ex.Source + ex.Message, "Error Interno");
-            }
-            finally
-            {
-                sqlConne.Close();
-            }
-            return modulos;
-        }
-
-        private DbConnection GetConnection()
-        {
-            //String tipoAplicacion = ConfigurationManager.AppSettings.Get("tipoAplicacion");
-
-            String bdStringSql;
-
-            //if (tipoAplicacion.Equals("PRUEBA"))
-            //{
-            //    bdStringSql = ConfigurationManager.ConnectionStrings["TematicoPrueba"].ConnectionString;
-            //    //MessageBox.Show(ConfigurationManager.AppSettings.Get("MensajeAppPrueba"));
-            //}
-            //else
-            bdStringSql = ConfigurationManager.ConnectionStrings["Tematicos"].ConnectionString;
-            DbConnection realConnection = new SqlConnection(bdStringSql);
-            return realConnection;
-
-
-        }
     }
 }
