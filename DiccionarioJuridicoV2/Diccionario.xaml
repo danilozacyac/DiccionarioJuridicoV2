@@ -47,15 +47,13 @@
                         <telerik:RadRibbonButton x:Name="RBtnDelGenerico"
                                                  Click="RBtnDelGenerico_Click"
                                                  Content="Eliminar término"
-                                                 LargeImage="Resources/Dictionary_128.png"
                                                  Size="Medium"
-                                                 SmallImage="Resources/Dictionary_32.png" />
+                                                 SmallImage="Resources/dictionarydelete.png" />
                         <telerik:RadRibbonButton x:Name="RBtnUpdateGenerico"
                                                  Click="RBtnUpdateGenerico_Click"
                                                  Content="Actualizar término"
-                                                 LargeImage="Resources/Dictionary_128.png"
                                                  Size="Medium"
-                                                 SmallImage="Resources/Dictionary_32.png" />
+                                                 SmallImage="Resources/dictionaryedit.png" />
                     </StackPanel>
                     <StackPanel Orientation="Vertical">
                         <telerik:RadRibbonButton x:Name="RBtnCortarInfo"
@@ -113,6 +111,23 @@
                                              Size="Large">
                         <StackPanel Orientation="Vertical">
                             <TextBlock HorizontalAlignment="Center" Text="Agregar" />
+                            <TextBlock HorizontalAlignment="Center" Text="Sinónimo" />
+                        </StackPanel>
+                    </telerik:RadRibbonButton>
+                    <telerik:RadRibbonButton x:Name="RBtnEdirSin"
+                                             LargeImage="Resources/equalityedit.png"
+                                             Size="Large" Click="RBtnEdirSin_Click">
+                        <StackPanel Orientation="Vertical">
+                            <TextBlock HorizontalAlignment="Center" Text="Modificar" />
+                            <TextBlock HorizontalAlignment="Center" Text="Sinónimo" />
+                        </StackPanel>
+                    </telerik:RadRibbonButton>
+                    <telerik:RadRibbonButton x:Name="RBtnDelSin"
+                                             Click="RBtnDelSin_Click"
+                                             LargeImage="Resources/equalitydelete.png"
+                                             Size="Large">
+                        <StackPanel Orientation="Vertical">
+                            <TextBlock HorizontalAlignment="Center" Text="Eliminar" />
                             <TextBlock HorizontalAlignment="Center" Text="Sinónimo" />
                         </StackPanel>
                     </telerik:RadRibbonButton>

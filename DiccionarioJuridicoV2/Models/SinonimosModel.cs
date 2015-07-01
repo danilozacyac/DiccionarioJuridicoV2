@@ -272,7 +272,7 @@ namespace DiccionarioJuridicoV2.Models
             }
         }
 
-        public void DeleteConcepto(Sinonimos sinonimo)
+        public void DeleteSinonimo(Sinonimos sinonimo)
         {
             OleDbConnection connection = new OleDbConnection(ConfigurationManager.ConnectionStrings["Diccionario"].ToString());
             OleDbCommand cmd;

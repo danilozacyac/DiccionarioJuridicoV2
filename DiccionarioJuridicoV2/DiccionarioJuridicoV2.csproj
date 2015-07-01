@@ -161,6 +161,9 @@
     <Compile Include="AddUpdates\UpdateGenerico.xaml.cs">
       <DependentUpon>UpdateGenerico.xaml</DependentUpon>
     </Compile>
+    <Compile Include="AddUpdates\UpdateSinonimos.xaml.cs">
+      <DependentUpon>UpdateSinonimos.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Converters\ForegroundConverter.cs" />
     <Compile Include="Dto\Materias.cs" />
     <Compile Include="Dto\TesauroScjn.cs" />
@@ -209,6 +212,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="AddUpdates\UpdateGenerico.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="AddUpdates\UpdateSinonimos.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -400,6 +407,18 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\paste_64.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\equalityedit.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\dictionaryedit.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\dictionarydelete.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\equalitydelete.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

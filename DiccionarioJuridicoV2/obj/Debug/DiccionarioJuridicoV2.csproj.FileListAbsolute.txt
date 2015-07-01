@@ -143,3 +143,5 @@ C:\Users\lavega\Documents\Visual Studio 2012\Projects\DiccionarioJuridicoV2\Dicc
 C:\Users\lavega\Documents\Visual Studio 2012\Projects\DiccionarioJuridicoV2\DiccionarioJuridicoV2\bin\Debug\TesauroTO.pdb
 C:\Users\lavega\Documents\Visual Studio 2012\Projects\DiccionarioJuridicoV2\DiccionarioJuridicoV2\bin\Debug\TesauroUtilities.pdb
 C:\Users\lavega\Documents\Visual Studio 2012\Projects\DiccionarioJuridicoV2\DiccionarioJuridicoV2\bin\Debug\IUSTO.pdb
+C:\Users\lavega\Documents\Visual Studio 2012\Projects\DiccionarioJuridicoV2\DiccionarioJuridicoV2\obj\Debug\AddUpdates\UpdateSinonimos.baml
+C:\Users\lavega\Documents\Visual Studio 2012\Projects\DiccionarioJuridicoV2\DiccionarioJuridicoV2\obj\Debug\AddUpdates\UpdateSinonimos.g.cs

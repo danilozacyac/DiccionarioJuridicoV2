@@ -151,6 +151,7 @@ namespace DiccionarioJuridicoV2
             if (result == MessageBoxResult.Yes)
             {
                 new GenericosModel().DeleteTerminoGenerico(rGrnSin.SelectedGenerico);
+                listaGenericos.Remove(rGrnSin.SelectedGenerico);
             }
         }
 
@@ -293,6 +294,23 @@ namespace DiccionarioJuridicoV2
         }
 
         #endregion
+
+        private void RBtnDelSin_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBoxResult result = MessageBox.Show("¿Estás seguro de eliminar este sinónimo?", "", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+            if (result == MessageBoxResult.Yes)
+            {
+                new SinonimosModel().DeleteSinonimo(rGrnSin.SelectedSinonimo);
+                rGrnSin.SelectedGenerico.Sinonimos.Remove(rGrnSin.SelectedSinonimo);
+            }
+        }
+
+        private void RBtnEdirSin_Click(object sender, RoutedEventArgs e)
+        {
+            UpdateSinonimos update = new UpdateSinonimos(rGrnSin.SelectedSinonimo);
+            update.ShowDialog();
+        }
 
        
 

@@ -18,6 +18,8 @@ namespace DiccionarioJuridicoV2.UserControls
         public Genericos SelectedGenerico;
         private RadRibbonButton pegarButton;
 
+        public Sinonimos SelectedSinonimo;
+
         public Genericos GenericoPorEliminar;
 
         public RGenSinoni() { }
@@ -91,6 +93,12 @@ namespace DiccionarioJuridicoV2.UserControls
 
             RConPasteInfo.IsEnabled = true;
             pegarButton.IsEnabled = true;
+        }
+
+        private void RLstSinonimos_SelectionChanged(object sender, SelectionChangeEventArgs e)
+        {
+            
+            SelectedSinonimo = RLstSinonimos.SelectedItem as Sinonimos;
         }
     }
 }

@@ -1,0 +1,59 @@
+﻿<telerik:RadWindow x:Class="DiccionarioJuridicoV2.AddUpdates.UpdateSinonimos"
+                   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                   xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+                   Width="462"
+                   Height="300"
+                   Header="Actualizar Sinónimo"
+                   Loaded="RadWindow_Loaded"
+                   ResizeMode="NoResize"
+                   WindowStartupLocation="CenterScreen">
+    <Grid>
+        <TextBox x:Name="TxtConcepto"
+                 Width="388"
+                 Height="28"
+                 Margin="27,47,0,0"
+                 HorizontalAlignment="Left"
+                 VerticalAlignment="Top"
+                 FontSize="16"
+                 SpellCheck.IsEnabled="True"
+                 Text="{Binding Sinonimo}"
+                 TextWrapping="Wrap" />
+        <Label Margin="27,16,0,0"
+               HorizontalAlignment="Left"
+               VerticalAlignment="Top"
+               Content="Sinónimo"
+               FontSize="16" />
+        <telerik:RadButton x:Name="RBtnAceptar"
+                           Width="85"
+                           Height="26"
+                           Margin="0,0,27,10"
+                           HorizontalAlignment="Right"
+                           VerticalAlignment="Bottom"
+                           Content="Aceptar" Click="RBtnAceptar_Click" />
+        <telerik:RadButton x:Name="RBtnCancelar"
+                           Width="85"
+                           Height="26"
+                           Margin="0,0,117,10"
+                           HorizontalAlignment="Right"
+                           VerticalAlignment="Bottom"
+                           Content="Cancelar" Click="RBtnCancelar_Click" />
+        <Label Width="100"
+               Margin="27,79,0,0"
+               HorizontalAlignment="Left"
+               VerticalAlignment="Top"
+               Content="Fuente:"
+               FontSize="16" />
+        <TextBox x:Name="TxtFuente"
+                 Width="388"
+                 Height="91"
+                 Margin="27,115,0,0"
+                 HorizontalAlignment="Left"
+                 VerticalAlignment="Top"
+                 FontSize="16"
+                 SpellCheck.IsEnabled="True"
+                 Text="{Binding Fuente}"
+                 TextWrapping="Wrap" />
+
+    </Grid>
+</telerik:RadWindow>

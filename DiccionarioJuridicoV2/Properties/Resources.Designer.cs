@@ -173,6 +173,26 @@ namespace DiccionarioJuridicoV2.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap dictionarydelete {
+            get {
+                object obj = ResourceManager.GetObject("dictionarydelete", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap dictionaryedit {
+            get {
+                object obj = ResourceManager.GetObject("dictionaryedit", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap edit_blue {
             get {
                 object obj = ResourceManager.GetObject("edit_blue", resourceCulture);
@@ -186,6 +206,26 @@ namespace DiccionarioJuridicoV2.Properties {
         internal static System.Drawing.Bitmap equality {
             get {
                 object obj = ResourceManager.GetObject("equality", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap equalitydelete {
+            get {
+                object obj = ResourceManager.GetObject("equalitydelete", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap equalityedit {
+            get {
+                object obj = ResourceManager.GetObject("equalityedit", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
