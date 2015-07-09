@@ -30,14 +30,16 @@
                            Margin="0,0,27,10"
                            HorizontalAlignment="Right"
                            VerticalAlignment="Bottom"
-                           Content="Aceptar" Click="RBtnAceptar_Click" />
+                           Click="RBtnAceptar_Click"
+                           Content="Aceptar" />
         <telerik:RadButton x:Name="RBtnCancelar"
                            Width="85"
                            Height="26"
                            Margin="0,0,117,10"
                            HorizontalAlignment="Right"
                            VerticalAlignment="Bottom"
-                           Content="Cancelar" Click="RBtnCancelar_Click" />
+                           Click="RBtnCancelar_Click"
+                           Content="Cancelar" />
         <Label Width="100"
                Margin="27,79,0,0"
                HorizontalAlignment="Left"

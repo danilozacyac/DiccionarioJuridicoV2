@@ -100,7 +100,7 @@ namespace DiccionarioJuridicoV2.Models
 
                 dr = dataSet.Tables["Genericos"].NewRow();
                 dr["IdConcepto"] = generico.IdGenerico;
-                dr["Concepto"] = StringUtilities.ToTitleCase(generico.Termino);
+                dr["Concepto"] = StringUtilities.UppercaseFirst(generico.Termino);
                 dr["ConceptoStr"] = ScjnUtilities.StringUtilities.PrepareToAlphabeticalOrder(generico.Termino);
                 dr["FechaAlta"] = DateTime.Now;
                 dr["FechaAltaInt"] = DateTimeUtilities.DateToInt(DateTime.Now);
@@ -164,7 +164,7 @@ namespace DiccionarioJuridicoV2.Models
 
                 dr = dataSet.Tables["Genericos"].Rows[0];
                 dr.BeginEdit();
-                dr["Concepto"] = StringUtilities.UppercaseFirst(generico.Termino);
+                dr["Concepto"] = generico.Termino;
                 dr["ConceptoStr"] = ScjnUtilities.StringUtilities.PrepareToAlphabeticalOrder(generico.Termino);
                 dr.EndEdit();
 

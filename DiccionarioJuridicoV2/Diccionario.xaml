@@ -115,8 +115,9 @@
                         </StackPanel>
                     </telerik:RadRibbonButton>
                     <telerik:RadRibbonButton x:Name="RBtnEdirSin"
+                                             Click="RBtnEdirSin_Click"
                                              LargeImage="Resources/equalityedit.png"
-                                             Size="Large" Click="RBtnEdirSin_Click">
+                                             Size="Large">
                         <StackPanel Orientation="Vertical">
                             <TextBlock HorizontalAlignment="Center" Text="Modificar" />
                             <TextBlock HorizontalAlignment="Center" Text="Sinónimo" />

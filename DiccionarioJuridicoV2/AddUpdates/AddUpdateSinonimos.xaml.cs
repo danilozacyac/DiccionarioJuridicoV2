@@ -60,7 +60,7 @@ namespace DiccionarioJuridicoV2.AddUpdates
             else
             {
                 Sinonimos newSinonimo = new Sinonimos();
-                newSinonimo.Sinonimo = TxtConcepto.Text;
+                newSinonimo.Sinonimo = StringUtilities.UppercaseFirst(TxtConcepto.Text);
                 newSinonimo.SinonimoStr = StringUtilities.PrepareToAlphabeticalOrder(newSinonimo.Sinonimo);
                 newSinonimo.Fuente = TxtFuente.Text;
 

@@ -73,13 +73,19 @@ namespace DiccionarioJuridicoV2.AddUpdates
         private void SearchTextBox_Search(object sender, RoutedEventArgs e)
         {
             String tempString = ((TextBox)sender).Text.ToUpper();
-
-            if (!String.IsNullOrEmpty(tempString))
-                RLstDuplicados.DataContext = (from n in listaGenericos
-                                              where n.TerminoStr.Contains(StringUtilities.ConvMayEne(tempString))
-                                              select n).ToList();
-            else
-                RLstDuplicados.DataContext = listaGenericos;
+            try
+            {
+                if (!String.IsNullOrEmpty(tempString))
+                    RLstDuplicados.DataContext = (from n in listaGenericos
+                                                  where n.TerminoStr.Contains(StringUtilities.ConvMayEne(tempString))
+                                                  select n).ToList();
+                else
+                    RLstDuplicados.DataContext = listaGenericos;
+            }
+            catch (NullReferenceException)
+            {
+                RLstDuplicados.DataContext = null;
+            }
         }
     }
 }
