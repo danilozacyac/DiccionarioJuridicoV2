@@ -77,13 +77,11 @@ C:\Users\lavega\Documents\Visual Studio 2012\Projects\DiccionarioJuridicoV2\Dicc
 C:\Users\lavega\Documents\Visual Studio 2012\Projects\DiccionarioJuridicoV2\DiccionarioJuridicoV2\bin\Debug\nl\Telerik.Windows.Controls.resources.dll
 C:\Users\lavega\Documents\Visual Studio 2012\Projects\DiccionarioJuridicoV2\DiccionarioJuridicoV2\bin\Debug\tr\Telerik.Windows.Controls.resources.dll
 C:\Users\lavega\Documents\Visual Studio 2012\Projects\DiccionarioJuridicoV2\DiccionarioJuridicoV2\obj\Debug\DiccionarioJuridicoV2.csprojResolveAssemblyReference.cache
-C:\Users\lavega\Documents\Visual Studio 2012\Projects\DiccionarioJuridicoV2\DiccionarioJuridicoV2\obj\Debug\AddUpdates\AddUpdateGenericos.baml
 C:\Users\lavega\Documents\Visual Studio 2012\Projects\DiccionarioJuridicoV2\DiccionarioJuridicoV2\obj\Debug\AddUpdates\AddUpdateSinonimos.baml
 C:\Users\lavega\Documents\Visual Studio 2012\Projects\DiccionarioJuridicoV2\DiccionarioJuridicoV2\obj\Debug\AddUpdates\AddUpdateTesauroScjn.baml
 C:\Users\lavega\Documents\Visual Studio 2012\Projects\DiccionarioJuridicoV2\DiccionarioJuridicoV2\obj\Debug\Diccionario.baml
 C:\Users\lavega\Documents\Visual Studio 2012\Projects\DiccionarioJuridicoV2\DiccionarioJuridicoV2\obj\Debug\MainWindow.baml
 C:\Users\lavega\Documents\Visual Studio 2012\Projects\DiccionarioJuridicoV2\DiccionarioJuridicoV2\obj\Debug\UserControls\RGenSinoni.baml
-C:\Users\lavega\Documents\Visual Studio 2012\Projects\DiccionarioJuridicoV2\DiccionarioJuridicoV2\obj\Debug\AddUpdates\AddUpdateGenericos.g.cs
 C:\Users\lavega\Documents\Visual Studio 2012\Projects\DiccionarioJuridicoV2\DiccionarioJuridicoV2\obj\Debug\AddUpdates\AddUpdateSinonimos.g.cs
 C:\Users\lavega\Documents\Visual Studio 2012\Projects\DiccionarioJuridicoV2\DiccionarioJuridicoV2\obj\Debug\AddUpdates\AddUpdateTesauroScjn.g.cs
 C:\Users\lavega\Documents\Visual Studio 2012\Projects\DiccionarioJuridicoV2\DiccionarioJuridicoV2\obj\Debug\Diccionario.g.cs
@@ -145,3 +143,7 @@ C:\Users\lavega\Documents\Visual Studio 2012\Projects\DiccionarioJuridicoV2\Dicc
 C:\Users\lavega\Documents\Visual Studio 2012\Projects\DiccionarioJuridicoV2\DiccionarioJuridicoV2\bin\Debug\IUSTO.pdb
 C:\Users\lavega\Documents\Visual Studio 2012\Projects\DiccionarioJuridicoV2\DiccionarioJuridicoV2\obj\Debug\AddUpdates\UpdateSinonimos.baml
 C:\Users\lavega\Documents\Visual Studio 2012\Projects\DiccionarioJuridicoV2\DiccionarioJuridicoV2\obj\Debug\AddUpdates\UpdateSinonimos.g.cs
+C:\Users\lavega\Documents\Visual Studio 2012\Projects\DiccionarioJuridicoV2\DiccionarioJuridicoV2\obj\Debug\AddUpdates\AddGenerico.baml
+C:\Users\lavega\Documents\Visual Studio 2012\Projects\DiccionarioJuridicoV2\DiccionarioJuridicoV2\obj\Debug\AddUpdates\AddUpdateDefinicion.baml
+C:\Users\lavega\Documents\Visual Studio 2012\Projects\DiccionarioJuridicoV2\DiccionarioJuridicoV2\obj\Debug\AddUpdates\AddGenerico.g.cs
+C:\Users\lavega\Documents\Visual Studio 2012\Projects\DiccionarioJuridicoV2\DiccionarioJuridicoV2\obj\Debug\AddUpdates\AddUpdateDefinicion.g.cs

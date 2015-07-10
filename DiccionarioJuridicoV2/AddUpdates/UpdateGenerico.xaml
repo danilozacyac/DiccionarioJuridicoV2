@@ -3,11 +3,11 @@
                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                    xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
                    Width="442"
-                   Height="348"
-                   WindowStartupLocation="CenterScreen"
-                   ResizeMode="NoResize"
+                   Height="200"
                    Header="Actualizar término"
-                   Loaded="RadWindow_Loaded">
+                   Loaded="RadWindow_Loaded"
+                   ResizeMode="NoResize"
+                   WindowStartupLocation="CenterScreen">
     <Grid>
         <TextBox x:Name="TxtTermino"
                  Width="359"
@@ -22,21 +22,22 @@
                Content="Término:"
                FontSize="14"
                FontWeight="Bold" />
-        <Label Margin="28,91,0,0"
-               HorizontalAlignment="Left"
-               VerticalAlignment="Top"
-               Content="Definición:"
-               FontSize="14"
-               FontWeight="Bold" />
-        <TextBox x:Name="TxtDefinicion"
-                 Width="359"
-                 Height="130"
-                 Margin="28,125,0,0"
-                 HorizontalAlignment="Left"
-                 VerticalAlignment="Top"
-                 TextWrapping="Wrap" AcceptsReturn="True" />
-        <telerik:RadButton x:Name="BtnActualizar" Content="Actualizar" HorizontalAlignment="Left" Margin="295,271,0,0" VerticalAlignment="Top" Height="27" Width="92" Click="BtnActualizar_Click"/>
-        <telerik:RadButton x:Name="BtnCancelar" Content="Cancelar" HorizontalAlignment="Left" Margin="198,271,0,0" VerticalAlignment="Top" Height="27" Width="92" Click="BtnCancelar_Click"/>
+        <telerik:RadButton x:Name="BtnActualizar"
+                           Width="92"
+                           Height="27"
+                           Margin="295,120,0,0"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Top"
+                           Click="BtnActualizar_Click"
+                           Content="Actualizar" />
+        <telerik:RadButton x:Name="BtnCancelar"
+                           Width="92"
+                           Height="27"
+                           Margin="198,120,0,0"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Top"
+                           Click="BtnCancelar_Click"
+                           Content="Cancelar" />
 
     </Grid>
 </telerik:RadWindow>

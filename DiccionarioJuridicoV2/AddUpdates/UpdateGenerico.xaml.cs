@@ -23,17 +23,12 @@ namespace DiccionarioJuridicoV2.AddUpdates
         private void RadWindow_Loaded(object sender, RoutedEventArgs e)
         {
             TxtTermino.Text = generico.Termino;
-            TxtDefinicion.Text = generico.Definicion;
         }
 
         private void BtnActualizar_Click(object sender, RoutedEventArgs e)
         {
             generico.Termino = TxtTermino.Text;
-            generico.Definicion = TxtDefinicion.Text;
             generico.TerminoStr = StringUtilities.PrepareToAlphabeticalOrder(generico.Termino);
-
-            if (!String.IsNullOrEmpty(generico.Definicion) || !String.IsNullOrWhiteSpace(generico.Definicion))
-                generico.DefinicionStr = StringUtilities.PrepareToAlphabeticalOrder(generico.Definicion);
 
             new GenericosModel().UpdateTerminoGenerico(generico);
 

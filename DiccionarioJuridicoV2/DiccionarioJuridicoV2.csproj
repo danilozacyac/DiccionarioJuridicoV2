@@ -29,7 +29,7 @@
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
     <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
-    <ApplicationRevision>18</ApplicationRevision>
+    <ApplicationRevision>19</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -149,8 +149,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="AddUpdates\AddUpdateGenericos.xaml.cs">
-      <DependentUpon>AddUpdateGenericos.xaml</DependentUpon>
+    <Compile Include="AddUpdates\AddGenerico.xaml.cs">
+      <DependentUpon>AddGenerico.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AddUpdates\AddUpdateDefinicion.xaml.cs">
+      <DependentUpon>AddUpdateDefinicion.xaml</DependentUpon>
     </Compile>
     <Compile Include="AddUpdates\AddUpdateSinonimos.xaml.cs">
       <DependentUpon>AddUpdateSinonimos.xaml</DependentUpon>
@@ -165,12 +168,14 @@
       <DependentUpon>UpdateSinonimos.xaml</DependentUpon>
     </Compile>
     <Compile Include="Converters\ForegroundConverter.cs" />
+    <Compile Include="Dto\Definiciones.cs" />
     <Compile Include="Dto\Materias.cs" />
     <Compile Include="Dto\TesauroScjn.cs" />
     <Compile Include="Dto\Tesis.cs" />
     <Compile Include="FusionarTemas.xaml.cs">
       <DependentUpon>FusionarTemas.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Models\DefinicionModel.cs" />
     <Compile Include="Models\MateriasModel.cs" />
     <Compile Include="Models\TesauroScjnModel.cs" />
     <Compile Include="Models\TesisModel.cs" />
@@ -199,7 +204,11 @@
     <Compile Include="VentanaPrueba.xaml.cs">
       <DependentUpon>VentanaPrueba.xaml</DependentUpon>
     </Compile>
-    <Page Include="AddUpdates\AddUpdateGenericos.xaml">
+    <Page Include="AddUpdates\AddGenerico.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="AddUpdates\AddUpdateDefinicion.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -419,6 +428,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\equalitydelete.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\message_128.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\message_48.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

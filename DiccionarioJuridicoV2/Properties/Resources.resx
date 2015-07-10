@@ -205,4 +205,10 @@
   <data name="equalityedit" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\equalityedit.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="message_128" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\message_128.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="message_48" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\message_48.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>

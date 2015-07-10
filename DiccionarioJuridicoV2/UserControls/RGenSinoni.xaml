@@ -28,20 +28,27 @@
                             FontSize="16"
                             ItemsSource="{Binding}"
                             SelectedValuePath="IdGenerico"
-                            SelectionChanged="RLstGenericos_SelectionChanged" >
+                            SelectionChanged="RLstGenericos_SelectionChanged">
             <telerik:RadContextMenu.ContextMenu>
                 <telerik:RadContextMenu>
-                    <telerik:RadMenuItem x:Name="RConCopyInfo" Header="Copy" IsEnabled="False"  >
+                    <telerik:RadMenuItem x:Name="RConCopyInfo"
+                                         Header="Copy"
+                                         IsEnabled="False">
                         <telerik:RadMenuItem.Icon>
                             <Image Source="../Resources/copy_16.png" Stretch="None" />
                         </telerik:RadMenuItem.Icon>
                     </telerik:RadMenuItem>
-                    <telerik:RadMenuItem x:Name="RConPasteInfo" Header="Paste" Click="PegarInfo" IsEnabled="False">
+                    <telerik:RadMenuItem x:Name="RConPasteInfo"
+                                         Click="PegarInfo"
+                                         Header="Paste"
+                                         IsEnabled="False">
                         <telerik:RadMenuItem.Icon>
                             <Image Source="../Resources/paste_16.png" Stretch="None" />
                         </telerik:RadMenuItem.Icon>
                     </telerik:RadMenuItem>
-                    <telerik:RadMenuItem x:Name="RConCutInfo" Header="Cut" Click="CortarInfo">
+                    <telerik:RadMenuItem x:Name="RConCutInfo"
+                                         Click="CortarInfo"
+                                         Header="Cut">
                         <telerik:RadMenuItem.Icon>
                             <Image Source="../Resources/cut_16.png" Stretch="None" />
                         </telerik:RadMenuItem.Icon>
@@ -55,24 +62,6 @@
                 <RowDefinition Height="*" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
-
-            <Label Grid.Row="0"
-                   Width="100"
-                   Height="23"
-                   Margin="20,13,0,0"
-                   HorizontalAlignment="Left"
-                   VerticalAlignment="Top"
-                   Content="Definición:" />
-            <TextBox x:Name="TxtDefinicion"
-                     Grid.Row="0"
-                     IsReadOnly="True"
-                     Margin="20,50,20,20"
-                     HorizontalAlignment="Stretch"
-                     VerticalAlignment="Stretch"
-                     AcceptsReturn="True"
-                     Text="{Binding Definicion,Mode=TwoWay}"
-                     FontSize="16"
-                     TextWrapping="Wrap" />
             <Label Grid.Row="1"
                    Margin="20,15,0,0"
                    HorizontalAlignment="Left"
@@ -82,13 +71,14 @@
                                  Grid.Row="1"
                                  Height="200"
                                  Margin="20,40,20,0"
-                                 AutoGenerateColumns="False"
                                  HorizontalAlignment="Stretch"
                                  VerticalAlignment="Top"
+                                 AutoGenerateColumns="False"
                                  FontSize="18"
                                  IsFilteringAllowed="False"
                                  ItemsSource="{Binding}"
-                                 ShowGroupPanel="False" SelectionChanged="RLstSinonimos_SelectionChanged">
+                                 SelectionChanged="RLstSinonimos_SelectionChanged"
+                                 ShowGroupPanel="False">
                 <telerik:RadGridView.Columns>
 
 
@@ -101,6 +91,29 @@
                                                 DataMemberBinding="{Binding Fuente}"
                                                 Header="Fuente"
                                                 IsReadOnly="True" />
+
+                </telerik:RadGridView.Columns>
+            </telerik:RadGridView>
+            <telerik:RadGridView x:Name="RLstDefiniciones"
+                                 Grid.Row="0"
+                                 Height="200"
+                                 Margin="20,46,20,0"
+                                 HorizontalAlignment="Stretch"
+                                 VerticalAlignment="Top"
+                                 AutoGenerateColumns="False"
+                                 FontSize="18"
+                                 IsFilteringAllowed="False"
+                                 ItemsSource="{Binding}"
+                                 ShowGroupPanel="False" SelectionChanged="RLstDefiniciones_SelectionChanged">
+                <telerik:RadGridView.Columns>
+
+                    <telerik:GridViewDataColumn Width="*"
+                                                DataMemberBinding="{Binding Definicion}"
+                                                Header="Definiciones"
+                                                HeaderTextAlignment="Center"
+                                                IsReadOnly="True"
+                                                ToolTip="{Binding Fuente}"
+                                                TextWrapping="Wrap" />
 
                 </telerik:RadGridView.Columns>
             </telerik:RadGridView>

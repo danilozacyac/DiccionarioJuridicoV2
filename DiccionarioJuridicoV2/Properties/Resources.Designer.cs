@@ -273,6 +273,26 @@ namespace DiccionarioJuridicoV2.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap message_128 {
+            get {
+                object obj = ResourceManager.GetObject("message_128", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap message_48 {
+            get {
+                object obj = ResourceManager.GetObject("message_48", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap paste_16 {
             get {
                 object obj = ResourceManager.GetObject("paste_16", resourceCulture);

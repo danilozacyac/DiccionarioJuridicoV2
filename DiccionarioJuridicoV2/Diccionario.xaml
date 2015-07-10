@@ -78,6 +78,22 @@
                         </StackPanel>
                     </telerik:RadRibbonButton>
                 </telerik:RadRibbonGroup>
+                <telerik:RadRibbonGroup Header="Definiciones">
+                    <StackPanel Orientation="Vertical">
+                        <telerik:RadRibbonButton x:Name="RBtnAddDefinicion"
+                                                 Click="RBtnAddDefinicion_Click"
+                                                 Content="Agregar definición"
+                                                 SmallImage="Resources/message_48.png" />
+                        <telerik:RadRibbonButton x:Name="RBtnEditDefinicion"
+                                                 Click="RBtnEditDefinicion_Click"
+                                                 Content="Editar definición"
+                                                 SmallImage="Resources/message_48.png" />
+                        <telerik:RadRibbonButton x:Name="RBtnDelDefinicion"
+                                                 Click="RBtnDelDefinicion_Click"
+                                                 Content="Eliminar definición"
+                                                 SmallImage="Resources/message_48.png" />
+                    </StackPanel>
+                </telerik:RadRibbonGroup>
                 <telerik:RadRibbonGroup Header="Figuras Jurídicas">
                     <!--
                         <telerik:RadRibbonButton x:Name="RBtnAddConcepto"

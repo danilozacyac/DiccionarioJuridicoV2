@@ -11,9 +11,10 @@ namespace DiccionarioJuridicoV2.Dto
         private string termino;
         private string terminoStr;
         private int idDefinicion;
-        private string definicion;
-        private string definicionStr;
+        //private string definicion;
+        //private string definicionStr;
         private ObservableCollection<int> conceptosAsociados;
+        ObservableCollection<Definiciones> definiciones;
         private ObservableCollection<Sinonimos> sinonimos;
         private ObservableCollection<TesauroScjn> conceptosScjn;
         
@@ -55,42 +56,42 @@ namespace DiccionarioJuridicoV2.Dto
             }
         }
 
-        public int IdDefinicion
-        {
-            get
-            {
-                return this.idDefinicion;
-            }
-            set
-            {
-                this.idDefinicion = value;
-            }
-        }
+        //public int IdDefinicion
+        //{
+        //    get
+        //    {
+        //        return this.idDefinicion;
+        //    }
+        //    set
+        //    {
+        //        this.idDefinicion = value;
+        //    }
+        //}
 
-        public string Definicion
-        {
-            get
-            {
-                return this.definicion;
-            }
-            set
-            {
-                this.definicion = value;
-                this.OnPropertyChanged("Definicion");
-            }
-        }
+        //public string Definicion
+        //{
+        //    get
+        //    {
+        //        return this.definicion;
+        //    }
+        //    set
+        //    {
+        //        this.definicion = value;
+        //        this.OnPropertyChanged("Definicion");
+        //    }
+        //}
 
-        public string DefinicionStr
-        {
-            get
-            {
-                return this.definicionStr;
-            }
-            set
-            {
-                this.definicionStr = value;
-            }
-        }
+        //public string DefinicionStr
+        //{
+        //    get
+        //    {
+        //        return this.definicionStr;
+        //    }
+        //    set
+        //    {
+        //        this.definicionStr = value;
+        //    }
+        //}
 
         public ObservableCollection<int> ConceptosAsociados
         {
@@ -103,6 +104,20 @@ namespace DiccionarioJuridicoV2.Dto
                 this.conceptosAsociados = value;
             }
         }
+
+
+        public ObservableCollection<Definiciones> Definiciones
+        {
+            get
+            {
+                return this.definiciones;
+            }
+            set
+            {
+                this.definiciones = value;
+            }
+        }
+
 
         public ObservableCollection<Sinonimos> Sinonimos
         {

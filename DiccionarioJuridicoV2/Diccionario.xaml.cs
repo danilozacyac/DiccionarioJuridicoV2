@@ -133,7 +133,7 @@ namespace DiccionarioJuridicoV2
 
         private void RBtnAgregarGenerico_Click(object sender, RoutedEventArgs e)
         {
-            AddUpdateGenericos addUpdate = new AddUpdateGenericos(listaGenericos);
+            AddGenerico addUpdate = new AddGenerico(listaGenericos);
             addUpdate.ShowDialog();
         }
 
@@ -175,29 +175,31 @@ namespace DiccionarioJuridicoV2
                 "\" y agregar su información al tema \"" + rGrnSin.SelectedGenerico.Termino + "\" ¿Deseas continuar?",
                 "ATENCIÓN:", MessageBoxButton.YesNo, MessageBoxImage.Question);
 
-            if (result == MessageBoxResult.Yes)
-            {
-                rGrnSin.SelectedGenerico.Definicion += "\n\r\n\r" + rGrnSin.GenericoPorEliminar.Definicion;
+            //ARREGLAR
 
-                new GenericosModel().UpdateTerminoGenerico(rGrnSin.SelectedGenerico);
+            //if (result == MessageBoxResult.Yes)
+            //{
+            //    rGrnSin.SelectedGenerico.Definicion += "\n\r\n\r" + rGrnSin.GenericoPorEliminar.Definicion;
 
-                RelacionesModel model = new RelacionesModel();
-                foreach (Sinonimos sinonimo in rGrnSin.GenericoPorEliminar.Sinonimos)
-                {
-                    rGrnSin.SelectedGenerico.Sinonimos.Add(sinonimo);
-                    model.UpdateRelation(2, rGrnSin.SelectedGenerico.IdGenerico, rGrnSin.GenericoPorEliminar.IdGenerico, sinonimo.IdSinonimo);
+            //    new GenericosModel().UpdateTerminoGenerico(rGrnSin.SelectedGenerico);
 
-                }
+            //    RelacionesModel model = new RelacionesModel();
+            //    foreach (Sinonimos sinonimo in rGrnSin.GenericoPorEliminar.Sinonimos)
+            //    {
+            //        rGrnSin.SelectedGenerico.Sinonimos.Add(sinonimo);
+            //        model.UpdateRelation(2, rGrnSin.SelectedGenerico.IdGenerico, rGrnSin.GenericoPorEliminar.IdGenerico, sinonimo.IdSinonimo);
 
-                foreach (TesauroScjn conceptoScjn in rGrnSin.GenericoPorEliminar.ConceptosScjn)
-                {
-                    rGrnSin.SelectedGenerico.ConceptosScjn.Add(conceptoScjn);
-                    model.UpdateRelation(9, rGrnSin.SelectedGenerico.IdGenerico, rGrnSin.GenericoPorEliminar.IdGenerico, conceptoScjn.Id);
-                }
+            //    }
 
-                listaGenericos.Remove(rGrnSin.GenericoPorEliminar);
-                new GenericosModel().DeleteTerminoGenerico(rGrnSin.GenericoPorEliminar);
-            }
+            //    foreach (TesauroScjn conceptoScjn in rGrnSin.GenericoPorEliminar.ConceptosScjn)
+            //    {
+            //        rGrnSin.SelectedGenerico.ConceptosScjn.Add(conceptoScjn);
+            //        model.UpdateRelation(9, rGrnSin.SelectedGenerico.IdGenerico, rGrnSin.GenericoPorEliminar.IdGenerico, conceptoScjn.Id);
+            //    }
+
+            //    listaGenericos.Remove(rGrnSin.GenericoPorEliminar);
+            //    new GenericosModel().DeleteTerminoGenerico(rGrnSin.GenericoPorEliminar);
+            //}
         }
 
 
@@ -310,6 +312,53 @@ namespace DiccionarioJuridicoV2
         {
             UpdateSinonimos update = new UpdateSinonimos(rGrnSin.SelectedSinonimo);
             update.ShowDialog();
+        }
+
+        private void RBtnAddDefinicion_Click(object sender, RoutedEventArgs e)
+        {
+            if (rGrnSin.SelectedGenerico == null)
+            {
+                MessageBox.Show("Selecciona el término donde se agregará la definición");
+                return;
+            }
+            else
+            {
+                AddUpdateDefinicion add = new AddUpdateDefinicion(rGrnSin.SelectedGenerico);
+                add.ShowDialog();
+            }
+        }
+
+        private void RBtnEditDefinicion_Click(object sender, RoutedEventArgs e)
+        {
+            if (rGrnSin.SelectedDefinition == null)
+            {
+                MessageBox.Show("Selecciona la definición que deseas modificar");
+                return;
+            }
+            else
+            {
+                AddUpdateDefinicion edit = new AddUpdateDefinicion(rGrnSin.SelectedDefinition);
+                edit.ShowDialog();
+            }
+        }
+
+        private void RBtnDelDefinicion_Click(object sender, RoutedEventArgs e)
+        {
+            if (rGrnSin.SelectedDefinition == null)
+            {
+                MessageBox.Show("Selecciona la definición que deseas eliminar");
+                return;
+            }
+            else
+            {
+                MessageBoxResult result = MessageBox.Show("¿Estas seguro de eliminar esta definición?", "", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+                if (result == MessageBoxResult.Yes)
+                {
+                    new DefinicionModel().DeleteDefinicion(rGrnSin.SelectedDefinition);
+                    rGrnSin.SelectedGenerico.Definiciones.Remove(rGrnSin.SelectedDefinition);
+                }
+            }
         }
 
        
