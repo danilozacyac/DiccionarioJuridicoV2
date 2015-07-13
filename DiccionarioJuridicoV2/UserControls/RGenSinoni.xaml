@@ -8,6 +8,13 @@
              d:DesignHeight="500"
              d:DesignWidth="500"
              mc:Ignorable="d">
+    <UserControl.Resources>
+        <Style x:Key="FuenteColumnStyle" TargetType="telerik:GridViewCell">
+            <Setter Property="ToolTip"  
+                        Value="{Binding Fuente}" />
+        </Style>
+
+    </UserControl.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
@@ -113,6 +120,7 @@
                                                 HeaderTextAlignment="Center"
                                                 IsReadOnly="True"
                                                 ToolTip="{Binding Fuente}"
+                                                CellStyle="{StaticResource FuenteColumnStyle}"
                                                 TextWrapping="Wrap" />
 
                 </telerik:RadGridView.Columns>
