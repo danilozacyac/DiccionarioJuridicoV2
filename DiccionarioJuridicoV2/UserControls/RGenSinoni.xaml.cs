@@ -46,6 +46,10 @@ namespace DiccionarioJuridicoV2.UserControls
         {
             SelectedGenerico = RLstGenericos.SelectedItem as Genericos;
 
+            SelectedGenerico.Definiciones = new DefinicionModel().GetDefinicion(SelectedGenerico);
+            SelectedGenerico.Sinonimos = new SinonimosModel().GetSinonimos(SelectedGenerico);
+            SelectedGenerico.ConceptosScjn = new TesauroScjnModel().GetTerminosScjn(SelectedGenerico);
+
             RLstDefiniciones.DataContext = SelectedGenerico.Definiciones;
 
             RLstSinonimos.DataContext = SelectedGenerico.Sinonimos;

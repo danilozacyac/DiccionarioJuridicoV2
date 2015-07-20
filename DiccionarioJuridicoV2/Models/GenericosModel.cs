@@ -43,9 +43,9 @@ namespace DiccionarioJuridicoV2.Models
                     generico.IdGenerico = reader["IdConcepto"] as int? ?? -1;
                     generico.Termino = reader["Concepto"].ToString();
                     generico.TerminoStr = reader["ConceptoStr"].ToString();
-                    generico.Definiciones = new DefinicionModel().GetDefinicion(generico.IdGenerico);
-                    generico.Sinonimos = new SinonimosModel().GetSinonimos(generico.IdGenerico);
-                    generico.ConceptosScjn = new TesauroScjnModel().GetTerminosScjn(generico.IdGenerico);
+                    //generico.Definiciones = new DefinicionModel().GetDefinicion(generico.IdGenerico);
+                    //generico.Sinonimos = new SinonimosModel().GetSinonimos(generico.IdGenerico);
+                    //generico.ConceptosScjn = new TesauroScjnModel().GetTerminosScjn(generico.IdGenerico);
 
                     terminosGenericos.Add(generico);
                 }

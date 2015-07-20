@@ -18,7 +18,7 @@ namespace DiccionarioJuridicoV2.Models
         /// </summary>
         /// <param name="idConceptoScjn">Identificador del concepto del cual se quieren obtener sus relaciones</param>
         /// <returns></returns>
-        public ObservableCollection<TesauroScjn> GetTerminosScjn(int idConceptoScjn)
+        public ObservableCollection<TesauroScjn> GetTerminosScjn(Genericos terminoGenerico)
         {
             ObservableCollection<TesauroScjn> conceptos = new ObservableCollection<TesauroScjn>();
 
@@ -35,7 +35,7 @@ namespace DiccionarioJuridicoV2.Models
                                    " WHERE IdConcepto = @IdConcepto AND TipoRelacion = 9";
 
                 cmd = new OleDbCommand(sqlCadena, connection);
-                cmd.Parameters.AddWithValue("@IdConcepto", idConceptoScjn);
+                cmd.Parameters.AddWithValue("@IdConcepto", terminoGenerico.IdGenerico);
                 reader = cmd.ExecuteReader();
 
                 if (reader.HasRows)

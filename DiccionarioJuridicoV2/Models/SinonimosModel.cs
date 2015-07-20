@@ -20,7 +20,7 @@ namespace DiccionarioJuridicoV2.Models
          * excepción del Temático Constitucional que si esta contenido dentro de esta clase y se identifica expresamente
          * */
 
-        public ObservableCollection<Sinonimos> GetSinonimos(int idConcepto)
+        public ObservableCollection<Sinonimos> GetSinonimos(Genericos terminoGenerico)
         {
             ObservableCollection<Sinonimos> conceptos = new ObservableCollection<Sinonimos>();
 
@@ -37,7 +37,7 @@ namespace DiccionarioJuridicoV2.Models
                                    " WHERE IdConcepto = @IdConcepto AND TipoRelacion = 2";
 
                 cmd = new OleDbCommand(sqlCadena, connection);
-                cmd.Parameters.AddWithValue("@IdConcepto", idConcepto);
+                cmd.Parameters.AddWithValue("@IdConcepto", terminoGenerico.IdGenerico);
                 reader = cmd.ExecuteReader();
 
                 if (reader.HasRows)

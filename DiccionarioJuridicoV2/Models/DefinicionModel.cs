@@ -18,7 +18,7 @@ namespace DiccionarioJuridicoV2.Models
         /// </summary>
         /// <param name="idConcepto">Identificador del Concepto</param>
         /// <returns></returns>
-        public ObservableCollection<Definiciones> GetDefinicion(int idConcepto)
+        public ObservableCollection<Definiciones> GetDefinicion(Genericos terminoGenerico)
         {
             OleDbConnection connection = new OleDbConnection(ConfigurationManager.ConnectionStrings["Diccionario"].ToString());
 
@@ -36,7 +36,7 @@ namespace DiccionarioJuridicoV2.Models
                 string miQry = "SELECT * FROM Definiciones WHERE IdConcepto = @IdConcepto";
 
                 cmd = new OleDbCommand(miQry, connection);
-                cmd.Parameters.AddWithValue("@IdConcepto", idConcepto);
+                cmd.Parameters.AddWithValue("@IdConcepto", terminoGenerico.IdGenerico);
                 reader = cmd.ExecuteReader();
 
                 while (reader.Read())
